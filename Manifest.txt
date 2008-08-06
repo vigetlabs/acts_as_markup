@@ -3,10 +3,10 @@ LICENSE.txt
 Manifest.txt
 README.rdoc
 Rakefile
-acts_as_markdown.gemspec
-lib/acts/as_markdown.rb
-lib/acts_as_markdown.rb
-lib/acts_as_markdown/exts/rdiscount.rb
+acts_as_markup.gemspec
+lib/acts/as_markup.rb
+lib/acts_as_markup.rb
+lib/acts_as_markup/exts/rdiscount.rb
 tasks/bones.rake
 tasks/gem.rake
 tasks/git.rake
@@ -16,5 +16,5 @@ tasks/rdoc.rake
 tasks/rubyforge.rake
 tasks/setup.rb
 tasks/test.rake
-test/acts_as_markdown_test.rb
+test/acts_as_markup_test.rb
 test/test_helper.rb

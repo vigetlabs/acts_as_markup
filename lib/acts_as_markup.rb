@@ -7,7 +7,7 @@ module ActsAsMarkup
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
   # :startdoc:
   
-  # This is exception is raised when an unsupported markup language is supplied to acts_as_markup.
+  # This exception is raised when an unsupported markup language is supplied to acts_as_markup.
   class UnsportedMarkupLanguage < ArgumentError
   end
   

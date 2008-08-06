@@ -11,10 +11,10 @@ module ActiveRecord # :nodoc:
         
         ##
         # This allows you to specify columns you want to define as containing 
-        # markdown or Textile content.
-        # Then you can simply call +.to_html+ method on the attribute.
+        # Markdown or Textile content.
+        # Then you can simply call <tt>.to_html</tt> method on the attribute.
         #
-        # === Example
+        # ==== Example
         #     class Post < ActiveRecrod
         #       acts_as_markup :language => :markdown, :columns => [:body]
         #     end
@@ -52,7 +52,7 @@ module ActiveRecord # :nodoc:
         
         ##
         # This is a convenience method for 
-        # +acts_as_markup :language => :markdown, :columns => [:body]+
+        # `<tt>acts_as_markup :language => :markdown, :columns => [:body]</tt>`
         # 
         def acts_as_markdown(*columns)
           acts_as_markup :language => :markdown, :columns => columns
@@ -60,7 +60,7 @@ module ActiveRecord # :nodoc:
         
         ##
         # This is a convenience method for 
-        # +acts_as_markup :language => :textile, :columns => [:body]+
+        # `<tt>acts_as_markup :language => :textile, :columns => [:body]</tt>`
         #
         def acts_as_textile(*columns)
           acts_as_markup :language => :textile, :columns => columns
