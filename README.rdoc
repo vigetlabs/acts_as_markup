@@ -1,0 +1,74 @@
+= acts_as_markup
+
+by Brian Landau of Viget Labs <brian.landau@viget.com>
+
+GitHub Project: http://github.com/vigetlabs/acts_as_markup
+
+RDoc: http://viget.rubyforge.org/acts_as_markup
+
+
+== DESCRIPTION:
+
+Allows you to specify columns of an ActiveRecord model that contain Markdown or 
+Textile text. You may then use +to_s+ to get the original markdown or textile 
+text or +to_html+ to get the formated HTML.
+
+This AR extension can use 3 different types of Markdown processing backends: 
+BlueCloth, RDiscount, or Ruby PEG. You specify which one you want to use by setting
+a config value in your environment.rb file:
+
+    ActsAsMarkup.markdown_library = :bluecloth
+
+By default RDiscount will be used.
+
+== EXAMPLES:
+
+==== Using +acts_as_markdown+:
+
+    class Post < ActiveRecrod
+      acts_as_markdown :body
+    end
+    
+    @post = Post.find(:first)
+    @post.body.to_s     #=> "## Markdown Headline"
+    @post.body.to_html  #=> "<h2> Markdown Headline</h2>"
+
+==== Using +acts_as_textile+:
+
+    class Post < ActiveRecrod
+      acts_as_textile :body
+    end
+
+    @post = Post.find(:first)
+    @post.body.to_s     #=> "h2. Markdown Headline"
+    @post.body.to_html  #=> "<h2>Markdown Headline</h2>"
+
+==== Using +acts_as_markup+:
+
+    class Post < ActiveRecrod
+      acts_as_markup :language => :markdown, :columns => [:body]
+    end
+
+    @post = Post.find(:first)
+    @post.body.to_s     #=> "## Markdown Headline"
+    @post.body.to_html  #=> "<h2> Markdown Headline</h2>"
+
+== REQUIREMENTS:
+
+You will need the RedCloth library for processing the Textile text.
+
+You will also need to install some type of Markdown processor.
+The three options currently supported are:
+
+* BlueCloth
+* RDiscount[http://github.com/rtomayko/rdiscount]
+* {Ruby PEG}[http://github.com/rtomayko/rpeg-markdown/tree/master]
+
+== INSTALL:
+
+<tt>sudo gem install acts_as_markup</tt>
+ 
+Add "+acts_as_markup+" to your environment.rb:
+
+    config.gem "acts_as_markup"
+

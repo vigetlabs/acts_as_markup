@@ -1,0 +1,4 @@
+== 0.1.0 / 2008-08-04
+
+* Initial Release
+  * Support for BlueCloth, RDiscount and Ruyb PEG markdown processors.
