@@ -34,7 +34,7 @@ namespace :git do
 
 end  # namespace :git
 
-# task 'gem:release' => 'git:create_tag'
+task 'gem:release' => 'git:create_tag'
 
 end  # if HAVE_GIT
 
