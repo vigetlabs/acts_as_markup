@@ -20,6 +20,6 @@ PROJ.rdoc.include = %w(^lib/ LICENSE\.txt README\.rdoc)
 PROJ.rdoc.remote_dir = 'acts_as_markup'
 PROJ.test.files = FileList['test/**/*_test.rb']
 
-%W(activesupport activerecord rdiscount redcloth).each  do |gem|
+%W(activesupport activerecord rdiscount RedCloth).each  do |gem|
   depend_on gem
 end
