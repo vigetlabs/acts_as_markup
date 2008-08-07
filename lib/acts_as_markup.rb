@@ -2,13 +2,17 @@ require 'active_support'
 
 module ActsAsMarkup
   # :stopdoc:
-  VERSION = '0.1.1'
+  VERSION = '0.2.0'
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
   # :startdoc:
   
   # This exception is raised when an unsupported markup language is supplied to acts_as_markup.
   class UnsportedMarkupLanguage < ArgumentError
+  end
+  
+  # This exception is raised when an unsupported Markdown library is set to the config value.
+  class UnsportedMarkdownLibrary < ArgumentError
   end
   
   DEFAULT_MAKRDOWN_LIB = :rdiscount
