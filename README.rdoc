@@ -72,7 +72,7 @@ By default RDiscount will be used.
     @post.body.to_html  #=> "<h2> Markdown Headline</h2>"
     
     
-==== Using +acts_as_markup+ with +:variable+ language:
+==== Using +acts_as_markup+ with <tt>:variable</tt> language:
 
     class Post < ActiveRecrod
       acts_as_markup :language => :variable, :columns => [:body], :language_column => 'markup_language'
