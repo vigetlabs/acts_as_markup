@@ -1,5 +1,5 @@
-History.txt
-LICENSE.txt
+CHANGELOG
+LICENSE
 Manifest.txt
 README.rdoc
 Rakefile
@@ -8,6 +8,7 @@ lib/acts/as_markup.rb
 lib/acts_as_markup.rb
 lib/acts_as_markup/exts/rdiscount.rb
 lib/acts_as_markup/exts/string.rb
+lib/acts_as_markup/exts/wikitext.rb
 tasks/bones.rake
 tasks/gem.rake
 tasks/git.rake
@@ -17,5 +18,8 @@ tasks/rdoc.rake
 tasks/rubyforge.rake
 tasks/setup.rb
 tasks/test.rake
+test/acts_as_markdown_test.rb
 test/acts_as_markup_test.rb
+test/acts_as_textile_test.rb
+test/acts_as_wikitext_test.rb
 test/test_helper.rb

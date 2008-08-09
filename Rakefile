@@ -13,13 +13,13 @@ PROJ.name = 'acts_as_markup'
 PROJ.authors = 'Brian Landau'
 PROJ.email = 'brian.landau@viget.com'
 PROJ.url = 'http://viget.rubyforge.com/acts_as_markup'
-PROJ.description = "Represent ActiveRecord Markdown or Textile text columns as Markdown or Textile objects using various external libraries to convert to HTML."
+PROJ.description = "Represent ActiveRecord Markdown, Textile, or Wiki text columns as Markdown, Textile or Wikitext objects using various external libraries to convert to HTML."
 PROJ.rubyforge.name = 'viget'
 PROJ.version = ActsAsMarkup::VERSION
-PROJ.rdoc.include = %w(^lib/ LICENSE\.txt README\.rdoc)
+PROJ.rdoc.include = %w(^lib/ LICENSE CHANGELOG README\.rdoc)
 PROJ.rdoc.remote_dir = 'acts_as_markup'
 PROJ.test.files = FileList['test/**/*_test.rb']
 
-%W(activesupport activerecord rdiscount RedCloth).each  do |gem|
+%W(activesupport activerecord rdiscount RedCloth wikitext).each  do |gem|
   depend_on gem
 end

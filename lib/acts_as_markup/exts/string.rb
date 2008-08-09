@@ -1,9 +1,1 @@
-module ActsAsMarkup
-  module StringExtension
-    def to_html
-      self.to_s
-    end
-  end
-end
-
-String.send :include, ActsAsMarkup::StringExtension
+String.send :alias_method, :to_html, :to_s

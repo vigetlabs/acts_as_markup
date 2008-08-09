@@ -11,15 +11,15 @@ module ActiveRecord # :nodoc:
         
         ##
         # This allows you to specify columns you want to define as containing 
-        # Markdown or Textile content.
+        # Markdown, Textile or Wikitext content.
         # Then you can simply call <tt>.to_html</tt> method on the attribute.
         # 
         # You can also specify the language as <tt>:variable</tt> you will then
         # need to add an additional option of <tt>:language_column</tt>. When 
-        # a value is accessed it will create the correct object (Markdown or Textile)
-        # based on the value of the language column. If any value besides markdown or
-        # textile is supplied for the markup language the text will pass through
-        # as a string.
+        # a value is accessed it will create the correct object (Markdown, Textile, 
+        # or Wikitext) based on the value of the language column. If any value 
+        # besides markdown, textile, or wikitext is supplied for the markup language 
+        # the text will pass through as a string.
         # 
         # 
         # ==== Examples
@@ -50,26 +50,21 @@ module ActiveRecord # :nodoc:
         def acts_as_markup(options)
           case options[:language].to_sym
           when :markdown
-            if ActsAsMarkup::MARKDOWN_LIBS.keys.include? ActsAsMarkup.markdown_library
-              markdown_library_names = ActsAsMarkup::MARKDOWN_LIBS[ActsAsMarkup.markdown_library]
-              require markdown_library_names[:lib_name]
-              klass = markdown_library_names[:class_name]
-            else
-              raise ActsAsMarkup::UnsportedMarkdownLibrary, "#{ActsAsMarkup.markdown_library} is not currently supported."
-            end
+            klass = get_markdown_class
           when :textile
             require 'redcloth'
             klass = 'RedCloth'
+          when :wikitext
+            require 'wikitext'
+            require_extensions 'wikitext'
+            klass = 'WikitextString'
           when :variable
-            if ActsAsMarkup::MARKDOWN_LIBS.keys.include? ActsAsMarkup.markdown_library
-              markdown_library_names = ActsAsMarkup::MARKDOWN_LIBS[ActsAsMarkup.markdown_library]
-              require markdown_library_names[:lib_name]
-              markdown_klass = markdown_library_names[:class_name]
-            else
-              raise ActsAsMarkup::UnsportedMarkdownLibrary, "#{ActsAsMarkup.markdown_library} is not currently supported."
-            end
+            markdown_klass = get_markdown_class
             require 'redcloth'
+            require 'wikitext'
+            require_extensions 'wikitext'
             textile_klass = 'RedCloth'
+            wiki_klass = 'WikitextString'
           else
             raise ActsAsMarkup::UnsportedMarkupLanguage, "#{options[:langauge]} is not a currently supported markup language."
           end
@@ -99,6 +94,8 @@ module ActiveRecord # :nodoc:
                     @#{col.to_s} = #{markdown_klass}.new(self['#{col.to_s}'].to_s)
                   when /textile/i
                     @#{col.to_s} = #{textile_klass}.new(self['#{col.to_s}'].to_s)
+                  when /wikitext/i
+                    @#{col.to_s} = #{wiki_klass}.new(self['#{col.to_s}'].to_s)
                   else
                     @#{col.to_s} = self['#{col.to_s}']
                   end
@@ -123,6 +120,32 @@ module ActiveRecord # :nodoc:
         def acts_as_textile(*columns)
           acts_as_markup :language => :textile, :columns => columns
         end
+        
+        ##
+        # This is a convenience method for 
+        # `<tt>acts_as_markup :language => :wikitext, :columns => [:body]</tt>`
+        #
+        def acts_as_wikitext(*columns)
+          acts_as_markup :language => :wikitext, :columns => columns
+        end
+        
+        
+        private
+          def get_markdown_class
+            if ActsAsMarkup::MARKDOWN_LIBS.keys.include? ActsAsMarkup.markdown_library
+              markdown_library_names = ActsAsMarkup::MARKDOWN_LIBS[ActsAsMarkup.markdown_library]
+              require markdown_library_names[:lib_name]
+              require_extensions(markdown_library_names[:lib_name])
+              return markdown_library_names[:class_name]
+            else
+              raise ActsAsMarkup::UnsportedMarkdownLibrary, "#{ActsAsMarkup.markdown_library} is not currently supported."
+            end
+          end
+          def require_extensions(library)# :nodoc:
+            if %w(rdiscount maruku wikitext).include? library.to_s
+              require "acts_as_markup/exts/#{library.to_s}"
+            end
+          end
         
       end
     end

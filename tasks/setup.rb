@@ -24,7 +24,7 @@ PROJ = OpenStruct.new(
   # System Defaults
   :ruby_opts => %w(-w),
   :libs => [],
-  :history_file => 'History.txt',
+  :history_file => 'CHANGELOG',
   :manifest_file => 'Manifest.txt',
   :readme_file => 'README.rdoc',
 

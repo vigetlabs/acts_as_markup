@@ -1,3 +1,5 @@
+require 'rdiscount'
+
 class RDiscount
   def to_s
     self.text

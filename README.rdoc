@@ -9,13 +9,13 @@ RDoc: http://viget.rubyforge.org/acts_as_markup
 
 == DESCRIPTION:
 
-Allows you to specify columns of an ActiveRecord model that contain Markdown or 
-Textile text. You may then use +to_s+ to get the original markdown or textile 
+Allows you to specify columns of an ActiveRecord model that contain Markdown, 
+Textile, and Wiki text. You may then use +to_s+ to get the original markup 
 text or +to_html+ to get the formated HTML.
 
 Additionally you can have a model that contains a column that has a column with 
 markup text, and another that defines what language to process it as. If the field 
-is listed as "markdown" or "textile" (case insensitive) it will treat it as such, 
+is listed as "markdown" "textile", or "wikitext" (case insensitive) it will treat it as such, 
 any other value for markup language will have the value pass through as a normal string.
 
 This AR extension can use 3 different types of Markdown processing backends: 
@@ -46,8 +46,19 @@ By default RDiscount will be used.
     end
 
     @post = Post.find(:first)
-    @post.body.to_s     #=> "h2. Markdown Headline"
-    @post.body.to_html  #=> "<h2>Markdown Headline</h2>"
+    @post.body.to_s     #=> "h2. Textile Headline"
+    @post.body.to_html  #=> "<h2>Textile Headline</h2>"
+    
+
+==== Using +acts_as_wikitext+:
+
+    class Post < ActiveRecrod
+      acts_as_wikitext :body
+    end
+
+    @post = Post.find(:first)
+    @post.body.to_s     #=> "== Wikitext Headline =="
+    @post.body.to_html  #=> "<h2>Wikitext Headline</h2>"
     
 
 ==== Using +acts_as_markup+:
@@ -75,7 +86,9 @@ By default RDiscount will be used.
 
 == REQUIREMENTS:
 
-You will need the RedCloth library for processing the Textile text.
+You will need the RedCloth[http://whytheluckystiff.net/ruby/redcloth/] library 
+for processing the Textile text, and the Wikitext[http://wikitext.rubyforge.org/] 
+library for processing wikitext.
 
 You will also need to install some type of Markdown processor.
 The three options currently supported are:

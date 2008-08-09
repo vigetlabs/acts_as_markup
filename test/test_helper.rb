@@ -1,5 +1,7 @@
 require 'test/unit'
 require 'shoulda'
+require 'active_support'
+require 'active_support/test_case'
 require File.expand_path( File.join(File.dirname(__FILE__), %w[.. lib acts_as_markup]) )
 
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :dbfile => ":memory:")
@@ -36,5 +38,15 @@ end
 def teardown_db
   ActiveRecord::Base.connection.tables.each do |table|
     ActiveRecord::Base.connection.drop_table(table)
+  end
+end
+
+class ActsAsMarkupTestCase < ActiveSupport::TestCase
+  def setup
+    setup_db
+  end
+  
+  def teardown
+    teardown_db
   end
 end

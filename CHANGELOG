@@ -1,4 +1,12 @@
-== 0.1.0 / 2008-08-04
+== 0.3.0 / 2008-08-08
+
+* Add support for wikitext.
+
+== 0.2.0 / 2008-08-07
+
+* Add support for a variable markup language option.
+
+== 0.1.0 / 2008-08-05
 
 * Initial Release
   * Support for Markdown and Textile markup languages.
