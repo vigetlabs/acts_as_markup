@@ -424,6 +424,17 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
     end
   end
   
+  context 'acts_as_markup with bad markdown library' do
+    should 'raise exception when a non-supported library is set as the markdown library attribute on ActsAsMarkup' do
+      assert_raise ActsAsMarkup::UnsportedMarkdownLibrary do
+        ActsAsMarkup.markdown_library = :fake
+        class ::Post < ActiveRecord::Base
+          acts_as_markup :language => :markdown, :columns => [:body]
+        end
+      end
+    end
+  end
+  
   def teardown
     teardown_db
   end
