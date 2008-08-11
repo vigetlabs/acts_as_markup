@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{acts_as_markup}
-  s.version = "0.4.0"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Brian Landau"]
@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.description = %q{Represent ActiveRecord Markdown, Textile, or Wiki text columns as Markdown, Textile or Wikitext objects using various external libraries to convert to HTML.}
   s.email = %q{brian.landau@viget.com}
   s.extra_rdoc_files = ["CHANGELOG", "LICENSE", "README.rdoc"]
-  s.files = ["CHANGELOG", "LICENSE", "Manifest.txt", "README.rdoc", "Rakefile", "acts_as_markup.gemspec", "lib/acts/as_markup.rb", "lib/acts_as_markup.rb", "lib/acts_as_markup/exts/rdiscount.rb", "lib/acts_as_markup/exts/rdoc.rb", "lib/acts_as_markup/exts/string.rb", "lib/acts_as_markup/exts/wikitext.rb", "tasks/bones.rake", "tasks/gem.rake", "tasks/git.rake", "tasks/manifest.rake", "tasks/post_load.rake", "tasks/rdoc.rake", "tasks/rubyforge.rake", "tasks/setup.rb", "tasks/test.rake", "test/acts_as_markdown_test.rb", "test/acts_as_markup_test.rb", "test/acts_as_rdoc_test.rb", "test/acts_as_textile_test.rb", "test/acts_as_wikitext_test.rb", "test/test_helper.rb"]
+  s.files = ["CHANGELOG", "LICENSE", "Manifest.txt", "README.rdoc", "Rakefile", "acts_as_markup.gemspec", "lib/acts/as_markup.rb", "lib/acts_as_markup.rb", "lib/acts_as_markup/exts/maruku.rb", "lib/acts_as_markup/exts/rdiscount.rb", "lib/acts_as_markup/exts/rdoc.rb", "lib/acts_as_markup/exts/string.rb", "lib/acts_as_markup/exts/wikitext.rb", "tasks/bones.rake", "tasks/gem.rake", "tasks/git.rake", "tasks/manifest.rake", "tasks/post_load.rake", "tasks/rdoc.rake", "tasks/rubyforge.rake", "tasks/setup.rb", "tasks/test.rake", "test/acts_as_markdown_test.rb", "test/acts_as_markup_test.rb", "test/acts_as_rdoc_test.rb", "test/acts_as_textile_test.rb", "test/acts_as_wikitext_test.rb", "test/test_helper.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://viget.rubyforge.com/acts_as_markup}
   s.rdoc_options = ["--main", "README.rdoc"]
