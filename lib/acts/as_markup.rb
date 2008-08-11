@@ -9,7 +9,6 @@ module ActiveRecord # :nodoc:
       
       module ClassMethods
         
-        ##
         # This allows you to specify columns you want to define as containing 
         # Markdown, Textile, Wikitext or RDoc content.
         # Then you can simply call <tt>.to_html</tt> method on the attribute.
@@ -116,7 +115,6 @@ module ActiveRecord # :nodoc:
           end
         end
         
-        ##
         # This is a convenience method for 
         # `<tt>acts_as_markup :language => :markdown, :columns => [:body]</tt>`
         # 
@@ -124,7 +122,6 @@ module ActiveRecord # :nodoc:
           acts_as_markup :language => :markdown, :columns => columns
         end
         
-        ##
         # This is a convenience method for 
         # `<tt>acts_as_markup :language => :textile, :columns => [:body]</tt>`
         #
@@ -132,7 +129,6 @@ module ActiveRecord # :nodoc:
           acts_as_markup :language => :textile, :columns => columns
         end
         
-        ##
         # This is a convenience method for 
         # `<tt>acts_as_markup :language => :wikitext, :columns => [:body]</tt>`
         #
@@ -140,7 +136,6 @@ module ActiveRecord # :nodoc:
           acts_as_markup :language => :wikitext, :columns => columns
         end
         
-        ##
         # This is a convenience method for 
         # `<tt>acts_as_markup :language => :rdoc, :columns => [:body]</tt>`
         #

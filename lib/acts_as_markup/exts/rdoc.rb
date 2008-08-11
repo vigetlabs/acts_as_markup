@@ -3,9 +3,9 @@ require 'rdoc/markup/simple_markup/to_html'
 
 class RDocWithHyperlinkToHtml < SM::ToHtml
 
-  ##
   # Generate a hyperlink for url, labeled with text. Handle the
   # special cases for img: and link: described under handle_special_HYPEDLINK
+  # 
   def gen_url(url, text)
     if url =~ /([A-Za-z]+):(.*)/
       type = $1
@@ -31,21 +31,21 @@ class RDocWithHyperlinkToHtml < SM::ToHtml
     end
   end
   
-  ##
   # And we're invoked with a potential external hyperlink mailto:
   # just gets inserted. http: links are checked to see if they
   # reference an image. If so, that image gets inserted using an
   # <img> tag. Otherwise a conventional <a href> is used.  We also
   # support a special type of hyperlink, link:, which is a reference
   # to a local file whose path is relative to the --op directory.
+  # 
   def handle_special_HYPERLINK(special)
     url = special.text
     gen_url(url, url)
   end
 
   # Here's a hypedlink where the label is different to the URL
-  #  <label>[url]
-  #
+  #    <label>[url]
+  # 
   def handle_special_TIDYLINK(special)
     text = special.text
     unless text =~ /\{(.*?)\}\[(.*?)\]/ or text =~ /(\S+)\[(.*?)\]/ 
@@ -58,7 +58,6 @@ class RDocWithHyperlinkToHtml < SM::ToHtml
 
 end
 
-##
 # This allows a us to create a wrapper object similar to those provided by the
 # Markdown and Textile libraries. It stores the original and formated HTML text
 # in instance variables. It also stores the SimpleMarkup parser objects in

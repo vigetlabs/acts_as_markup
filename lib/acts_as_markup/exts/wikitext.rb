@@ -1,6 +1,5 @@
 require 'wikitext'
 
-##
 # This allows a us to create a wrapper object similar to those provided by the
 # Markdown and Textile libraries. It stores the original and formated HTML text
 # in instance variables.
