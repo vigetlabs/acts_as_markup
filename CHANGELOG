@@ -1,4 +1,8 @@
-== 0.4.0 / 2008-08-08
+== 1.0.0 / 2008-08-11
+
+* Add support for Maruku Markdown Library.
+
+== 0.4.0 / 2008-08-11
 
 * Add support for RDoc.
 
@@ -15,4 +19,4 @@
 * Initial Release
   * Support for Markdown and Textile markup languages.
   * `acts_as_markdown` and `acts_as_textile` convenience methods
-  * Support for BlueCloth, RDiscount and Ruyb PEG markdown processors.
+  * Support for BlueCloth, RDiscount and Ruby PEG markdown processors.

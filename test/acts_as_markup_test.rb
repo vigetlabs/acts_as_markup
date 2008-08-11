@@ -33,7 +33,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
     end
   
     should "return formated html for a `to_html` method call on the column value" do
-      assert_match(/<h2>\s*Markdown Test Text\s*<\/h2>/, @markdown_post.body.to_html)
+      assert_match(/<h2(\s\w+\=['"]\w*['"])*\s*>\s*Markdown Test Text\s*<\/h2>/, @markdown_post.body.to_html)
       assert_match(/<h2>Textile Test Text<\/h2>/, @textile_post.body.to_html)
     end
   
@@ -97,7 +97,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
       end
 
       should "return formated html for a `to_html` method call on the column value" do
-        assert_match(/<h2>\s*Markdown Test Text\s*<\/h2>/, @markdown_post.body.to_html)
+        assert_match(/<h2(\s\w+\=['"]\w*['"])*\s*>\s*Markdown Test Text\s*<\/h2>/, @markdown_post.body.to_html)
       end
 
       context "changing value of markup field should return new markup object" do
@@ -479,6 +479,33 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
       
       should "have a PEGMarkdown object returned for the column value" do
         assert_kind_of PEGMarkdown, @post.body
+      end
+      
+      teardown do
+        @post = nil
+        Post.delete_all
+      end
+    end
+    
+    context 'with Maruku Markdown' do
+      setup do
+        ActsAsMarkup.markdown_library = :maruku
+        class ::Post < ActiveRecord::Base
+          acts_as_markdown :body
+        end
+        @post = Post.create!(:title => 'Blah', :body => @text)
+      end
+      
+      should 'return a blank string for `to_s` method' do
+        assert_equal @post.body.to_s, ''
+      end
+      
+      should 'return a blank string for `to_html` method' do
+        assert_match(/[\n\s]*/, @post.body.to_html)
+      end
+      
+      should "have a Maruku object returned for the column value" do
+        assert_kind_of Maruku, @post.body
       end
       
       teardown do

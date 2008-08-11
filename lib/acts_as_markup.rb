@@ -2,7 +2,7 @@ require 'active_support'
 
 module ActsAsMarkup
   # :stopdoc:
-  VERSION = '0.4.0'
+  VERSION = '1.0.0'
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
   # :startdoc:
@@ -22,7 +22,9 @@ module ActsAsMarkup
                     :bluecloth => {:class_name => "BlueCloth",
                                    :lib_name   => "bluecloth"},
                     :rpeg      => {:class_name => "PEGMarkdown",
-                                   :lib_name   => "peg_markdown"} }
+                                   :lib_name   => "peg_markdown"},
+                    :maruku    => {:class_name => "Maruku",
+                                   :lib_name   => "maruku"} }
   
   @@markdown_library = DEFAULT_MAKRDOWN_LIB
   mattr_accessor :markdown_library

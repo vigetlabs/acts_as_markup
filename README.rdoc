@@ -1,4 +1,4 @@
-= acts_as_markup
+= Acts as Markup
 
 by Brian Landau of Viget Labs <brian.landau@viget.com>
 
@@ -20,7 +20,7 @@ treat it as such, any other value for markup language will have the value pass
 through as a normal string.
 
 This AR extension can use 3 different types of Markdown processing backends: 
-BlueCloth, RDiscount, or Ruby PEG. You specify which one you want to use by setting
+BlueCloth, RDiscount, Ruby PEG or Maruku. You specify which one you want to use by setting
 a config value in your environment.rb file:
 
     ActsAsMarkup.markdown_library = :bluecloth
@@ -108,6 +108,7 @@ The three options currently supported are:
 * BlueCloth
 * RDiscount[http://github.com/rtomayko/rdiscount]
 * {Ruby PEG}[http://github.com/rtomayko/rpeg-markdown/tree/master]
+* Maruku[http://maruku.rubyforge.org/]
 
 == INSTALL:
 

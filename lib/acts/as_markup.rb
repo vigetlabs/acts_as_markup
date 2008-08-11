@@ -155,8 +155,9 @@ module ActiveRecord # :nodoc:
               raise ActsAsMarkup::UnsportedMarkdownLibrary, "#{ActsAsMarkup.markdown_library} is not currently supported."
             end
           end
+          
           def require_extensions(library)# :nodoc:
-            if %w(rdiscount wikitext rdoc).include? library.to_s
+            if %w(rdiscount maruku wikitext rdoc).include? library.to_s
               require "acts_as_markup/exts/#{library.to_s}"
             end
           end

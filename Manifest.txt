@@ -6,6 +6,7 @@ Rakefile
 acts_as_markup.gemspec
 lib/acts/as_markup.rb
 lib/acts_as_markup.rb
+lib/acts_as_markup/exts/maruku.rb
 lib/acts_as_markup/exts/rdiscount.rb
 lib/acts_as_markup/exts/rdoc.rb
 lib/acts_as_markup/exts/string.rb
