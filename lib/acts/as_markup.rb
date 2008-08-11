@@ -11,15 +11,15 @@ module ActiveRecord # :nodoc:
         
         ##
         # This allows you to specify columns you want to define as containing 
-        # Markdown, Textile or Wikitext content.
+        # Markdown, Textile, Wikitext or RDoc content.
         # Then you can simply call <tt>.to_html</tt> method on the attribute.
         # 
         # You can also specify the language as <tt>:variable</tt> you will then
         # need to add an additional option of <tt>:language_column</tt>. When 
         # a value is accessed it will create the correct object (Markdown, Textile, 
-        # or Wikitext) based on the value of the language column. If any value 
-        # besides markdown, textile, or wikitext is supplied for the markup language 
-        # the text will pass through as a string.
+        # Wikitext or RDoc) based on the value of the language column. If any value 
+        # besides markdown, textile, wikitext, or RDoc is supplied for the markup 
+        # language the text will pass through as a string.
         # 
         # 
         # ==== Examples
@@ -58,13 +58,22 @@ module ActiveRecord # :nodoc:
             require 'wikitext'
             require_extensions 'wikitext'
             klass = 'WikitextString'
+          when :rdoc
+            require 'rdoc/markup/simple_markup'
+            require 'rdoc/markup/simple_markup/to_html'
+            require_extensions 'rdoc'
+            klass = 'RDocText'
           when :variable
             markdown_klass = get_markdown_class
             require 'redcloth'
             require 'wikitext'
+            require 'rdoc/markup/simple_markup'
+            require 'rdoc/markup/simple_markup/to_html'
             require_extensions 'wikitext'
+            require_extensions 'rdoc'
             textile_klass = 'RedCloth'
             wiki_klass = 'WikitextString'
+            rdoc_klass = 'RDocText'
           else
             raise ActsAsMarkup::UnsportedMarkupLanguage, "#{options[:langauge]} is not a currently supported markup language."
           end
@@ -74,7 +83,7 @@ module ActiveRecord # :nodoc:
               class_eval <<-EOV
                 def #{col.to_s}
                   if @#{col.to_s}
-                    if !self.#{col.to_s}_changed?
+                    unless self.#{col.to_s}_changed?
                       return @#{col.to_s}
                     end
                   end
@@ -96,6 +105,8 @@ module ActiveRecord # :nodoc:
                     @#{col.to_s} = #{textile_klass}.new(self['#{col.to_s}'].to_s)
                   when /wikitext/i
                     @#{col.to_s} = #{wiki_klass}.new(self['#{col.to_s}'].to_s)
+                  when /rdoc/i
+                    @#{col.to_s} = #{rdoc_klass}.new(self['#{col.to_s}'].to_s)
                   else
                     @#{col.to_s} = self['#{col.to_s}']
                   end
@@ -129,6 +140,14 @@ module ActiveRecord # :nodoc:
           acts_as_markup :language => :wikitext, :columns => columns
         end
         
+        ##
+        # This is a convenience method for 
+        # `<tt>acts_as_markup :language => :rdoc, :columns => [:body]</tt>`
+        #
+        def acts_as_rdoc(*columns)
+          acts_as_markup :language => :rdoc, :columns => columns
+        end
+        
         
         private
           def get_markdown_class
@@ -142,7 +161,7 @@ module ActiveRecord # :nodoc:
             end
           end
           def require_extensions(library)# :nodoc:
-            if %w(rdiscount maruku wikitext).include? library.to_s
+            if %w(rdiscount wikitext rdoc).include? library.to_s
               require "acts_as_markup/exts/#{library.to_s}"
             end
           end

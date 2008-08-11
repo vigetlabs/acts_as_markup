@@ -10,13 +10,14 @@ RDoc: http://viget.rubyforge.org/acts_as_markup
 == DESCRIPTION:
 
 Allows you to specify columns of an ActiveRecord model that contain Markdown, 
-Textile, and Wiki text. You may then use +to_s+ to get the original markup 
+Textile, Wiki text and RDoc. You may then use +to_s+ to get the original markup 
 text or +to_html+ to get the formated HTML.
 
 Additionally you can have a model that contains a column that has a column with 
 markup text, and another that defines what language to process it as. If the field 
-is listed as "markdown" "textile", or "wikitext" (case insensitive) it will treat it as such, 
-any other value for markup language will have the value pass through as a normal string.
+is listed as "markdown" "textile", "wikitext" or "rdoc" (case insensitive) it will 
+treat it as such, any other value for markup language will have the value pass 
+through as a normal string.
 
 This AR extension can use 3 different types of Markdown processing backends: 
 BlueCloth, RDiscount, or Ruby PEG. You specify which one you want to use by setting
@@ -59,6 +60,17 @@ By default RDiscount will be used.
     @post = Post.find(:first)
     @post.body.to_s     #=> "== Wikitext Headline =="
     @post.body.to_html  #=> "<h2>Wikitext Headline</h2>"
+    
+
+==== Using +acts_as_rdoc+:
+
+    class Post < ActiveRecrod
+      acts_as_rdoc :body
+    end
+
+    @post = Post.find(:first)
+    @post.body.to_s     #=> "== RDoc Headline"
+    @post.body.to_html  #=> "<h2>RDoc Headline</h2>"
     
 
 ==== Using +acts_as_markup+:

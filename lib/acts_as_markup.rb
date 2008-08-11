@@ -2,7 +2,7 @@ require 'active_support'
 
 module ActsAsMarkup
   # :stopdoc:
-  VERSION = '0.3.1'
+  VERSION = '0.4.0'
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
   # :startdoc:

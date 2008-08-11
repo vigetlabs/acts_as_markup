@@ -7,6 +7,7 @@ acts_as_markup.gemspec
 lib/acts/as_markup.rb
 lib/acts_as_markup.rb
 lib/acts_as_markup/exts/rdiscount.rb
+lib/acts_as_markup/exts/rdoc.rb
 lib/acts_as_markup/exts/string.rb
 lib/acts_as_markup/exts/wikitext.rb
 tasks/bones.rake
@@ -20,6 +21,7 @@ tasks/setup.rb
 tasks/test.rake
 test/acts_as_markdown_test.rb
 test/acts_as_markup_test.rb
+test/acts_as_rdoc_test.rb
 test/acts_as_textile_test.rb
 test/acts_as_wikitext_test.rb
 test/test_helper.rb

@@ -224,6 +224,54 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
       end
     end
     
+    context 'with a RDoc post' do
+      setup do
+        @rdoctext = "== RDoc Test Text"
+        @rdoc_post = VariablePost.create!(:title => 'Blah', :body => @rdoctext, :markup_language => 'RDoc')
+      end
+
+      should "have a RDocText object returned for the column value" do
+        assert_kind_of RDocText, @rdoc_post.body
+      end
+
+      should "return original RDoc text for a `to_s` method call on the column value" do
+        assert_equal @rdoctext, @rdoc_post.body.to_s
+      end
+
+      should "return formated html for a `to_html` method call on the column value" do
+        assert_match(/<h2>\s*RDoc Test Text\s*<\/h2>/, @rdoc_post.body.to_html)
+      end
+
+      context "changing value of RDoc field should return new RDoc object" do
+        setup do
+          @old_body = @rdoc_post.body
+          @rdoc_post.body = "http://www.example.com/"
+        end
+
+        should "still have an RDocText object but not the same object" do
+          assert_kind_of RDocText, @rdoc_post.body
+          assert_not_same @rdoc_post.body, @old_body 
+        end
+
+        should "return correct text for `to_s`" do
+          assert_equal "http://www.example.com/", @rdoc_post.body.to_s
+        end
+
+        should "return correct HTML for the `to_html` method" do
+          assert_match(/<a href="http:\/\/www.example.com">www.example.com<\/a>/, @rdoc_post.body.to_html)
+        end
+
+        teardown do
+          @old_body = nil
+        end
+      end
+
+      teardown do
+        @rdoctext, @rdoc_post = nil
+        Post.delete_all
+      end
+    end
+    
     context "with a plain text post" do
       setup do
         @plain_text = "Hahaha!!!"
@@ -322,8 +370,34 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
         assert_match(/[\n\s]*/, @post.body.to_html)
       end
       
-      should "have a RedCloth object returned for the column value" do
+      should "have a WikitextString object returned for the column value" do
         assert_kind_of WikitextString, @post.body
+      end
+      
+      teardown do
+        @post = nil
+        Post.delete_all
+      end
+    end
+    
+    context 'with RDoc' do
+      setup do
+        class ::Post < ActiveRecord::Base
+          acts_as_rdoc :body
+        end
+        @post = Post.create!(:title => 'Blah', :body => @text)
+      end
+      
+      should 'return a blank string for `to_s` method' do
+        assert_equal @post.body.to_s, ''
+      end
+      
+      should 'return a blank string for `to_html` method' do
+        assert_match(/[\n\s]*/, @post.body.to_html)
+      end
+      
+      should "have a RDocText object returned for the column value" do
+        assert_kind_of RDocText, @post.body
       end
       
       teardown do
