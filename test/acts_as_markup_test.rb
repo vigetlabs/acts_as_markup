@@ -78,7 +78,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
     setup do
       ActsAsMarkup.markdown_library = ActsAsMarkup::DEFAULT_MAKRDOWN_LIB
       class ::VariablePost < ActiveRecord::Base
-        acts_as_markup :language => :variable, :columns => [:body], :language_column => :markup_language
+        acts_as_markup :language => :variable, :columns => [:body]
       end
     end
     
@@ -320,6 +320,28 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
     
     teardown do
       VariablePost.delete_all
+    end
+  end
+  
+  context 'acts_as_markup with variable language setting the language column' do
+    setup do
+      ActsAsMarkup.markdown_library = ActsAsMarkup::DEFAULT_MAKRDOWN_LIB
+      class ::VariableLanguagePost < ActiveRecord::Base
+        acts_as_markup :language => :variable, :columns => [:body], :language_column => :language_name
+      end
+    end
+    
+    should "use the correct language column" do
+      markdown_text = '## Markdown Test Text'
+      markdown_post = VariableLanguagePost.create!(:title => 'Blah', :body => markdown_text, :language_name => 'Markdown')
+      
+      assert_kind_of RDiscount, markdown_post.body
+      assert_equal markdown_text, markdown_post.body.to_s
+      assert_match(/<h2(\s\w+\=['"]\w*['"])*\s*>\s*Markdown Test Text\s*<\/h2>/, markdown_post.body.to_html)
+    end
+    
+    teardown do
+      VariableLanguagePost.delete_all
     end
   end
   

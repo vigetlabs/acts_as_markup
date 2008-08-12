@@ -13,12 +13,13 @@ module ActiveRecord # :nodoc:
         # Markdown, Textile, Wikitext or RDoc content.
         # Then you can simply call <tt>.to_html</tt> method on the attribute.
         # 
-        # You can also specify the language as <tt>:variable</tt> you will then
-        # need to add an additional option of <tt>:language_column</tt>. When 
-        # a value is accessed it will create the correct object (Markdown, Textile, 
-        # Wikitext or RDoc) based on the value of the language column. If any value 
-        # besides markdown, textile, wikitext, or RDoc is supplied for the markup 
-        # language the text will pass through as a string.
+        # You can also specify the language as <tt>:variable</tt>. The language used
+        # to process the column will be based on another column. By default a column
+        # named "<tt>markup_language</tt>" is used, but this can be changed by providing 
+        # a <tt>:language_column</tt> option. When a value is accessed it will create 
+        # the correct object (Markdown, Textile, Wikitext or RDoc) based on the value 
+        # of the language column. If any value besides markdown, textile, wikitext, or 
+        # RDoc is supplied for the markup language the text will pass through as a string.
         # 
         # 
         # ==== Examples
@@ -37,11 +38,11 @@ module ActiveRecord # :nodoc:
         # ===== Using variable language
         # 
         #     class Post < ActiveRecrod
-        #       acts_as_markup :language => :variable, :columns => [:body], :language_column => 'markup_language'
+        #       acts_as_markup :language => :variable, :columns => [:body], :language_column => 'language_name'
         #     end
         #     
         #     @post = Post.find(:first)
-        #     @post.markup_language      # => "markdown"
+        #     @post.language_name        # => "markdown"
         #     @post.body.to_s            # => "## Markdown Headline"
         #     @post.body.to_html         # => "<h2> Markdown Headline</h2>"
         #     
@@ -73,6 +74,7 @@ module ActiveRecord # :nodoc:
             textile_klass = 'RedCloth'
             wiki_klass = 'WikitextString'
             rdoc_klass = 'RDocText'
+            options[:language_column] ||= :markup_language
           else
             raise ActsAsMarkup::UnsportedMarkupLanguage, "#{options[:langauge]} is not a currently supported markup language."
           end

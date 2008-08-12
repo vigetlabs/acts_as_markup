@@ -32,6 +32,13 @@ def setup_db
       t.column :markup_language, :string
       t.timestamps
     end
+    
+    create_table :variable_language_posts do |t|
+      t.column :title, :string
+      t.column :body, :text
+      t.column :language_name, :string
+      t.timestamps
+    end
   end
 end
 

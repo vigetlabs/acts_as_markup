@@ -87,7 +87,7 @@ By default RDiscount will be used.
 ==== Using +acts_as_markup+ with <tt>:variable</tt> language:
 
     class Post < ActiveRecrod
-      acts_as_markup :language => :variable, :columns => [:body], :language_column => 'markup_language'
+      acts_as_markup :language => :variable, :columns => [:body]
     end
     
     @post = Post.find(:first)
