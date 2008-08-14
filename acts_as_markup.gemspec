@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name = %q{acts_as_markup}
-  s.version = "1.1.0"
+  s.version = "1.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Brian Landau"]
-  s.date = %q{2008-08-12}
+  s.date = %q{2008-08-14}
   s.description = %q{Represent ActiveRecord Markdown, Textile, Wiki text, RDoc columns as Markdown, Textile Wikitext, RDoc objects using various external libraries to convert to HTML.}
   s.email = %q{brian.landau@viget.com}
   s.extra_rdoc_files = ["CHANGELOG", "LICENSE", "README.rdoc"]

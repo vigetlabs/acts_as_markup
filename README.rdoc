@@ -118,3 +118,28 @@ Add "+acts_as_markup+" to your environment.rb:
 
     config.gem "acts_as_markup"
 
+== CONTRIBUTING:
+
+Make a fork on GitHub, make your changes and do a pull request. Good places to start are adding new Markdown libraries or new markup languages, here's instructions for both:
+
+=== Instructions for how to add a new Markdown Library:
+
+1. Add another item to the <tt>ActsAsMarkup::MARKDOWN_LIBS</tt> hash in the form of:
+       :bluecloth => {:class_name => "BlueCloth",
+                      :lib_name   => "bluecloth"}
+   <tt>:lib_name</tt> should be the name needed to require the library, while <tt>:class_name</tt> should be the class that we are making an instance of.
+2. If you need to modify the object in anyway (e.g. to add a <tt>to_s</tt> or <tt>to_html</tt> method), add a file to the "lib/acts_as_markup/exts/" directory.
+3. Add appropriate tests (see current tests).
+
+=== Instructions for how to add a new Markup Language:
+
+1. Add a "<tt>when</tt>" statement to the "<tt>case</tt>" statement in <tt>acts_as_markup</tt>. The "<tt>when</tt>" statement should match with a symbol that represents the language name in some way (e.g. "<tt>:markdown</tt>").
+2. In the "<tt>when</tt>" block you need to set the "<tt>klass</tt>" local variable and require the library and the extension file if you need one (use the special <tt>require_extensions</tt> method to require extensions).
+3. Add the same lines you added to the previous "<tt>when</tt>" statement to the "<tt>:variable</tt>" "<tt>when</tt>" statement. But replace "<tt>klass</tt>" with "<tt>language_klass</tt>" (e.g. "<tt>markdown_klass</tt>").
+4. Add a relevant "<tt>when</tt>" statement to the <tt>class_eval</tt> block for the "<tt>:variable</tt>" language option. This should look something like:
+       when /markdown/i
+         @#{col.to_s} = #{markdown_klass}.new(self['#{col.to_s}'].to_s)
+5. Add a convenience method (e.g. "<tt>acts_as_markdown</tt>")
+6. Add an extension file to the "lib/acts_as_markup/exts/" directory if you need to modify the object in anyway.
+7. Add appropriate tests (see current tests).
+

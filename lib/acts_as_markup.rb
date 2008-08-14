@@ -2,7 +2,7 @@ require 'active_support'
 
 module ActsAsMarkup
   # :stopdoc:
-  VERSION = '1.1.0'
+  VERSION = '1.1.1'
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
   # :startdoc:
@@ -25,6 +25,8 @@ module ActsAsMarkup
                                    :lib_name   => "peg_markdown"},
                     :maruku    => {:class_name => "Maruku",
                                    :lib_name   => "maruku"} }
+                                   
+  LIBRARY_EXTENSIONS = Set.new(Dir[ActsAsMarkup::LIBPATH + 'acts_as_markup/exts/*.rb'].map {|file| File.basename(file, '.rb')}).delete('string')
   
   @@markdown_library = DEFAULT_MAKRDOWN_LIB
   mattr_accessor :markdown_library
