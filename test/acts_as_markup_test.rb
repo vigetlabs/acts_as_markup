@@ -7,7 +7,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
   
   context 'acts_as_markup' do
     setup do
-      ActsAsMarkup.markdown_library = ActsAsMarkup::DEFAULT_MAKRDOWN_LIB
+      ActsAsMarkup.markdown_library = ActsAsMarkup::DEFAULT_MARKDOWN_LIB
       
       @textile_text = "h2. Textile Test Text"
       class ::TextilePost < ActiveRecord::Base
@@ -76,7 +76,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
   
   context 'acts_as_markup with variable language' do
     setup do
-      ActsAsMarkup.markdown_library = ActsAsMarkup::DEFAULT_MAKRDOWN_LIB
+      ActsAsMarkup.markdown_library = ActsAsMarkup::DEFAULT_MARKDOWN_LIB
       class ::VariablePost < ActiveRecord::Base
         acts_as_markup :language => :variable, :columns => [:body]
       end
@@ -325,7 +325,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
   
   context 'acts_as_markup with variable language setting the language column' do
     setup do
-      ActsAsMarkup.markdown_library = ActsAsMarkup::DEFAULT_MAKRDOWN_LIB
+      ActsAsMarkup.markdown_library = ActsAsMarkup::DEFAULT_MARKDOWN_LIB
       class ::VariableLanguagePost < ActiveRecord::Base
         acts_as_markup :language => :variable, :columns => [:body], :language_column => :language_name
       end

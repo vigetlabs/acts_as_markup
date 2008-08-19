@@ -15,7 +15,7 @@ module ActsAsMarkup
   class UnsportedMarkdownLibrary < ArgumentError
   end
   
-  DEFAULT_MAKRDOWN_LIB = :rdiscount
+  DEFAULT_MARKDOWN_LIB = :rdiscount
   
   MARKDOWN_LIBS = { :rdiscount => {:class_name => "RDiscount",
                                    :lib_name   => "rdiscount"}, 
@@ -28,7 +28,7 @@ module ActsAsMarkup
                                    
   LIBRARY_EXTENSIONS = Set.new(Dir[ActsAsMarkup::LIBPATH + 'acts_as_markup/exts/*.rb'].map {|file| File.basename(file, '.rb')}).delete('string')
   
-  @@markdown_library = DEFAULT_MAKRDOWN_LIB
+  @@markdown_library = DEFAULT_MARKDOWN_LIB
   mattr_accessor :markdown_library
   
   # :stopdoc:
