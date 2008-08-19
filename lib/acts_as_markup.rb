@@ -8,7 +8,7 @@ module ActsAsMarkup
   # :startdoc:
   
   # This exception is raised when an unsupported markup language is supplied to acts_as_markup.
-  class UnsportedMarkupLanguage < ArgumentError
+  class UnsupportedMarkupLanguage < ArgumentError
   end
   
   # This exception is raised when an unsupported Markdown library is set to the config value.
@@ -39,14 +39,14 @@ module ActsAsMarkup
   end
 
   # Returns the library path for the module. If any arguments are given,
-  # they will be joined to the end of the libray path using
+  # they will be joined to the end of the library path using
   # <tt>File.join</tt>.
   #
   def self.libpath( *args )
     args.empty? ? LIBPATH : ::File.join(LIBPATH, *args)
   end
 
-  # Returns the lpath for the module. If any arguments are given,
+  # Returns the path for the module. If any arguments are given,
   # they will be joined to the end of the path using
   # <tt>File.join</tt>.
   #

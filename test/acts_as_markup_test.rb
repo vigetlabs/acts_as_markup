@@ -539,7 +539,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
   
   context 'acts_as_markup with bad language name' do
     should 'raise exception when a non-supported language is passed to acts_as_markup' do
-      assert_raise ActsAsMarkup::UnsportedMarkupLanguage do
+      assert_raise ActsAsMarkup::UnsupportedMarkupLanguage do
         class ::Post < ActiveRecord::Base
           acts_as_markup :language => :fake, :columns => [:body]
         end
