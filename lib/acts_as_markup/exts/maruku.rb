@@ -16,6 +16,11 @@ class Maruku
 	def to_s
 	  @text
   end
+  
+  # used to be compatable with Rails/ActiveSupport
+  def blank?
+    @text.blank?
+  end
 	
 end
 

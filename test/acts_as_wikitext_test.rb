@@ -17,6 +17,10 @@ class ActsAsWikitextTest < ActsAsMarkupTestCase
     should "return original wikitext text for a `to_s` method call on the column value" do
       assert_equal @wikitext, @post.body.to_s
     end
+    
+    should 'return false for .blank?' do
+      assert !@post.body.blank?
+    end
   
     should "return formated html for a `to_html` method call on the column value" do
       assert_match(/<h2>Wikitext Test Text<\/h2>/, @post.body.to_html)

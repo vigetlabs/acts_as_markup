@@ -1,3 +1,6 @@
+== 1.1.2 / 2008-08-22
+* Make sure all markup objects properly respond to the .blank? method call.
+
 == 1.1.0 / 2008-08-12
 
 * Use a default for markup language column name when the variable options is used.

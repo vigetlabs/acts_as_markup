@@ -17,6 +17,10 @@ class ActsAsTextileTest < ActsAsMarkupTestCase
     should "return original textile text for a `to_s` method call on the column value" do
       assert_equal @textile_text, @post.body.to_s
     end
+    
+    should 'return false for .blank?' do
+      assert !@post.body.blank?
+    end
   
     should "return formated html for a `to_html` method call on the column value" do
       assert_match(/<h2>Textile Test Text<\/h2>/, @post.body.to_html)

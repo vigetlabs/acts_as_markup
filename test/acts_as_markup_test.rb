@@ -362,6 +362,10 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
         assert_equal @post.body.to_s, ''
       end
       
+      should 'return true for .blank?' do
+        assert @post.body.blank?
+      end
+      
       should 'return a blank string for `to_html` method' do
         assert_match(/[\n\s]*/, @post.body.to_html)
       end
@@ -388,6 +392,10 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
         assert_equal @post.body.to_s, ''
       end
       
+      should 'return true for .blank?' do
+        assert @post.body.blank?
+      end
+      
       should 'return a blank string for `to_html` method' do
         assert_match(/[\n\s]*/, @post.body.to_html)
       end
@@ -412,6 +420,10 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
       
       should 'return a blank string for `to_s` method' do
         assert_equal @post.body.to_s, ''
+      end
+      
+      should 'return true for .blank?' do
+        assert @post.body.blank?
       end
       
       should 'return a blank string for `to_html` method' do
@@ -441,6 +453,10 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
         assert_equal @post.body.to_s, ''
       end
       
+      should 'return true for .blank?' do
+        assert @post.body.blank?
+      end
+      
       should 'return a blank string for `to_html` method' do
         assert_match(/[\n\s]*/, @post.body.to_html)
       end
@@ -466,6 +482,10 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
       
       should 'return a blank string for `to_s` method' do
         assert_equal @post.body.to_s, ''
+      end
+      
+      should 'return true for .blank?' do
+        assert @post.body.blank?
       end
       
       should 'return a blank string for `to_html` method' do
@@ -495,6 +515,10 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
         assert_equal @post.body.to_s, ''
       end
       
+      should 'return true for .blank?' do
+        assert @post.body.blank?
+      end
+      
       should 'return a blank string for `to_html` method' do
         assert_match(/[\n\s]*/, @post.body.to_html)
       end
@@ -520,6 +544,10 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
       
       should 'return a blank string for `to_s` method' do
         assert_equal @post.body.to_s, ''
+      end
+      
+      should 'return true for .blank?' do
+        assert @post.body.blank?
       end
       
       should 'return a blank string for `to_html` method' do
