@@ -76,7 +76,7 @@ module ActiveRecord # :nodoc:
             rdoc_klass = 'RDocText'
             options[:language_column] ||= :markup_language
           else
-            raise ActsAsMarkup::UnsportedMarkupLanguage, "#{options[:langauge]} is not a currently supported markup language."
+            raise ActsAsMarkup::UnsupportedMarkupLanguage, "#{options[:langauge]} is not a currently supported markup language."
           end
           
           options[:columns].each do |col|

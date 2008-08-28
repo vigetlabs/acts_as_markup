@@ -8,14 +8,14 @@ module ActsAsMarkup
   # :startdoc:
   
   # This exception is raised when an unsupported markup language is supplied to acts_as_markup.
-  class UnsportedMarkupLanguage < ArgumentError
+  class UnsupportedMarkupLanguage < ArgumentError
   end
   
   # This exception is raised when an unsupported Markdown library is set to the config value.
   class UnsportedMarkdownLibrary < ArgumentError
   end
   
-  DEFAULT_MAKRDOWN_LIB = :rdiscount
+  DEFAULT_MARKDOWN_LIB = :rdiscount
   
   MARKDOWN_LIBS = { :rdiscount => {:class_name => "RDiscount",
                                    :lib_name   => "rdiscount"}, 
@@ -28,7 +28,7 @@ module ActsAsMarkup
                                    
   LIBRARY_EXTENSIONS = Set.new(Dir[ActsAsMarkup::LIBPATH + 'acts_as_markup/exts/*.rb'].map {|file| File.basename(file, '.rb')}).delete('string')
   
-  @@markdown_library = DEFAULT_MAKRDOWN_LIB
+  @@markdown_library = DEFAULT_MARKDOWN_LIB
   mattr_accessor :markdown_library
   
   # :stopdoc:
@@ -39,14 +39,14 @@ module ActsAsMarkup
   end
 
   # Returns the library path for the module. If any arguments are given,
-  # they will be joined to the end of the libray path using
+  # they will be joined to the end of the library path using
   # <tt>File.join</tt>.
   #
   def self.libpath( *args )
     args.empty? ? LIBPATH : ::File.join(LIBPATH, *args)
   end
 
-  # Returns the lpath for the module. If any arguments are given,
+  # Returns the path for the module. If any arguments are given,
   # they will be joined to the end of the path using
   # <tt>File.join</tt>.
   #
