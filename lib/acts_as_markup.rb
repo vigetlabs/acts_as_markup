@@ -71,4 +71,5 @@ module ActsAsMarkup
 end  # module ActsAsMarkup
 
 require 'acts_as_markup/exts/string'
+require 'acts_as_markup/stringlike'
 ActsAsMarkup.require_all_libs_relative_to __FILE__, 'acts'

@@ -14,6 +14,8 @@ class ActsAsMarkdownTest < ActsAsMarkupTestCase
         end
         @post = Post.create!(:title => 'Blah', :body => @markdown_text)
       end
+      
+      should_act_like_a_string
 
       should "have a RDiscount object returned for the column value" do
         assert_kind_of RDiscount, @post.body
@@ -27,7 +29,7 @@ class ActsAsMarkdownTest < ActsAsMarkupTestCase
         assert !@post.body.blank?
       end
 
-      should "return formated html for a `to_html` method call on the column value" do
+      should "return formatted html for a `to_html` method call on the column value" do
         assert_match(/<h2(\s\w+\=['"]\w*['"])*\s*>\s*Markdown Test Text\s*<\/h2>/, @post.body.to_html)
       end
 
@@ -69,6 +71,8 @@ class ActsAsMarkdownTest < ActsAsMarkupTestCase
         end
         @post = Post.create!(:title => 'Blah', :body => @markdown_text)
       end
+      
+      should_act_like_a_string
 
       should "have a Ruby PEG Markdown object returned for the column value" do
         assert_kind_of PEGMarkdown, @post.body
@@ -124,6 +128,8 @@ class ActsAsMarkdownTest < ActsAsMarkupTestCase
         end
         @post = Post.create!(:title => 'Blah', :body => @markdown_text)
       end
+      
+      should_act_like_a_string
 
       should "have a BlueCloth object returned for the column value" do
         assert_kind_of BlueCloth, @post.body
@@ -179,6 +185,8 @@ class ActsAsMarkdownTest < ActsAsMarkupTestCase
         end
         @post = Post.create!(:title => 'Blah', :body => @markdown_text)
       end
+      
+      should_act_like_a_string
 
       should "have a Maruku object returned for the column value" do
         assert_kind_of Maruku, @post.body

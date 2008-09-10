@@ -1,4 +1,5 @@
 require 'test/unit'
+require 'rubygems'
 require 'shoulda'
 require 'active_support'
 require 'active_support/test_case'
@@ -55,5 +56,12 @@ class ActsAsMarkupTestCase < ActiveSupport::TestCase
   
   def teardown
     teardown_db
+  end
+  
+  def self.should_act_like_a_string
+    should "act like a string" do
+      assert_equal @post.body.split(' '), ['##', 'Markdown', 'Test', 'Text']
+      assert @post.body.match(/Te[sx]t/)
+    end
   end
 end

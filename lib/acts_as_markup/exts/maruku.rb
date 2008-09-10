@@ -1,6 +1,8 @@
 require 'maruku'
 
 class Maruku
+  include Stringlike
+  
   attr_reader :text
   
 	def initialize(s=nil, meta={})
