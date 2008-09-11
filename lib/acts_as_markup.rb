@@ -2,7 +2,7 @@ require 'active_support'
 
 module ActsAsMarkup
   # :stopdoc:
-  VERSION = '1.1.2'
+  VERSION = '1.2.0'
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
   # :startdoc:
@@ -70,6 +70,6 @@ module ActsAsMarkup
 
 end  # module ActsAsMarkup
 
-require 'acts_as_markup/exts/string'
+require 'acts_as_markup/exts/object'
 require 'acts_as_markup/stringlike'
 ActsAsMarkup.require_all_libs_relative_to __FILE__, 'acts'

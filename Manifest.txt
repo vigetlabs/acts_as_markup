@@ -7,11 +7,12 @@ acts_as_markup.gemspec
 lib/acts/as_markup.rb
 lib/acts_as_markup.rb
 lib/acts_as_markup/exts/maruku.rb
+lib/acts_as_markup/exts/object.rb
 lib/acts_as_markup/exts/peg_markdown.rb
 lib/acts_as_markup/exts/rdiscount.rb
 lib/acts_as_markup/exts/rdoc.rb
-lib/acts_as_markup/exts/string.rb
 lib/acts_as_markup/exts/wikitext.rb
+lib/acts_as_markup/stringlike.rb
 tasks/bones.rake
 tasks/gem.rake
 tasks/git.rake
