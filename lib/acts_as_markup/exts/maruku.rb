@@ -44,30 +44,25 @@ module MaRuKu # :nodoc:
       # method because we need +to_html+ to return the original text on plain text fields of
       # the variable language option on +acts_as_markup+
       def array_to_html(array)
-    		e = []
-    		array.each do |c|
-    			method = c.kind_of?(MDElement) ? 
-    			   "to_html_#{c.node_type}" : "to_xml"
-
-    			if not c.respond_to?(method)
-    				#raise "Object does not answer to #{method}: #{c.class} #{c.inspect}"
+    		elements = []
+    		array.each do |item|
+    			method = item.kind_of?(MDElement) ? "to_html_#{item.node_type}" : "to_xml"
+          unless item.respond_to?(method)
     				next
     			end
 
-    			h =  c.send(method)
-
-    			if h.nil?
-    				raise "Nil html created by method  #{method}:\n#{h.inspect}\n"+
-    				" for object #{c.inspect[0,300]}"
+    			html_text =  item.send(method)
+          if html_text.nil?
+    				raise "Nil html created by method  #{method}:\n#{html_text.inspect}\n for object #{item.inspect[0,300]}"
     			end
 
-    			if h.kind_of?Array
-    				e = e + h #h.each do |hh| e << hh end
+    			if html_text.kind_of?Array
+    				elements = elements + html_text
     			else
-    				e << h
+    				elements << html_text
     			end
     		end
-    		e
+    		elements
     	end
 
     end

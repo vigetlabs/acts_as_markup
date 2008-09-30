@@ -49,31 +49,13 @@ module ActiveRecord # :nodoc:
         # 
         def acts_as_markup(options)
           case options[:language].to_sym
-          when :markdown
-            klass = get_markdown_class
-          when :textile
-            require 'redcloth'
-            klass = 'RedCloth'
-          when :wikitext
-            require 'wikitext'
-            require_extensions 'wikitext'
-            klass = 'WikitextString'
-          when :rdoc
-            require 'rdoc/markup/simple_markup'
-            require 'rdoc/markup/simple_markup/to_html'
-            require_extensions 'rdoc'
-            klass = 'RDocText'
+          when :markdown, :textile, :wikitext, :rdoc
+            klass = require_library_and_get_class(options[:language].to_sym)
           when :variable
-            markdown_klass = get_markdown_class
-            require 'redcloth'
-            require 'wikitext'
-            require 'rdoc/markup/simple_markup'
-            require 'rdoc/markup/simple_markup/to_html'
-            require_extensions 'wikitext'
-            require_extensions 'rdoc'
-            textile_klass = 'RedCloth'
-            wiki_klass = 'WikitextString'
-            rdoc_klass = 'RDocText'
+            markup_klasses = {}
+            [:textile, :wikitext, :rdoc, :markdown].each do |language|
+              markup_klasses[language] = require_library_and_get_class(language)
+            end
             options[:language_column] ||= :markup_language
           else
             raise ActsAsMarkup::UnsupportedMarkupLanguage, "#{options[:langauge]} is not a currently supported markup language."
@@ -101,13 +83,13 @@ module ActiveRecord # :nodoc:
                   end
                   case self.#{options[:language_column].to_s}
                   when /markdown/i
-                    @#{col.to_s} = #{markdown_klass}.new(self['#{col.to_s}'].to_s)
+                    @#{col.to_s} = #{markup_klasses[:markdown]}.new(self['#{col.to_s}'].to_s)
                   when /textile/i
-                    @#{col.to_s} = #{textile_klass}.new(self['#{col.to_s}'].to_s)
+                    @#{col.to_s} = #{markup_klasses[:textile]}.new(self['#{col.to_s}'].to_s)
                   when /wikitext/i
-                    @#{col.to_s} = #{wiki_klass}.new(self['#{col.to_s}'].to_s)
+                    @#{col.to_s} = #{markup_klasses[:wikitext]}.new(self['#{col.to_s}'].to_s)
                   when /rdoc/i
-                    @#{col.to_s} = #{rdoc_klass}.new(self['#{col.to_s}'].to_s)
+                    @#{col.to_s} = #{markup_klasses[:rdoc]}.new(self['#{col.to_s}'].to_s)
                   else
                     @#{col.to_s} = self['#{col.to_s}']
                   end
@@ -161,6 +143,27 @@ module ActiveRecord # :nodoc:
           def require_extensions(library)# :nodoc:
             if ActsAsMarkup::LIBRARY_EXTENSIONS.include? library.to_s
               require "acts_as_markup/exts/#{library.to_s}"
+            end
+          end
+          
+          def require_library_and_get_class(language)
+            case language
+            when :markdown
+              return get_markdown_class
+            when :textile
+              require 'redcloth'
+              return 'RedCloth'
+            when :wikitext
+              require 'wikitext'
+              require_extensions 'wikitext'
+              return 'WikitextString'
+            when :rdoc
+              require 'rdoc/markup/simple_markup'
+              require 'rdoc/markup/simple_markup/to_html'
+              require_extensions 'rdoc'
+              return 'RDocText'
+            else
+              return 'String'
             end
           end
         

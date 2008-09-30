@@ -1,4 +1,7 @@
 require 'rake/testtask'
+if HAVE_RCOV
+  require 'rcov/rcovtask'
+end
 
 namespace :test do
 
@@ -12,17 +15,9 @@ namespace :test do
 
   if HAVE_RCOV
     desc 'Run rcov on the unit tests'
-    task :rcov => :clobber_rcov do
-      opts = PROJ.rcov.opts.dup << '-o' << PROJ.rcov.dir
-      opts = opts.join(' ')
-      files = if test(?f, PROJ.test.file) then [PROJ.test.file]
-              else PROJ.test.files end
-      files = files.join(' ')
-      sh "#{RCOV} #{files} #{opts}"
-    end
-
-    task :clobber_rcov do
-      rm_r 'coverage' rescue nil
+    Rcov::RcovTask.new do |t|
+      t.pattern = PROJ.rcov.pattern
+      t.rcov_opts = PROJ.rcov.opts
     end
   end
 
