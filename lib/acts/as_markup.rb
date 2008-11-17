@@ -63,38 +63,34 @@ module ActiveRecord # :nodoc:
           
           options[:columns].each do |col|
             unless options[:language].to_sym == :variable
-              class_eval <<-EOV
-                def #{col.to_s}
-                  if @#{col.to_s}
-                    unless self.#{col.to_s}_changed?
-                      return @#{col.to_s}
-                    end
+              define_method col do
+                if iv = instance_variable_get("@#{col}")
+                  unless send("#{col}_changed?")
+                    return iv
                   end
-                  @#{col.to_s} = #{klass}.new(self['#{col.to_s}'].to_s)
                 end
-              EOV
+                instance_variable_set("@#{col}", klass.new(self[col].to_s))
+              end
             else
-              class_eval <<-EOV
-                def #{col.to_s}
-                  if @#{col.to_s}
-                    unless self.#{col.to_s}_changed? || self.#{options[:language_column].to_s}_changed?
-                      return @#{col.to_s}
-                    end
-                  end
-                  case self.#{options[:language_column].to_s}
-                  when /markdown/i
-                    @#{col.to_s} = #{markup_klasses[:markdown]}.new(self['#{col.to_s}'].to_s)
-                  when /textile/i
-                    @#{col.to_s} = #{markup_klasses[:textile]}.new(self['#{col.to_s}'].to_s)
-                  when /wikitext/i
-                    @#{col.to_s} = #{markup_klasses[:wikitext]}.new(self['#{col.to_s}'].to_s)
-                  when /rdoc/i
-                    @#{col.to_s} = #{markup_klasses[:rdoc]}.new(self['#{col.to_s}'].to_s)
-                  else
-                    @#{col.to_s} = self['#{col.to_s}']
+              define_method col do
+                if iv = instance_variable_get("@#{col}")
+                  unless send("#{col}_changed?") || send("#{options[:language_column]}_changed?")
+                    return iv
                   end
                 end
-              EOV
+                instance_variable_set("@#{col}", case send(options[:language_column])
+                when /markdown/i
+                  markup_klasses[:markdown].new(self[col].to_s)
+                when /textile/i
+                  markup_klasses[:textile].new(self[col].to_s)
+                when /wikitext/i
+                  markup_klasses[:wikitext].new(self[col].to_s)
+                when /rdoc/i
+                  markup_klasses[:rdoc].new(self[col].to_s)
+                else
+                  self[col]
+                end)
+              end
             end
           end
         end
@@ -134,7 +130,7 @@ module ActiveRecord # :nodoc:
               markdown_library_names = ActsAsMarkup::MARKDOWN_LIBS[ActsAsMarkup.markdown_library]
               require markdown_library_names[:lib_name]
               require_extensions(markdown_library_names[:lib_name])
-              return markdown_library_names[:class_name]
+              return markdown_library_names[:class_name].constantize
             else
               raise ActsAsMarkup::UnsportedMarkdownLibrary, "#{ActsAsMarkup.markdown_library} is not currently supported."
             end
@@ -152,18 +148,18 @@ module ActiveRecord # :nodoc:
               return get_markdown_class
             when :textile
               require 'redcloth'
-              return 'RedCloth'
+              return RedCloth
             when :wikitext
               require 'wikitext'
               require_extensions 'wikitext'
-              return 'WikitextString'
+              return WikitextString
             when :rdoc
               require 'rdoc/markup/simple_markup'
               require 'rdoc/markup/simple_markup/to_html'
               require_extensions 'rdoc'
-              return 'RDocText'
+              return RDocText
             else
-              return 'String'
+              return String
             end
           end
         
