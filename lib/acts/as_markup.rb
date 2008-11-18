@@ -102,7 +102,7 @@ module ActiveRecord # :nodoc:
         # `<tt>acts_as_markup :language => :markdown, :columns => [:body]</tt>`
         # 
         def acts_as_markdown(*columns)
-          options = columns.last.is_a?(::Hash) ? columns.pop : {}
+          options = columns.extract_options!
           acts_as_markup options.merge(:language => :markdown, :columns => columns)
         end
         
@@ -110,7 +110,7 @@ module ActiveRecord # :nodoc:
         # `<tt>acts_as_markup :language => :textile, :columns => [:body]</tt>`
         #
         def acts_as_textile(*columns)
-          options = columns.last.is_a?(::Hash) ? columns.pop : {}
+          options = columns.extract_options!
           acts_as_markup options.merge(:language => :textile, :columns => columns)
         end
         
@@ -118,7 +118,7 @@ module ActiveRecord # :nodoc:
         # `<tt>acts_as_markup :language => :wikitext, :columns => [:body]</tt>`
         #
         def acts_as_wikitext(*columns)
-          options = columns.last.is_a?(::Hash) ? columns.pop : {}
+          options = columns.extract_options!
           acts_as_markup options.merge(:language => :wikitext, :columns => columns)
         end
         
@@ -126,7 +126,7 @@ module ActiveRecord # :nodoc:
         # `<tt>acts_as_markup :language => :rdoc, :columns => [:body]</tt>`
         #
         def acts_as_rdoc(*columns)
-          options = columns.last.is_a?(::Hash) ? columns.pop : {}
+          options = columns.extract_options!
           acts_as_markup options.merge(:language => :rdoc, :columns => columns)
         end
         
