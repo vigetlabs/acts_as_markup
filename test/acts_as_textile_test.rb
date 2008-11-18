@@ -25,6 +25,11 @@ class ActsAsTextileTest < ActsAsMarkupTestCase
     should "return formated html for a `to_html` method call on the column value" do
       assert_match(/<h2>Textile Test Text<\/h2>/, @post.body.to_html)
     end
+    
+    should "not return escaped html" do
+      @post.body = "h2. Textile <i>Test</i> Text"
+      assert_match(/<i>Test<\/i>/, @post.body.to_html)
+    end
   
     context "changing value of textile field should return new textile object" do
       setup do
@@ -53,6 +58,20 @@ class ActsAsTextileTest < ActsAsMarkupTestCase
     teardown do
       @textile_text, @post = nil
       Post.delete_all
+    end
+  end
+  
+  context 'acts_as_textile with options' do
+    setup do
+      class ::Post
+        acts_as_textile :body, :textile_options => [ [ :filter_html ] ]
+      end
+      @post = Post.new(:title => 'Blah')
+    end
+    
+    should "return escaped html because of :filter_html" do
+      @post.body = "h2. Textile <i>Test</i> Text"
+      assert_match(/&lt;i&gt;Test&lt;\/i&gt;/, @post.body.to_html)
     end
   end
 end

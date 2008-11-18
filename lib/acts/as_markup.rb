@@ -61,32 +61,35 @@ module ActiveRecord # :nodoc:
             raise ActsAsMarkup::UnsupportedMarkupLanguage, "#{options[:langauge]} is not a currently supported markup language."
           end
           
-          options[:columns].each do |col|
-            unless options[:language].to_sym == :variable
+          unless options[:language].to_sym == :variable
+            markup_options = options["#{options[:language]}_options".to_sym] || []
+            options[:columns].each do |col|
               define_method col do
-                if iv = instance_variable_get("@#{col}")
+                if instance_variable_defined?("@#{col}")
                   unless send("#{col}_changed?")
-                    return iv
+                    return instance_variable_get("@#{col}")
                   end
                 end
-                instance_variable_set("@#{col}", klass.new(self[col].to_s))
+                instance_variable_set("@#{col}", klass.new(self[col].to_s, *markup_options))
               end
-            else
+            end
+          else
+            options[:columns].each do |col|
               define_method col do
-                if iv = instance_variable_get("@#{col}")
+                if instance_variable_defined?("@#{col}")
                   unless send("#{col}_changed?") || send("#{options[:language_column]}_changed?")
-                    return iv
+                    return instance_variable_get("@#{col}")
                   end
                 end
                 instance_variable_set("@#{col}", case send(options[:language_column])
                 when /markdown/i
-                  markup_klasses[:markdown].new(self[col].to_s)
+                  markup_klasses[:markdown].new self[col].to_s, *(options[:markdown_options] || [])
                 when /textile/i
-                  markup_klasses[:textile].new(self[col].to_s)
+                  markup_klasses[:textile].new self[col].to_s, *(options[:textile_options] || [])
                 when /wikitext/i
-                  markup_klasses[:wikitext].new(self[col].to_s)
+                  markup_klasses[:wikitext].new self[col].to_s, *(options[:wikitext_options] || [])
                 when /rdoc/i
-                  markup_klasses[:rdoc].new(self[col].to_s)
+                  markup_klasses[:rdoc].new self[col].to_s
                 else
                   self[col]
                 end)
@@ -99,28 +102,32 @@ module ActiveRecord # :nodoc:
         # `<tt>acts_as_markup :language => :markdown, :columns => [:body]</tt>`
         # 
         def acts_as_markdown(*columns)
-          acts_as_markup :language => :markdown, :columns => columns
+          options = columns.last.is_a?(::Hash) ? columns.pop : {}
+          acts_as_markup options.merge(:language => :markdown, :columns => columns)
         end
         
         # This is a convenience method for 
         # `<tt>acts_as_markup :language => :textile, :columns => [:body]</tt>`
         #
         def acts_as_textile(*columns)
-          acts_as_markup :language => :textile, :columns => columns
+          options = columns.last.is_a?(::Hash) ? columns.pop : {}
+          acts_as_markup options.merge(:language => :textile, :columns => columns)
         end
         
         # This is a convenience method for 
         # `<tt>acts_as_markup :language => :wikitext, :columns => [:body]</tt>`
         #
         def acts_as_wikitext(*columns)
-          acts_as_markup :language => :wikitext, :columns => columns
+          options = columns.last.is_a?(::Hash) ? columns.pop : {}
+          acts_as_markup options.merge(:language => :wikitext, :columns => columns)
         end
         
         # This is a convenience method for 
         # `<tt>acts_as_markup :language => :rdoc, :columns => [:body]</tt>`
         #
         def acts_as_rdoc(*columns)
-          acts_as_markup :language => :rdoc, :columns => columns
+          options = columns.last.is_a?(::Hash) ? columns.pop : {}
+          acts_as_markup options.merge(:language => :rdoc, :columns => columns)
         end
         
         
@@ -138,7 +145,7 @@ module ActiveRecord # :nodoc:
           
           def require_extensions(library)# :nodoc:
             if ActsAsMarkup::LIBRARY_EXTENSIONS.include? library.to_s
-              require "acts_as_markup/exts/#{library.to_s}"
+              require "#{ActsAsMarkup::LIBPATH}/acts_as_markup/exts/#{library}"
             end
           end
           

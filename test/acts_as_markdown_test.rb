@@ -32,6 +32,11 @@ class ActsAsMarkdownTest < ActsAsMarkupTestCase
       should "return formatted html for a `to_html` method call on the column value" do
         assert_match(/<h2(\s\w+\=['"]\w*['"])*\s*>\s*Markdown Test Text\s*<\/h2>/, @post.body.to_html)
       end
+    
+      should "not return escaped html" do
+        @post.body = "## Markdown <i>Test</i> Text"
+        assert_match(/<i>Test<\/i>/, @post.body.to_html)
+      end
 
       context "changing value of markdown field should return new markdown object" do
         setup do
@@ -62,6 +67,20 @@ class ActsAsMarkdownTest < ActsAsMarkupTestCase
         Post.delete_all
       end
     end
+    
+    context 'using RDiscount with options' do
+      setup do
+        class ::Post
+          acts_as_markdown :body, :markdown_options => [ :filter_html ]
+        end
+        @post = Post.new(:title => 'Blah')
+      end
+      
+      should "return escaped html because of :filter_html" do
+        @post.body = "## Markdown <i>Test</i> Text"
+        assert_match(/&lt;i>Test&lt;\/i>/, @post.body.to_html)
+      end
+    end
 
     context 'using Ruby PEG Markdown' do
       setup do
@@ -88,6 +107,11 @@ class ActsAsMarkdownTest < ActsAsMarkupTestCase
 
       should "return formated html for a `to_html` method call on the column value" do
         assert_match(/<h2(\s\w+\=['"]\w*['"])*\s*>\s*Markdown Test Text\s*<\/h2>/, @post.body.to_html)
+      end
+    
+      should "not return escaped html" do
+        @post.body = "## Markdown <i>Test</i> Text"
+        assert_match(/<i>Test<\/i>/, @post.body.to_html)
       end
 
       context "changing value of markdown field should return new markdown object" do
@@ -120,6 +144,20 @@ class ActsAsMarkdownTest < ActsAsMarkupTestCase
       end
     end
 
+    context 'using Ruby PEG Markdown with options' do
+      setup do
+        class ::Post
+          acts_as_markdown :body, :markdown_options => [ :filter_html ]
+        end
+        @post = Post.new(:title => 'Blah')
+      end
+      
+      should "return no html because of :filter_html" do
+        @post.body = "## Markdown <i>Test</i> Text"
+        assert_match(/Markdown Test Text/, @post.body.to_html)
+      end
+    end
+
     context 'using BlueCloth' do
       setup do
         ActsAsMarkup.markdown_library = :bluecloth
@@ -145,6 +183,11 @@ class ActsAsMarkdownTest < ActsAsMarkupTestCase
 
       should "return formated html for a `to_html` method call on the column value" do
         assert_match(/<h2(\s\w+\=['"]\w*['"])*\s*>\s*Markdown Test Text\s*<\/h2>/, @post.body.to_html)
+      end
+    
+      should "not return escaped html" do
+        @post.body = "## Markdown <i>Test</i> Text"
+        assert_match(/<i>Test<\/i>/, @post.body.to_html)
       end
 
       context "changing value of markdown field should return new markdown object" do
@@ -174,6 +217,20 @@ class ActsAsMarkdownTest < ActsAsMarkupTestCase
       teardown do
         @post = nil
         Post.delete_all
+      end
+    end
+    
+    context 'using BlueCloth with options' do
+      setup do
+        class ::Post
+          acts_as_markdown :body, :markdown_options => [ :filter_html ]
+        end
+        @post = Post.new(:title => 'Blah')
+      end
+      
+      should "return escaped html because of :filter_html" do
+        @post.body = "## Markdown <i>Test</i> Text"
+        assert_match(/&lt;i&gt;Test&lt;\/i&gt;/, @post.body.to_html)
       end
     end
     

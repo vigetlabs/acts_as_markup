@@ -8,10 +8,10 @@ class WikitextString < String
   attr_reader :text
   attr_reader :html
   
-  def initialize(str)
+  def initialize(str, *options)
     super(str)
     @text = str.to_s
-    @html = Wikitext::Parser.new.parse(@text)
+    @html = Wikitext::Parser.new(*options).parse(@text)
   end
   
   def to_html

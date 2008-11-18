@@ -25,6 +25,11 @@ class ActsAsWikitextTest < ActsAsMarkupTestCase
     should "return formated html for a `to_html` method call on the column value" do
       assert_match(/<h2>Wikitext Test Text<\/h2>/, @post.body.to_html)
     end
+    
+    should "not underscore spaces in URLs" do
+      @post.body = "[[foo bar]]"
+      assert_match(/<a href="\/wiki\/foo%20bar">foo bar<\/a>/, @post.body.to_html)
+    end
   
     context "changing value of wikitext field should return new wikitext object" do
       setup do
@@ -53,6 +58,20 @@ class ActsAsWikitextTest < ActsAsMarkupTestCase
     teardown do
       @wikitext, @post = nil
       Post.delete_all
+    end
+  end
+  
+  context 'acts_as_wikitext with options' do
+    setup do
+      class ::Post
+        acts_as_wikitext :body, :wikitext_options => [ { :space_to_underscore => true } ]
+      end
+      @post = Post.new(:title => 'Blah')
+    end
+    
+    should "underscore spaces in URLs because of :space_to_underscore" do
+      @post.body = "[[foo bar]]"
+      assert_match(/<a href="\/wiki\/foo_bar">foo bar<\/a>/, @post.body.to_html)
     end
   end
 end
