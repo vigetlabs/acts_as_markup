@@ -28,11 +28,11 @@ a config value in your environment.rb file:
 By default RDiscount will be used.
 
 You can specify additional options to pass to the markup library by using
-+:markdown_options+, +:textile_options+ or +:wikitext_options+. RDoc does not
-support any useful options. The options should be given as an array of
-arguments. You can specify options for multiple languages when allowing more
-than one. See each library's documentation for more details on what options
-are available.
+<tt>:markdown_options</tt>, <tt>:textile_options</tt> or <tt>:wikitext_options</tt>.
+RDoc does not support any useful options. The options should be given as an
+array of arguments. You can specify options for multiple languages when
+allowing more than one. See each library's documentation for more details on
+what options are available.
 
 == EXAMPLES:
 
