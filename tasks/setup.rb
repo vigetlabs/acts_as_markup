@@ -66,9 +66,7 @@ PROJ = OpenStruct.new(
   # Rcov
   :rcov => OpenStruct.new(
     :dir => 'coverage',
-    :opts => %w[--sort coverage -T],
-    :threshold => 90.0,
-    :threshold_exact => false
+    :opts => %w[--sort coverage -T --no-html]
   ),
 
   # Rdoc
