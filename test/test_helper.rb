@@ -1,5 +1,6 @@
 require 'test/unit'
 require 'rubygems'
+gem 'sqlite3-ruby'
 require 'shoulda'
 require 'active_support'
 require 'active_support/test_case'
