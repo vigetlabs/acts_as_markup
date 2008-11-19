@@ -27,6 +27,13 @@ a config value in your environment.rb file:
 
 By default RDiscount will be used.
 
+You can specify additional options to pass to the markup library by using
++:markdown_options+, +:textile_options+ or +:wikitext_options+. RDoc does not
+support any useful options. The options should be given as an array of
+arguments. You can specify options for multiple languages when allowing more
+than one. See each library's documentation for more details on what options
+are available.
+
 == EXAMPLES:
 
 ==== Using +acts_as_markdown+:
@@ -96,6 +103,21 @@ By default RDiscount will be used.
     @post.body.to_html         # => "<h2> Markdown Headline</h2>"
     
 
+==== Using options
+
+    class Post < ActiveRecord
+      acts_as_markdown :body, :markdown_options => [ :filter_html ]
+    end
+    
+    class Post < ActiveRecord
+      acts_as_textile :body, :textile_options => [ [ :filter_html ] ]
+    end
+    
+    class Post < ActiveRecord
+      acts_as_wikitext :body, :wikitext_options => [ { :space_to_underscore => true } ]
+    end
+    
+
 == REQUIREMENTS:
 
 You will need the RedCloth[http://whytheluckystiff.net/ruby/redcloth/] library 
@@ -138,7 +160,7 @@ Make a fork on GitHub, make your changes and do a pull request. Good places to s
 3. Add the same lines you added to the previous "<tt>when</tt>" statement to the "<tt>:variable</tt>" "<tt>when</tt>" statement. But replace "<tt>klass</tt>" with "<tt>language_klass</tt>" (e.g. "<tt>markdown_klass</tt>").
 4. Add a relevant "<tt>when</tt>" statement to the <tt>class_eval</tt> block for the "<tt>:variable</tt>" language option. This should look something like:
        when /markdown/i
-         @#{col.to_s} = #{markdown_klass}.new(self['#{col.to_s}'].to_s)
+         markup_klasses[:markdown].new self[col].to_s
 5. Add a convenience method (e.g. "<tt>acts_as_markdown</tt>")
 6. Add an extension file to the "lib/acts_as_markup/exts/" directory if you need to modify the object in anyway.
 7. Add appropriate tests (see current tests).

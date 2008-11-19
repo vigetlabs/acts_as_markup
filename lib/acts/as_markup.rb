@@ -20,13 +20,20 @@ module ActiveRecord # :nodoc:
         # the correct object (Markdown, Textile, Wikitext or RDoc) based on the value 
         # of the language column. If any value besides markdown, textile, wikitext, or 
         # RDoc is supplied for the markup language the text will pass through as a string.
+        #
+        # You can specify additional options to pass to the markup library by using
+        # <tt>:markdown_options</tt>, <tt>:textile_options</tt> or <tt>:wikitext_options</tt>.
+        # RDoc does not support any useful options. The options should be given as an array
+        # of arguments. You can specify options for more than one language when using
+        # <tt>:variable</tt>. See each library's documentation for more details on what
+        # options are available.
         # 
         # 
         # ==== Examples
         # 
         # ===== Using Markdown language
         # 
-        #     class Post < ActiveRecrod
+        #     class Post < ActiveRecord
         #       acts_as_markup :language => :markdown, :columns => [:body]
         #     end
         #     
@@ -37,7 +44,7 @@ module ActiveRecord # :nodoc:
         # 
         # ===== Using variable language
         # 
-        #     class Post < ActiveRecrod
+        #     class Post < ActiveRecord
         #       acts_as_markup :language => :variable, :columns => [:body], :language_column => 'language_name'
         #     end
         #     
@@ -45,6 +52,21 @@ module ActiveRecord # :nodoc:
         #     @post.language_name        # => "markdown"
         #     @post.body.to_s            # => "## Markdown Headline"
         #     @post.body.to_html         # => "<h2> Markdown Headline</h2>"
+        #     
+        # 
+        # ===== Using options
+        # 
+        #     class Post < ActiveRecord
+        #       acts_as_markup :language => :markdown, :columns => [:body], :markdown_options => [ :filter_html ]
+        #     end
+        #     
+        #     class Post < ActiveRecord
+        #       acts_as_markup :language => :textile, :columns => [:body], :textile_options => [ [ :filter_html ] ]
+        #     end
+        #     
+        #     class Post < ActiveRecord
+        #       acts_as_markup :language => :wikitext, :columns => [:body], :wikitext_options => [ { :space_to_underscore => true } ]
+        #     end
         #     
         # 
         def acts_as_markup(options)
@@ -100,6 +122,7 @@ module ActiveRecord # :nodoc:
         
         # This is a convenience method for 
         # `<tt>acts_as_markup :language => :markdown, :columns => [:body]</tt>`
+        # Additional options can be given at the end, if necessary.
         # 
         def acts_as_markdown(*columns)
           options = columns.extract_options!
@@ -108,6 +131,7 @@ module ActiveRecord # :nodoc:
         
         # This is a convenience method for 
         # `<tt>acts_as_markup :language => :textile, :columns => [:body]</tt>`
+        # Additional options can be given at the end, if necessary.
         #
         def acts_as_textile(*columns)
           options = columns.extract_options!
@@ -116,6 +140,7 @@ module ActiveRecord # :nodoc:
         
         # This is a convenience method for 
         # `<tt>acts_as_markup :language => :wikitext, :columns => [:body]</tt>`
+        # Additional options can be given at the end, if necessary.
         #
         def acts_as_wikitext(*columns)
           options = columns.extract_options!
@@ -124,6 +149,7 @@ module ActiveRecord # :nodoc:
         
         # This is a convenience method for 
         # `<tt>acts_as_markup :language => :rdoc, :columns => [:body]</tt>`
+        # Additional options can be given at the end, if necessary.
         #
         def acts_as_rdoc(*columns)
           options = columns.extract_options!
