@@ -18,7 +18,6 @@ PROJ.rubyforge.name = 'viget'
 PROJ.version = ActsAsMarkup::VERSION
 PROJ.rdoc.include = %w(^lib/ LICENSE CHANGELOG README\.rdoc)
 PROJ.rdoc.remote_dir = 'acts_as_markup'
-PROJ.test.files = FileList['test/**/*_test.rb']
 PROJ.rcov.opts = ['--no-html', '-T', '--sort coverage',
                   '-x "\/Library\/Ruby\/"', 
                   '-x "\/opt\/local\/lib/ruby"',

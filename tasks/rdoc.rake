@@ -7,7 +7,7 @@ namespace :doc do
   desc 'Generate RDoc documentation'
   Rake::RDocTask.new do |rd|
     rdoc = PROJ.rdoc
-    rd.main = rdoc.main
+    rd.main = rdoc.main || PROJ.readme_file
     rd.rdoc_dir = rdoc.dir
 
     incl = Regexp.new(rdoc.include.join('|'))
@@ -21,9 +21,6 @@ namespace :doc do
     rd.rdoc_files.push(*files)
 
     title = "#{PROJ.name}-#{PROJ.version} Documentation"
-
-    rf_name = PROJ.rubyforge.name
-    title = "#{rf_name}'s " + title if rf_name.valid? and rf_name != title
 
     rd.options << "-t #{title}"
     rd.options.concat(rdoc.opts)

@@ -1,6 +1,92 @@
-# $Id$
 
-require 'rake/gempackagetask'
+require 'find'
+require 'rake/packagetask'
+require 'rubygems/user_interaction'
+require 'rubygems/builder'
+
+module Bones
+class GemPackageTask < Rake::PackageTask
+  # Ruby GEM spec containing the metadata for this package.  The
+  # name, version and package_files are automatically determined
+  # from the GEM spec and don't need to be explicitly provided.
+  #
+  attr_accessor :gem_spec
+
+  # Tasks from the Bones gem directory
+  attr_reader :bones_files
+
+  # Create a GEM Package task library.  Automatically define the gem
+  # if a block is given.  If no block is supplied, then +define+
+  # needs to be called to define the task.
+  #
+  def initialize(gem_spec)
+    init(gem_spec)
+    yield self if block_given?
+    define if block_given?
+  end
+
+  # Initialization tasks without the "yield self" or define
+  # operations.
+  #
+  def init(gem)
+    super(gem.name, gem.version)
+    @gem_spec = gem
+    @package_files += gem_spec.files if gem_spec.files
+    @bones_files = []
+
+    local_setup = File.join(Dir.pwd, %w[tasks setup.rb])
+    if !test(?e, local_setup)
+      Dir.glob(::Bones.path(%w[lib bones tasks *])).each {|fn| bones_files << fn}
+      gem_spec.files = (gem_spec.files +
+          bones_files.map {|fn| File.join('tasks', File.basename(fn))}).sort
+    end
+  end
+
+  # Create the Rake tasks and actions specified by this
+  # GemPackageTask.  (+define+ is automatically called if a block is
+  # given to +new+).
+  #
+  def define
+    super
+    task :prereqs
+    task :package => ['gem:prereqs', "#{package_dir_path}/#{gem_file}"]
+    file "#{package_dir_path}/#{gem_file}" => [package_dir_path] + package_files + bones_files do
+      when_writing("Creating GEM") {
+        chdir(package_dir_path) do
+          Gem::Builder.new(gem_spec).build
+          verbose(true) {
+            mv gem_file, "../#{gem_file}"
+          }
+        end
+      }
+    end
+
+    file package_dir_path => bones_files do
+      mkdir_p package_dir rescue nil
+      bones_files.each do |fn|
+        base_fn = File.join('tasks', File.basename(fn))
+        f = File.join(package_dir_path, base_fn)
+        fdir = File.dirname(f)
+        mkdir_p(fdir) if !File.exist?(fdir)
+        if File.directory?(fn)
+          mkdir_p(f)
+        else
+          raise "file name conflict for '#{base_fn}' (conflicts with '#{fn}')" if test(?e, f)
+          safe_ln(fn, f)
+        end
+      end
+    end
+  end
+  
+  def gem_file
+    if @gem_spec.platform == Gem::Platform::RUBY
+      "#{package_name}.gem"
+    else
+      "#{package_name}-#{@gem_spec.platform}.gem"
+    end
+  end
+end  # class GemPackageTask
+end  # module Bones
 
 namespace :gem do
 
@@ -17,6 +103,10 @@ namespace :gem do
 
     PROJ.gem.dependencies.each do |dep|
       s.add_dependency(*dep)
+    end
+
+    PROJ.gem.development_dependencies.each do |dep|
+      s.add_development_dependency(*dep)
     end
 
     s.files = PROJ.gem.files
@@ -57,37 +147,14 @@ namespace :gem do
     end
   end  # Gem::Specification.new
 
-  # A prerequisites task that all other tasks depend upon
-  task :prereqs
+  Bones::GemPackageTask.new(PROJ.gem._spec) do |pkg|
+    pkg.need_tar = PROJ.gem.need_tar
+    pkg.need_zip = PROJ.gem.need_zip
+  end
 
   desc 'Show information about the gem'
   task :debug => 'gem:prereqs' do
     puts PROJ.gem._spec.to_ruby
-  end
-
-  pkg = Rake::PackageTask.new(PROJ.name, PROJ.version) do |pkg|
-    pkg.need_tar = PROJ.gem.need_tar
-    pkg.need_zip = PROJ.gem.need_zip
-    pkg.package_files += PROJ.gem._spec.files
-  end
-  Rake::Task['gem:package'].instance_variable_set(:@full_comment, nil)
-
-  gem_file = if PROJ.gem._spec.platform == Gem::Platform::RUBY
-      "#{pkg.package_name}.gem"
-    else
-      "#{pkg.package_name}-#{PROJ.gem._spec.platform}.gem"
-    end
-
-  desc "Build the gem file #{gem_file}"
-  task :package => ['gem:prereqs', "#{pkg.package_dir}/#{gem_file}"]
-
-  file "#{pkg.package_dir}/#{gem_file}" => [pkg.package_dir] + PROJ.gem._spec.files do
-    when_writing("Creating GEM") {
-      Gem::Builder.new(PROJ.gem._spec).build
-      verbose(true) {
-        mv gem_file, "#{pkg.package_dir}/#{gem_file}"
-      }
-    }
   end
 
   desc 'Install the gem'
@@ -113,14 +180,13 @@ namespace :gem do
   task :cleanup do
     sh "#{SUDO} #{GEM} cleanup #{PROJ.gem._spec.name}"
   end
-
 end  # namespace :gem
+
 
 desc 'Alias to gem:package'
 task :gem => 'gem:package'
 
 task :clobber => 'gem:clobber_package'
-
-remove_desc_for_task %w(gem:clobber_package)
+remove_desc_for_task 'gem:clobber_package'
 
 # EOF

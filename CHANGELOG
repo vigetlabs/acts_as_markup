@@ -1,3 +1,6 @@
+== 1.3.0 / 2008-11-19
+* Add ability to accept options that will be passed to supported markup parsers. (chewi[http://github.com/chewi/])
+
 == 1.2.0 / 2008-09-10
 * Allow all objects to have a to_html method that defaults as to_s instead just doing this for strings. (idea from crnixon[http://github.com/crnixon/])
 * Add string methods to all markup objects via the StringLike mixin. (crnixon[http://github.com/crnixon/])

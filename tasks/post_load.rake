@@ -1,16 +1,15 @@
-# $Id$
 
 # This file does not define any rake tasks. It is used to load some project
 # settings if they are not defined by the user.
 
 PROJ.rdoc.exclude << "^#{Regexp.escape(PROJ.manifest_file)}$"
-PROJ.exclude << ["^#{Regexp.escape(PROJ.ann.file)}$",
-                 "^#{Regexp.escape(PROJ.rdoc.dir)}/",
+PROJ.exclude << ["^#{Regexp.escape(PROJ.rdoc.dir)}/",
                  "^#{Regexp.escape(PROJ.rcov.dir)}/"]
 
 flatten_arrays = lambda do |this,os|
     os.instance_variable_get(:@table).each do |key,val|
-      next if key == :dependencies
+      next if key == :dependencies \
+           or key == :development_dependencies
       case val
       when Array; val.flatten!
       when OpenStruct; this.call(this,val)

@@ -18,7 +18,7 @@ PROJ = OpenStruct.new(
   :email => nil,
   :url => "\000",
   :version => ENV['VERSION'] || '0.0.0',
-  :exclude => %w(tmp$ bak$ ~$ CVS \.svn/ \.git ^pkg/),
+  :exclude => %w(tmp$ bak$ ~$ CVS \.svn/ \.git/ ^pkg/),
   :release_name => ENV['RELEASE'],
 
   # System Defaults
@@ -28,26 +28,10 @@ PROJ = OpenStruct.new(
   :manifest_file => 'Manifest.txt',
   :readme_file => 'README.rdoc',
 
-  # Announce
-  :ann => OpenStruct.new(
-    :file => 'announcement.txt',
-    :text => nil,
-    :paragraphs => [],
-    :email => {
-      :from     => nil,
-      :to       => %w(ruby-talk@ruby-lang.org),
-      :server   => 'localhost',
-      :port     => 25,
-      :domain   => ENV['HOSTNAME'],
-      :acct     => nil,
-      :passwd   => nil,
-      :authtype => :plain
-    }
-  ),
-
   # Gem Packaging
   :gem => OpenStruct.new(
     :dependencies => [],
+    :development_dependencies => [],
     :executables => nil,
     :extensions => FileList['ext/**/extconf.rb'],
     :files => nil,
@@ -84,32 +68,19 @@ PROJ = OpenStruct.new(
     :name => "\000"
   ),
 
-  # Rspec
-  :spec => OpenStruct.new(
-    :files => FileList['spec/**/*_spec.rb'],
-    :opts => []
-  ),
-
-  # Subversion Repository
-  :svn => OpenStruct.new(
-    :root => nil,
-    :path => '',
-    :trunk => 'trunk',
-    :tags => 'tags',
-    :branches => 'branches'
-  ),
-
   # Test::Unit
   :test => OpenStruct.new(
-    :files => FileList['test/**/test_*.rb'],
+    :files => FileList['test/**/*_test.rb'],
     :file  => 'test/all.rb',
     :opts  => []
   )
 )
 
 # Load the other rake files in the tasks folder
-rakefiles = Dir.glob('tasks/*.rake').sort
-rakefiles.unshift(rakefiles.delete('tasks/post_load.rake')).compact!
+tasks_dir = File.expand_path(File.dirname(__FILE__))
+post_load_fn = File.join(tasks_dir, 'post_load.rake')
+rakefiles = Dir.glob(File.join(tasks_dir, '*.rake')).sort
+rakefiles.unshift(rakefiles.delete(post_load_fn)).compact!
 import(*rakefiles)
 
 # Setup the project libraries
