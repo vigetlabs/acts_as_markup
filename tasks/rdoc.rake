@@ -1,6 +1,6 @@
 # $Id$
 
-require 'hanna/rdoctask'
+require 'sdoc'
 
 namespace :doc do
 
@@ -21,8 +21,9 @@ namespace :doc do
     rd.rdoc_files.push(*files)
 
     title = "#{PROJ.name}-#{PROJ.version} Documentation"
-
-    rd.options << "-t #{title}"
+    
+    rd.template = 'direct'
+    rd.options << "-t #{title} --fmt shtml"
     rd.options.concat(rdoc.opts)
   end
 
