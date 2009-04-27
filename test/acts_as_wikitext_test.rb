@@ -26,11 +26,11 @@ class ActsAsWikitextTest < ActsAsMarkupTestCase
       assert_match(/<h2>Wikitext Test Text<\/h2>/, @post.body.to_html)
     end
     
-    should "not underscore spaces in URLs" do
+    should "underscore spaces in URLs" do
       @post.body = "[[foo bar]]"
-      assert_match(/<a href="\/wiki\/foo%20bar">foo bar<\/a>/, @post.body.to_html)
+      assert_match(/<a href="\/wiki\/foo_bar">foo bar<\/a>/, @post.body.to_html)
     end
-  
+    
     context "changing value of wikitext field should return new wikitext object" do
       setup do
         @old_body = @post.body
@@ -64,14 +64,14 @@ class ActsAsWikitextTest < ActsAsMarkupTestCase
   context 'acts_as_wikitext with options' do
     setup do
       class ::Post
-        acts_as_wikitext :body, :wikitext_options => [ { :space_to_underscore => true } ]
+        acts_as_wikitext :body, :wikitext_options => [ { :space_to_underscore => false } ]
       end
       @post = Post.new(:title => 'Blah')
     end
     
-    should "underscore spaces in URLs because of :space_to_underscore" do
+    should "not underscore spaces in URLs because of :space_to_underscore option" do
       @post.body = "[[foo bar]]"
-      assert_match(/<a href="\/wiki\/foo_bar">foo bar<\/a>/, @post.body.to_html)
+      assert_match(/<a href="\/wiki\/foo%20bar">foo bar<\/a>/, @post.body.to_html)
     end
   end
 end
