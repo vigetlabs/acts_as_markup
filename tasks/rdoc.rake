@@ -1,6 +1,7 @@
 # $Id$
 
 require 'sdoc'
+require 'rake/rdoctask'
 
 namespace :doc do
 

@@ -24,8 +24,8 @@ PROJ.rcov.opts = ['--no-html', '-T', '--sort coverage',
                   '-x "\/System\/Library\/"']
 PROJ.rcov.pattern = 'test/**/*_test.rb'
 
-PROJ.gem.development_dependencies = [['voloko-sdoc', '~> 0.2.12']]
-PROJ.gem.development_dependencies = [['thoughtbot-shoulda', '~> 2.0']]
+PROJ.gem.development_dependencies << ['voloko-sdoc', '~> 0.2.12']
+PROJ.gem.development_dependencies << ['thoughtbot-shoulda', '~> 2.0']
 depend_on 'activesupport', '~> 2.3.1'
 depend_on 'activerecord', '~> 2.3.1'
 depend_on 'activerecord', '~> 1.3'

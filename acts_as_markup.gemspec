@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<activerecord>, ["~> 1.3"])
       s.add_runtime_dependency(%q<wikitext>, ["~> 1.5"])
       s.add_runtime_dependency(%q<RedCloth>, ["~> 4.1"])
+      s.add_development_dependency(%q<voloko-sdoc>, ["~> 0.2.12"])
       s.add_development_dependency(%q<thoughtbot-shoulda>, ["~> 2.0"])
     else
       s.add_dependency(%q<activesupport>, ["~> 2.3.1"])
@@ -37,6 +38,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<activerecord>, ["~> 1.3"])
       s.add_dependency(%q<wikitext>, ["~> 1.5"])
       s.add_dependency(%q<RedCloth>, ["~> 4.1"])
+      s.add_dependency(%q<voloko-sdoc>, ["~> 0.2.12"])
       s.add_dependency(%q<thoughtbot-shoulda>, ["~> 2.0"])
     end
   else
@@ -45,6 +47,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<activerecord>, ["~> 1.3"])
     s.add_dependency(%q<wikitext>, ["~> 1.5"])
     s.add_dependency(%q<RedCloth>, ["~> 4.1"])
+    s.add_dependency(%q<voloko-sdoc>, ["~> 0.2.12"])
     s.add_dependency(%q<thoughtbot-shoulda>, ["~> 2.0"])
   end
 end
