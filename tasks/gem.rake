@@ -37,8 +37,6 @@ class GemPackageTask < Rake::PackageTask
     local_setup = File.join(Dir.pwd, %w[tasks setup.rb])
     if !test(?e, local_setup)
       Dir.glob(::Bones.path(%w[lib bones tasks *])).each {|fn| bones_files << fn}
-      gem_spec.files = (gem_spec.files +
-          bones_files.map {|fn| File.join('tasks', File.basename(fn))}).sort
     end
   end
 
@@ -63,6 +61,10 @@ class GemPackageTask < Rake::PackageTask
 
     file package_dir_path => bones_files do
       mkdir_p package_dir rescue nil
+      
+      gem_spec.files = (gem_spec.files +
+          bones_files.map {|fn| File.join('tasks', File.basename(fn))}).sort
+      
       bones_files.each do |fn|
         base_fn = File.join('tasks', File.basename(fn))
         f = File.join(package_dir_path, base_fn)
@@ -155,6 +157,13 @@ namespace :gem do
   desc 'Show information about the gem'
   task :debug => 'gem:prereqs' do
     puts PROJ.gem._spec.to_ruby
+  end
+  
+  desc 'Write the gemspec '
+  task :spec => 'gem:prereqs' do
+    File.open("#{PROJ.name}.gemspec", 'w') do |f|
+      f.write PROJ.gem._spec.to_ruby
+    end
   end
 
   desc 'Install the gem'

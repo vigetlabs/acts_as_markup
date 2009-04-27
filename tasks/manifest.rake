@@ -26,7 +26,7 @@ namespace :manifest do
 
   desc 'Create a new manifest'
   task :create do
-    files = manifest_files
+    files = manifest
     unless test(?f, PROJ.manifest_file)
       files << PROJ.manifest_file
       files.sort!

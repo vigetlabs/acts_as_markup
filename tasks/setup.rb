@@ -5,8 +5,9 @@ require 'rake'
 require 'rake/clean'
 require 'fileutils'
 require 'ostruct'
+require 'find'
 
-class OpenStruct; undef :gem; end
+class OpenStruct; undef :gem if defined? :gem; end 
 
 PROJ = OpenStruct.new(
   # Project Defaults
@@ -27,6 +28,7 @@ PROJ = OpenStruct.new(
   :history_file => 'CHANGELOG',
   :manifest_file => 'Manifest.txt',
   :readme_file => 'README.rdoc',
+  :ignore_file => '.gitignore',
 
   # Gem Packaging
   :gem => OpenStruct.new(
@@ -87,9 +89,7 @@ import(*rakefiles)
 %w(lib ext).each {|dir| PROJ.libs << dir if test ?d, dir}
 
 # Setup some constants
-WIN32 = %r/djgpp|(cyg|ms|bcc)win|mingw/ =~ RUBY_PLATFORM unless defined? WIN32
-
-DEV_NULL = WIN32 ? 'NUL:' : '/dev/null'
+DEV_NULL = File.exist?('/dev/null') ? '/dev/null' : 'NUL:'
 
 def quiet( &block )
   io = [STDOUT.dup, STDERR.dup]
@@ -102,21 +102,15 @@ ensure
   $stdout, $stderr = STDOUT, STDERR
 end
 
-DIFF = if WIN32 then 'diff.exe'
-       else
-         if quiet {system "gdiff", __FILE__, __FILE__} then 'gdiff'
-         else 'diff' end
-       end unless defined? DIFF
+DIFF = if system("gdiff '#{__FILE__}' '#{__FILE__}' > #{DEV_NULL} 2>&1") then 'gdiff'
+       else 'diff' end unless defined? DIFF
 
-SUDO = if WIN32 then ''
-       else
-         if quiet {system 'which sudo'} then 'sudo'
-         else '' end
-       end
+SUDO = if system("which sudo > #{DEV_NULL} 2>&1") then 'sudo'
+       else '' end unless defined? SUDO
 
-RCOV = WIN32 ? 'rcov.bat' : 'rcov'
-RDOC = WIN32 ? 'rdoc.bat' : 'rdoc'
-GEM  = WIN32 ? 'gem.bat'  : 'gem'
+RCOV = "#{RUBY} -S rcov"
+RDOC = "#{RUBY} -S rdoc"
+GEM  = "#{RUBY} -S gem"
 
 %w(rcov spec/rake/spectask rubyforge bones facets/ansicode).each do |lib|
   begin
@@ -212,9 +206,30 @@ end
 # Scans the current working directory and creates a list of files that are
 # candidates to be in the manifest.
 #
-def manifest_files
+def manifest
   files = []
-  exclude = Regexp.new(PROJ.exclude.join('|'))
+  exclude = PROJ.exclude.dup
+  comment = %r/^\s*#/
+  exclude << Regexp.escape(PROJ.ignore_file)
+ 
+  # process the ignore file and add the items there to the exclude list
+  if test(?f, PROJ.ignore_file)
+    ary = []
+    File.readlines(PROJ.ignore_file).each do |line|
+      next if line =~ comment
+      line.chomp!
+      line.strip!
+      next if line.nil? or line.empty?
+
+      glob = line =~ %r/\*\./ ? File.join('**', line) : line
+      Dir.glob(glob).each {|fn| ary << "^#{Regexp.escape(fn)}"}
+    end
+    exclude.concat ary
+  end
+
+  # generate a regular expression from the exclude list
+  exclude = Regexp.new(exclude.join('|'))
+  
   Find.find '.' do |path|
     path.sub! %r/^(\.\/|\/)/o, ''
     next unless test ?f, path

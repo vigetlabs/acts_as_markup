@@ -1,6 +1,6 @@
 # $Id$
 
-require 'rake/rdoctask'
+require 'hanna/rdoctask'
 
 namespace :doc do
 

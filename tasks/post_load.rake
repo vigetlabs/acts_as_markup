@@ -24,12 +24,7 @@ PROJ.description ||= paragraphs_of(PROJ.readme_file, 'description').join("\n\n")
 
 PROJ.summary ||= PROJ.description.split('.').first
 
-PROJ.gem.files ||=
-  if test(?f, PROJ.manifest_file)
-    files = File.readlines(PROJ.manifest_file).map {|fn| fn.chomp.strip}
-    files.delete ''
-    files
-  else [] end
+PROJ.gem.files ||= manifest
 
 PROJ.gem.executables ||= PROJ.gem.files.find_all {|fn| fn =~ %r/^bin/}
 
