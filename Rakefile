@@ -28,6 +28,6 @@ PROJ.gem.development_dependencies << ['mislav-hanna', '~> 0.1']
 PROJ.gem.development_dependencies << ['thoughtbot-shoulda', '~> 2.0']
 depend_on 'activesupport', '~> 2.3.1'
 depend_on 'activerecord', '~> 2.3.1'
-depend_on 'activerecord', '~> 1.3'
+depend_on 'rdiscount', '~> 1.3'
 depend_on 'wikitext', '~> 1.5'
 depend_on 'RedCloth', '~> 4.1'
