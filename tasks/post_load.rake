@@ -2,7 +2,6 @@
 # This file does not define any rake tasks. It is used to load some project
 # settings if they are not defined by the user.
 
-PROJ.rdoc.exclude << "^#{Regexp.escape(PROJ.manifest_file)}$"
 PROJ.exclude << ["^#{Regexp.escape(PROJ.rdoc.dir)}/",
                  "^#{Regexp.escape(PROJ.rcov.dir)}/"]
 

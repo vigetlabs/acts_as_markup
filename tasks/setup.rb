@@ -26,7 +26,6 @@ PROJ = OpenStruct.new(
   :ruby_opts => %w(-w),
   :libs => [],
   :history_file => 'CHANGELOG',
-  :manifest_file => 'Manifest.txt',
   :readme_file => 'README.rdoc',
   :ignore_file => '.gitignore',
 
@@ -112,7 +111,7 @@ RCOV = "#{RUBY} -S rcov"
 RDOC = "#{RUBY} -S rdoc"
 GEM  = "#{RUBY} -S gem"
 
-%w(rcov spec/rake/spectask rubyforge bones facets/ansicode).each do |lib|
+%w(rcov rubyforge bones facets/ansicode).each do |lib|
   begin
     require lib
     Object.instance_eval {const_set "HAVE_#{lib.tr('/','_').upcase}", true}
@@ -120,8 +119,6 @@ GEM  = "#{RUBY} -S gem"
     Object.instance_eval {const_set "HAVE_#{lib.tr('/','_').upcase}", false}
   end
 end
-HAVE_SVN = (Dir.entries(Dir.pwd).include?('.svn') and
-            system("svn --version 2>&1 > #{DEV_NULL}"))
 HAVE_GIT = (Dir.entries(Dir.pwd).include?('.git') and
             system("git --version 2>&1 > #{DEV_NULL}"))
 
