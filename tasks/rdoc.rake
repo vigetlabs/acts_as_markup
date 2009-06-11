@@ -1,6 +1,7 @@
 # $Id$
 
-require 'hanna/rdoctask'
+require 'sdoc'
+require 'rake/rdoctask'
 
 namespace :doc do
 
@@ -23,6 +24,8 @@ namespace :doc do
     title = "#{PROJ.name}-#{PROJ.version} Documentation"
     
     rd.options << "-t #{title}"
+    rd.options << '--fmt' << 'shtml' # explictly set shtml generator
+    rd.template = 'direct'
     rd.options.concat(rdoc.opts)
   end
 
