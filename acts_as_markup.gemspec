@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Brian Landau"]
-  s.date = %q{2009-06-03}
+  s.date = %q{2009-06-11}
   s.description = %q{Represent ActiveRecord Markdown, Textile, Wiki text, RDoc columns as Markdown, Textile Wikitext, RDoc objects using various external libraries to convert to HTML.}
   s.email = %q{brian.landau@viget.com}
   s.extra_rdoc_files = ["CHANGELOG", "LICENSE", "README.rdoc"]
@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<activerecord>, ["~> 2.3.2"])
       s.add_runtime_dependency(%q<rdiscount>, ["~> 1.3"])
       s.add_runtime_dependency(%q<wikitext>, ["~> 1.5"])
-      s.add_runtime_dependency(%q<RedCloth>, ["~> 4.1"])
+      s.add_runtime_dependency(%q<RedCloth>, ["~> 4.2"])
       s.add_development_dependency(%q<thoughtbot-shoulda>, ["~> 2.0"])
       s.add_development_dependency(%q<bones>, ["~> 2.5"])
     else
@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<activerecord>, ["~> 2.3.2"])
       s.add_dependency(%q<rdiscount>, ["~> 1.3"])
       s.add_dependency(%q<wikitext>, ["~> 1.5"])
-      s.add_dependency(%q<RedCloth>, ["~> 4.1"])
+      s.add_dependency(%q<RedCloth>, ["~> 4.2"])
       s.add_dependency(%q<thoughtbot-shoulda>, ["~> 2.0"])
       s.add_dependency(%q<bones>, ["~> 2.5"])
     end
@@ -45,7 +45,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<activerecord>, ["~> 2.3.2"])
     s.add_dependency(%q<rdiscount>, ["~> 1.3"])
     s.add_dependency(%q<wikitext>, ["~> 1.5"])
-    s.add_dependency(%q<RedCloth>, ["~> 4.1"])
+    s.add_dependency(%q<RedCloth>, ["~> 4.2"])
     s.add_dependency(%q<thoughtbot-shoulda>, ["~> 2.0"])
     s.add_dependency(%q<bones>, ["~> 2.5"])
   end
