@@ -2,7 +2,7 @@ require 'active_support'
 
 module ActsAsMarkup
   # :stopdoc:
-  VERSION = '1.3.2'
+  VERSION = '1.3.3'.freeze
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
   # :startdoc:
