@@ -1,80 +1,106 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang='en'>
-  <head>
-    <title>: Stringlike [ acts_as_markup-1.3.2 Documentation]</title>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
-    <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
-    <script type='text/javascript'>
-      //<![CDATA[
-        function popupCode(url) {
-          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
-        }
-        
-        function toggleCode(id) {
-          var code = document.getElementById(id)
-        
-          code.style.display = code.style.display != 'block' ? 'block' : 'none'
-          return true
-        }
-        
-        // Make codeblocks hidden by default
-        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
-      //]]>
-    </script>
-  </head>
-  <body class='page'>
-    <div class='class' id='wrapper'>
-      <div class='header'>
-        <h1 class='name'>
-          <span class='type'>Module</span>
-          Stringlike
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Stringlike</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+    <script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            Stringlike 
+            
         </h1>
-        <ol class='paths'>
-          <li>
-            <a href="../files/lib/acts_as_markup/stringlike_rb.html">lib/acts_as_markup/stringlike.rb</a>
-          </li>
-        </ol>
-      </div>
-      <div id='content'>
-        <div id='text'>
-          <div id='description'>
-            <p>
-            This mixin allows our markup objects (like <a
-            href="RDiscount.html">RDiscount</a> or RedCloth) to have all the normal
-            string methods that are available.
-            </p>
-          </div>
-          <div id='method-list'>
-            <h2>Methods</h2>
-            <h3>public instance</h3>
-            <ol>
-              <li><a href="#M000021">method_missing</a></li>
-            </ol>
-          </div>
-          <div id='section'>
-            <div id='methods'>
-              <h2>Public instance methods</h2>
-              <div class='public-instance method' id='method-M000021'>
-                <a name='M000021'>      </a>
-                <div class='synopsis'>
-                  <span class='name'>method_missing</span>
-                  <span class='arguments'>(method, *params)</span>
-                </div>
-                <div class='source'>
-                  <a class='source-toggle' href='#' onclick="toggleCode('M000021-source'); return false">
-                    [show source]
-                  </a>
-                  <pre id='M000021-source'><span class="ruby-comment cmt"># File lib/acts_as_markup/stringlike.rb, line 4</span>&#x000A;  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">params</span>)&#x000A;    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">params</span>)&#x000A;  <span class="ruby-keyword kw">end</span></pre>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id='footer-push'></div>
+        <ul class="files">
+            
+            <li><a href="../files/lib/acts_as_markup/stringlike_rb.html">lib/acts_as_markup/stringlike.rb</a></li>
+            
+        </ul>
     </div>
-    <div id='footer'>
-      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+This mixin allows our markup objects (like <a
+href="RDiscount.html">RDiscount</a> or RedCloth) to have all the normal
+string methods that are available.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000024">method_missing</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000024">
+                    
+                    <a name="M000024"></a><b>method_missing</b>(method, *params)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000024_source')" id="l_M000024_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/68cb02b661f115e607ed4e7b79fe5cae06ac766d/lib/acts_as_markup/stringlike.rb#L4" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000024_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/stringlike.rb, line 4</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">params</span>)
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">params</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
     </div>
   </body>
-</html>
+</html>    

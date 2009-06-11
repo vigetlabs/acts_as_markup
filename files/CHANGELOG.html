@@ -1,138 +1,155 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang='en'>
-  <head>
-    <title>File: CHANGELOG [ acts_as_markup-1.3.2 Documentation]</title>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
-    <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
-    <script type='text/javascript'>
-      //<![CDATA[
-        function popupCode(url) {
-          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
-        }
-        
-        function toggleCode(id) {
-          var code = document.getElementById(id)
-        
-          code.style.display = code.style.display != 'block' ? 'block' : 'none'
-          return true
-        }
-        
-        // Make codeblocks hidden by default
-        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
-      //]]>
-    </script>
-  </head>
-  <body class='page'>
-    <div class='file' id='wrapper'>
-      <div class='header'>
-        <h1 class='name'>CHANGELOG</h1>
-        <div class='paths'>
-          CHANGELOG
-        </div>
-        <div class='last-update'>
-          Last Update:
-          <span class='datetime'>Mon Apr 27 19:34:07 -0400 2009</span>
-        </div>
-      </div>
-      <div id='content'>
-        <div id='text'>
-          <div id='description'>
-            <h2>1.3.1 / 2008-04-27</h2>
-            <ul>
-            <li>Update rake tasks and way RDoc is generated
-            
-            </li>
-            <li>Ensure works with Rails 2.3.2 and latest version of related markup gems.
-            
-            </li>
-            </ul>
-            <h2>1.3.0 / 2008-11-19</h2>
-            <ul>
-            <li>Add ability to accept options that will be passed to supported markup
-            parsers. (<a href="http://github.com/chewi/">chewi</a>)
-            
-            </li>
-            </ul>
-            <h2>1.2.0 / 2008-09-10</h2>
-            <ul>
-            <li>Allow all objects to have a to_html method that defaults as to_s instead
-            just doing this for strings. (idea from <a
-            href="http://github.com/crnixon/">crnixon</a>)
-            
-            </li>
-            <li>Add string methods to all markup objects via the StringLike mixin. (<a
-            href="http://github.com/crnixon/">crnixon</a>)
-            
-            </li>
-            <li>Other Minor bug fixes
-            
-            </li>
-            </ul>
-            <h2>1.1.2 / 2008-08-22</h2>
-            <ul>
-            <li>Make sure all markup objects properly respond to the .blank? method call.
-            
-            </li>
-            </ul>
-            <h2>1.1.0 / 2008-08-12</h2>
-            <ul>
-            <li>Use a default for markup language column name when the variable options is
-            used.
-            
-            </li>
-            </ul>
-            <h2>1.0.0 / 2008-08-11</h2>
-            <ul>
-            <li>Add support for <a href="../classes/Maruku.html">Maruku</a> Markdown
-            Library.
-            
-            </li>
-            </ul>
-            <h2>0.4.0 / 2008-08-11</h2>
-            <ul>
-            <li>Add support for RDoc.
-            
-            </li>
-            </ul>
-            <h2>0.3.0 / 2008-08-08</h2>
-            <ul>
-            <li>Add support for wikitext.
-            
-            </li>
-            </ul>
-            <h2>0.2.0 / 2008-08-07</h2>
-            <ul>
-            <li>Add support for a variable markup language option.
-            
-            </li>
-            </ul>
-            <h2>0.1.0 / 2008-08-05</h2>
-            <ul>
-            <li>Initial Release
-            
-            <ul>
-            <li>Support for Markdown and Textile markup languages.
-            
-            </li>
-            <li>`acts_as_markdown` and `acts_as_textile` convenience methods
-            
-            </li>
-            <li>Support for BlueCloth, <a href="../classes/RDiscount.html">RDiscount</a>
-            and Ruby PEG markdown processors.
-            
-            </li>
-            </ul>
-            </li>
-            </ul>
-          </div>
-          <div id='section'>
-          </div>
-        </div>
-      </div>
-      <div id='footer-push'></div>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>CHANGELOG</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+    <script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            CHANGELOG
+        </h1>
+        <ul class="files">
+            <li>CHANGELOG</li>
+            <li>Last modified: Thu Jun 11 11:07:44 -0400 2009</li>
+        </ul>
     </div>
-    <div id='footer'>
-      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <h2>1.3.3 / 2009-06-11</h2>
+<ul>
+<li>Maintenance release
+
+</li>
+</ul>
+<h2>1.3.2 / 2009-04-28</h2>
+<ul>
+<li>Maintenance release
+
+</li>
+</ul>
+<h2>1.3.1 / 2008-04-27</h2>
+<ul>
+<li>Update rake tasks and way RDoc is generated
+
+</li>
+<li>Ensure works with Rails 2.3.2 and latest version of related markup gems.
+
+</li>
+</ul>
+<h2>1.3.0 / 2008-11-19</h2>
+<ul>
+<li>Add ability to accept options that will be passed to supported markup
+parsers. (<a href="http://github.com/chewi/">chewi</a>)
+
+</li>
+</ul>
+<h2>1.2.0 / 2008-09-10</h2>
+<ul>
+<li>Allow all objects to have a to_html method that defaults as to_s instead
+just doing this for strings. (idea from <a
+href="http://github.com/crnixon/">crnixon</a>)
+
+</li>
+<li>Add string methods to all markup objects via the StringLike mixin. (<a
+href="http://github.com/crnixon/">crnixon</a>)
+
+</li>
+<li>Other Minor bug fixes
+
+</li>
+</ul>
+<h2>1.1.2 / 2008-08-22</h2>
+<ul>
+<li>Make sure all markup objects properly respond to the .blank? method call.
+
+</li>
+</ul>
+<h2>1.1.0 / 2008-08-12</h2>
+<ul>
+<li>Use a default for markup language column name when the variable options is
+used.
+
+</li>
+</ul>
+<h2>1.0.0 / 2008-08-11</h2>
+<ul>
+<li>Add support for <a href="../classes/Maruku.html">Maruku</a> Markdown
+Library.
+
+</li>
+</ul>
+<h2>0.4.0 / 2008-08-11</h2>
+<ul>
+<li>Add support for RDoc.
+
+</li>
+</ul>
+<h2>0.3.0 / 2008-08-08</h2>
+<ul>
+<li>Add support for wikitext.
+
+</li>
+</ul>
+<h2>0.2.0 / 2008-08-07</h2>
+<ul>
+<li>Add support for a variable markup language option.
+
+</li>
+</ul>
+<h2>0.1.0 / 2008-08-05</h2>
+<ul>
+<li>Initial Release
+
+<ul>
+<li>Support for Markdown and Textile markup languages.
+
+</li>
+<li>`acts_as_markdown` and `acts_as_textile` convenience methods
+
+</li>
+<li>Support for BlueCloth, <a href="../classes/RDiscount.html">RDiscount</a>
+and Ruby PEG markdown processors.
+
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</div>
     </div>
   </body>
 </html>

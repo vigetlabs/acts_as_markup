@@ -1,223 +1,299 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang='en'>
-  <head>
-    <title>File: README.rdoc [ acts_as_markup-1.3.2 Documentation]</title>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
-    <link href='../rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
-    <script type='text/javascript'>
-      //<![CDATA[
-        function popupCode(url) {
-          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
-        }
-        
-        function toggleCode(id) {
-          var code = document.getElementById(id)
-        
-          code.style.display = code.style.display != 'block' ? 'block' : 'none'
-          return true
-        }
-        
-        // Make codeblocks hidden by default
-        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
-      //]]>
-    </script>
-  </head>
-  <body class='page'>
-    <div class='file' id='wrapper'>
-      <div class='header'>
-        <div class='name'>README.rdoc</div>
-        <div class='paths'>
-          README.rdoc
-        </div>
-        <div class='last-update'>
-          Last Update:
-          <span class='datetime'>Mon Apr 27 19:34:07 -0400 2009</span>
-        </div>
-      </div>
-      <div id='content'>
-        <div id='text'>
-          <div id='description'>
-            <h1>Acts as Markup</h1>
-            <p>
-            by Brian Landau of Viget Labs <brian.landau@viget.com>
-            </p>
-            <p>
-            GitHub Project: <a
-            href="http://github.com/vigetlabs/acts_as_markup">github.com/vigetlabs/acts_as_markup</a>
-            </p>
-            <p>
-            RDoc:
-            </p>
-            <ul>
-            <li><a
-            href="http://viget.rubyforge.org/acts_as_markup">viget.rubyforge.org/acts_as_markup</a>
-            
-            </li>
-            <li><a
-            href="http://gitrdoc.com/vigetlabs/acts_as_markup/tree/master">gitrdoc.com/vigetlabs/acts_as_markup/tree/master</a>
-            
-            </li>
-            <li><a
-            href="http://vigetlabs.github.com/acts_as_markup">vigetlabs.github.com/acts_as_markup</a>
-            
-            </li>
-            </ul>
-            <h2>DESCRIPTION:</h2>
-            <p>
-            Allows you to specify columns of an ActiveRecord model that contain
-            Markdown, Textile, Wiki text and RDoc. You may then use <tt>to_s</tt> to
-            get the original markup text or <tt>to_html</tt> to get the formated HTML.
-            </p>
-            <p>
-            Additionally you can have a model that contains a column that has a column
-            with markup text, and another that defines what language to process it as.
-            If the field is listed as &#8220;markdown&#8221; &#8220;textile&#8221;,
-            &#8220;wikitext&#8221; or &#8220;rdoc&#8221; (case insensitive) it will
-            treat it as such, any other value for markup language will have the value
-            pass through as a normal string.
-            </p>
-            <p>
-            This AR extension can use 3 different types of Markdown processing
-            backends: BlueCloth, <a href="../classes/RDiscount.html">RDiscount</a>,
-            Ruby PEG or <a href="../classes/Maruku.html">Maruku</a>. You specify which
-            one you want to use by setting a config value in your environment.rb file:
-            </p>
-            <pre>ActsAsMarkup.markdown_library = :bluecloth</pre>
-            <p>
-            By default <a href="../classes/RDiscount.html">RDiscount</a> will be used.
-            </p>
-            <p>
-            You can specify additional options to pass to the markup library by using
-            <tt>:markdown_options</tt>, <tt>:textile_options</tt> or
-            <tt>:wikitext_options</tt>. RDoc does not support any useful options. The
-            options should be given as an array of arguments. You can specify options
-            for multiple languages when allowing more than one. See each
-            library&#8217;s documentation for more details on what options are
-            available.
-            </p>
-            <h2>EXAMPLES:</h2>
-            <h4>Using <tt>acts_as_markdown</tt>:</h4>
-            <pre>class Post &lt; ActiveRecrod&#x000A;  acts_as_markdown :body&#x000A;end&#x000A;&#x000A;@post = Post.find(:first)&#x000A;@post.body.to_s     #=&gt; &quot;## Markdown Headline&quot;&#x000A;@post.body.to_html  #=&gt; &quot;&lt;h2&gt; Markdown Headline&lt;/h2&gt;&quot;</pre>
-            <h4>Using <tt>acts_as_textile</tt>:</h4>
-            <pre>class Post &lt; ActiveRecrod&#x000A;  acts_as_textile :body&#x000A;end&#x000A;&#x000A;@post = Post.find(:first)&#x000A;@post.body.to_s     #=&gt; &quot;h2. Textile Headline&quot;&#x000A;@post.body.to_html  #=&gt; &quot;&lt;h2&gt;Textile Headline&lt;/h2&gt;&quot;</pre>
-            <h4>Using <tt>acts_as_wikitext</tt>:</h4>
-            <pre>class Post &lt; ActiveRecrod&#x000A;  acts_as_wikitext :body&#x000A;end&#x000A;&#x000A;@post = Post.find(:first)&#x000A;@post.body.to_s     #=&gt; &quot;== Wikitext Headline ==&quot;&#x000A;@post.body.to_html  #=&gt; &quot;&lt;h2&gt;Wikitext Headline&lt;/h2&gt;&quot;</pre>
-            <h4>Using <tt>acts_as_rdoc</tt>:</h4>
-            <pre>class Post &lt; ActiveRecrod&#x000A;  acts_as_rdoc :body&#x000A;end&#x000A;&#x000A;@post = Post.find(:first)&#x000A;@post.body.to_s     #=&gt; &quot;== RDoc Headline&quot;&#x000A;@post.body.to_html  #=&gt; &quot;&lt;h2&gt;RDoc Headline&lt;/h2&gt;&quot;</pre>
-            <h4>Using <tt>acts_as_markup</tt>:</h4>
-            <pre>class Post &lt; ActiveRecrod&#x000A;  acts_as_markup :language =&gt; :markdown, :columns =&gt; [:body]&#x000A;end&#x000A;&#x000A;@post = Post.find(:first)&#x000A;@post.body.to_s     #=&gt; &quot;## Markdown Headline&quot;&#x000A;@post.body.to_html  #=&gt; &quot;&lt;h2&gt; Markdown Headline&lt;/h2&gt;&quot;</pre>
-            <h4>Using <tt>acts_as_markup</tt> with <tt>:variable</tt> language:</h4>
-            <pre>class Post &lt; ActiveRecrod&#x000A;  acts_as_markup :language =&gt; :variable, :columns =&gt; [:body]&#x000A;end&#x000A;&#x000A;@post = Post.find(:first)&#x000A;@post.markup_language      # =&gt; &quot;markdown&quot;&#x000A;@post.body.to_s            # =&gt; &quot;## Markdown Headline&quot;&#x000A;@post.body.to_html         # =&gt; &quot;&lt;h2&gt; Markdown Headline&lt;/h2&gt;&quot;</pre>
-            <h4>Using options</h4>
-            <pre>class Post &lt; ActiveRecord&#x000A;  acts_as_markdown :body, :markdown_options =&gt; [ :filter_html ]&#x000A;end&#x000A;&#x000A;class Post &lt; ActiveRecord&#x000A;  acts_as_textile :body, :textile_options =&gt; [ [ :filter_html ] ]&#x000A;end&#x000A;&#x000A;class Post &lt; ActiveRecord&#x000A;  acts_as_wikitext :body, :wikitext_options =&gt; [ { :space_to_underscore =&gt; true } ]&#x000A;end</pre>
-            <h2>REQUIREMENTS:</h2>
-            <p>
-            You will need the <a
-            href="http://whytheluckystiff.net/ruby/redcloth/">RedCloth</a> library for
-            processing the Textile text, and the <a
-            href="http://wikitext.rubyforge.org/">Wikitext</a> library for processing
-            wikitext.
-            </p>
-            <p>
-            You will also need to install some type of Markdown processor. The three
-            options currently supported are:
-            </p>
-            <ul>
-            <li>BlueCloth
-            
-            </li>
-            <li><a href="http://github.com/rtomayko/rdiscount">RDiscount</a>
-            
-            </li>
-            <li><a href="http://github.com/rtomayko/rpeg-markdown/tree/master">Ruby PEG</a>
-            
-            </li>
-            <li><a href="http://maruku.rubyforge.org/">Maruku</a>
-            
-            </li>
-            </ul>
-            <h2>INSTALL:</h2>
-            <p>
-            <tt>sudo gem install acts_as_markup</tt>
-            </p>
-            <p>
-            Add &#8220;<tt>acts_as_markup</tt>&#8220; to your environment.rb:
-            </p>
-            <pre>config.gem &quot;acts_as_markup&quot;</pre>
-            <h2>CONTRIBUTING:</h2>
-            <p>
-            Make a fork on GitHub, make your changes and do a pull request. Good places
-            to start are adding new Markdown libraries or new markup languages,
-            here&#8217;s instructions for both:
-            </p>
-            <h3>Instructions for how to add a new Markdown Library:</h3>
-            <ol>
-            <li>Add another item to the <tt>ActsAsMarkup::MARKDOWN_LIBS</tt> hash in the
-            form of:
-            
-            <pre>:bluecloth =&gt; {:class_name =&gt; &quot;BlueCloth&quot;,&#x000A;               :lib_name   =&gt; &quot;bluecloth&quot;}</pre>
-            <p>
-            <tt>:lib_name</tt> should be the name needed to require the library, while
-            <tt>:class_name</tt> should be the class that we are making an instance of.
-            </p>
-            </li>
-            <li>If you need to modify the object in anyway (e.g. to add a <tt>to_s</tt> or
-            <tt>to_html</tt> method), add a file to the
-            &#8220;lib/acts_as_markup/exts/&#8220; directory.
-            
-            </li>
-            <li>Add appropriate tests (see current tests).
-            
-            </li>
-            </ol>
-            <h3>Instructions for how to add a new Markup Language:</h3>
-            <ol>
-            <li>Add a &#8220;<tt>when</tt>&#8220; statement to the
-            &#8220;<tt>case</tt>&#8220; statement in <tt>acts_as_markup</tt>. The
-            &#8220;<tt>when</tt>&#8220; statement should match with a symbol that
-            represents the language name in some way (e.g.
-            &#8220;<tt>:markdown</tt>&#8220;).
-            
-            </li>
-            <li>In the &#8220;<tt>when</tt>&#8220; block you need to set the
-            &#8220;<tt>klass</tt>&#8220; local variable and require the library and the
-            extension file if you need one (use the special <tt>require_extensions</tt>
-            method to require extensions).
-            
-            </li>
-            <li>Add the same lines you added to the previous &#8220;<tt>when</tt>&#8220;
-            statement to the &#8220;<tt>:variable</tt>&#8220;
-            &#8220;<tt>when</tt>&#8220; statement. But replace
-            &#8220;<tt>klass</tt>&#8220; with &#8220;<tt>language_klass</tt>&#8220;
-            (e.g. &#8220;<tt>markdown_klass</tt>&#8220;).
-            
-            </li>
-            <li>Add a relevant &#8220;<tt>when</tt>&#8220; statement to the
-            <tt>class_eval</tt> block for the &#8220;<tt>:variable</tt>&#8220; language
-            option. This should look something like:
-            
-            <pre>when /markdown/i&#x000A;  markup_klasses[:markdown].new self[col].to_s</pre>
-            </li>
-            <li>Add a convenience method (e.g. &#8220;<tt>acts_as_markdown</tt>&#8220;)
-            
-            </li>
-            <li>Add an extension file to the &#8220;lib/acts_as_markup/exts/&#8220;
-            directory if you need to modify the object in anyway.
-            
-            </li>
-            <li>Add appropriate tests (see current tests).
-            
-            </li>
-            </ol>
-          </div>
-          <div id='section'>
-          </div>
-        </div>
-      </div>
-      <div id='footer-push'></div>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>README.rdoc</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+    <script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            README.rdoc
+        </h1>
+        <ul class="files">
+            <li>README.rdoc</li>
+            <li>Last modified: Tue Apr 28 13:13:06 -0400 2009</li>
+        </ul>
     </div>
-    <div id='footer'>
-      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <h1>Acts as Markup</h1>
+<p>
+by Brian Landau of Viget Labs <brian.landau@viget.com>
+</p>
+<p>
+GitHub Project: <a
+href="http://github.com/vigetlabs/acts_as_markup">github.com/vigetlabs/acts_as_markup</a>
+</p>
+<p>
+RDoc:
+</p>
+<ul>
+<li><a
+href="http://viget.rubyforge.org/acts_as_markup">viget.rubyforge.org/acts_as_markup</a>
+
+</li>
+<li><a
+href="http://gitrdoc.com/vigetlabs/acts_as_markup/tree/master">gitrdoc.com/vigetlabs/acts_as_markup/tree/master</a>
+
+</li>
+<li><a
+href="http://vigetlabs.github.com/acts_as_markup">vigetlabs.github.com/acts_as_markup</a>
+
+</li>
+</ul>
+<h2>DESCRIPTION:</h2>
+<p>
+Allows you to specify columns of an ActiveRecord model that contain
+Markdown, Textile, Wiki text and RDoc. You may then use <tt>to_s</tt> to
+get the original markup text or <tt>to_html</tt> to get the formated HTML.
+</p>
+<p>
+Additionally you can have a model that contains a column that has a column
+with markup text, and another that defines what language to process it as.
+If the field is listed as &#8220;markdown&#8221; &#8220;textile&#8221;,
+&#8220;wikitext&#8221; or &#8220;rdoc&#8221; (case insensitive) it will
+treat it as such, any other value for markup language will have the value
+pass through as a normal string.
+</p>
+<p>
+This AR extension can use 3 different types of Markdown processing
+backends: BlueCloth, <a href="../classes/RDiscount.html">RDiscount</a>,
+Ruby PEG or <a href="../classes/Maruku.html">Maruku</a>. You specify which
+one you want to use by setting a config value in your environment.rb file:
+</p>
+<pre>
+    ActsAsMarkup.markdown_library = :bluecloth
+</pre>
+<p>
+By default <a href="../classes/RDiscount.html">RDiscount</a> will be used.
+</p>
+<p>
+You can specify additional options to pass to the markup library by using
+<tt>:markdown_options</tt>, <tt>:textile_options</tt> or
+<tt>:wikitext_options</tt>. RDoc does not support any useful options. The
+options should be given as an array of arguments. You can specify options
+for multiple languages when allowing more than one. See each
+library&#8217;s documentation for more details on what options are
+available.
+</p>
+<h2>EXAMPLES:</h2>
+<h4>Using <tt>acts_as_markdown</tt>:</h4>
+<pre>
+    class Post &lt; ActiveRecrod
+      acts_as_markdown :body
+    end
+
+    @post = Post.find(:first)
+    @post.body.to_s     #=&gt; &quot;## Markdown Headline&quot;
+    @post.body.to_html  #=&gt; &quot;&lt;h2&gt; Markdown Headline&lt;/h2&gt;&quot;
+</pre>
+<h4>Using <tt>acts_as_textile</tt>:</h4>
+<pre>
+    class Post &lt; ActiveRecrod
+      acts_as_textile :body
+    end
+
+    @post = Post.find(:first)
+    @post.body.to_s     #=&gt; &quot;h2. Textile Headline&quot;
+    @post.body.to_html  #=&gt; &quot;&lt;h2&gt;Textile Headline&lt;/h2&gt;&quot;
+</pre>
+<h4>Using <tt>acts_as_wikitext</tt>:</h4>
+<pre>
+    class Post &lt; ActiveRecrod
+      acts_as_wikitext :body
+    end
+
+    @post = Post.find(:first)
+    @post.body.to_s     #=&gt; &quot;== Wikitext Headline ==&quot;
+    @post.body.to_html  #=&gt; &quot;&lt;h2&gt;Wikitext Headline&lt;/h2&gt;&quot;
+</pre>
+<h4>Using <tt>acts_as_rdoc</tt>:</h4>
+<pre>
+    class Post &lt; ActiveRecrod
+      acts_as_rdoc :body
+    end
+
+    @post = Post.find(:first)
+    @post.body.to_s     #=&gt; &quot;== RDoc Headline&quot;
+    @post.body.to_html  #=&gt; &quot;&lt;h2&gt;RDoc Headline&lt;/h2&gt;&quot;
+</pre>
+<h4>Using <tt>acts_as_markup</tt>:</h4>
+<pre>
+    class Post &lt; ActiveRecrod
+      acts_as_markup :language =&gt; :markdown, :columns =&gt; [:body]
+    end
+
+    @post = Post.find(:first)
+    @post.body.to_s     #=&gt; &quot;## Markdown Headline&quot;
+    @post.body.to_html  #=&gt; &quot;&lt;h2&gt; Markdown Headline&lt;/h2&gt;&quot;
+</pre>
+<h4>Using <tt>acts_as_markup</tt> with <tt>:variable</tt> language:</h4>
+<pre>
+    class Post &lt; ActiveRecrod
+      acts_as_markup :language =&gt; :variable, :columns =&gt; [:body]
+    end
+
+    @post = Post.find(:first)
+    @post.markup_language      # =&gt; &quot;markdown&quot;
+    @post.body.to_s            # =&gt; &quot;## Markdown Headline&quot;
+    @post.body.to_html         # =&gt; &quot;&lt;h2&gt; Markdown Headline&lt;/h2&gt;&quot;
+</pre>
+<h4>Using options</h4>
+<pre>
+    class Post &lt; ActiveRecord
+      acts_as_markdown :body, :markdown_options =&gt; [ :filter_html ]
+    end
+
+    class Post &lt; ActiveRecord
+      acts_as_textile :body, :textile_options =&gt; [ [ :filter_html ] ]
+    end
+
+    class Post &lt; ActiveRecord
+      acts_as_wikitext :body, :wikitext_options =&gt; [ { :space_to_underscore =&gt; true } ]
+    end
+</pre>
+<h2>REQUIREMENTS:</h2>
+<p>
+You will need the <a
+href="http://whytheluckystiff.net/ruby/redcloth/">RedCloth</a> library for
+processing the Textile text, and the <a
+href="http://wikitext.rubyforge.org/">Wikitext</a> library for processing
+wikitext.
+</p>
+<p>
+You will also need to install some type of Markdown processor. The three
+options currently supported are:
+</p>
+<ul>
+<li>BlueCloth
+
+</li>
+<li><a href="http://github.com/rtomayko/rdiscount">RDiscount</a>
+
+</li>
+<li><a href="http://github.com/rtomayko/rpeg-markdown/tree/master">Ruby PEG</a>
+
+</li>
+<li><a href="http://maruku.rubyforge.org/">Maruku</a>
+
+</li>
+</ul>
+<h2>INSTALL:</h2>
+<p>
+<tt>sudo gem install acts_as_markup</tt>
+</p>
+<p>
+Add &#8220;<tt>acts_as_markup</tt>&#8220; to your environment.rb:
+</p>
+<pre>
+    config.gem &quot;acts_as_markup&quot;
+</pre>
+<h2>CONTRIBUTING:</h2>
+<p>
+Make a fork on GitHub, make your changes and do a pull request. Good places
+to start are adding new Markdown libraries or new markup languages,
+here&#8217;s instructions for both:
+</p>
+<h3>Instructions for how to add a new Markdown Library:</h3>
+<ol>
+<li>Add another item to the <tt>ActsAsMarkup::MARKDOWN_LIBS</tt> hash in the
+form of:
+
+<pre>
+    :bluecloth =&gt; {:class_name =&gt; &quot;BlueCloth&quot;,
+                   :lib_name   =&gt; &quot;bluecloth&quot;}
+</pre>
+<p>
+<tt>:lib_name</tt> should be the name needed to require the library, while
+<tt>:class_name</tt> should be the class that we are making an instance of.
+</p>
+</li>
+<li>If you need to modify the object in anyway (e.g. to add a <tt>to_s</tt> or
+<tt>to_html</tt> method), add a file to the
+&#8220;lib/acts_as_markup/exts/&#8220; directory.
+
+</li>
+<li>Add appropriate tests (see current tests).
+
+</li>
+</ol>
+<h3>Instructions for how to add a new Markup Language:</h3>
+<ol>
+<li>Add a &#8220;<tt>when</tt>&#8220; statement to the
+&#8220;<tt>case</tt>&#8220; statement in <tt>acts_as_markup</tt>. The
+&#8220;<tt>when</tt>&#8220; statement should match with a symbol that
+represents the language name in some way (e.g.
+&#8220;<tt>:markdown</tt>&#8220;).
+
+</li>
+<li>In the &#8220;<tt>when</tt>&#8220; block you need to set the
+&#8220;<tt>klass</tt>&#8220; local variable and require the library and the
+extension file if you need one (use the special <tt>require_extensions</tt>
+method to require extensions).
+
+</li>
+<li>Add the same lines you added to the previous &#8220;<tt>when</tt>&#8220;
+statement to the &#8220;<tt>:variable</tt>&#8220;
+&#8220;<tt>when</tt>&#8220; statement. But replace
+&#8220;<tt>klass</tt>&#8220; with &#8220;<tt>language_klass</tt>&#8220;
+(e.g. &#8220;<tt>markdown_klass</tt>&#8220;).
+
+</li>
+<li>Add a relevant &#8220;<tt>when</tt>&#8220; statement to the
+<tt>class_eval</tt> block for the &#8220;<tt>:variable</tt>&#8220; language
+option. This should look something like:
+
+<pre>
+    when /markdown/i
+      markup_klasses[:markdown].new self[col].to_s
+</pre>
+</li>
+<li>Add a convenience method (e.g. &#8220;<tt>acts_as_markdown</tt>&#8220;)
+
+</li>
+<li>Add an extension file to the &#8220;lib/acts_as_markup/exts/&#8220;
+directory if you need to modify the object in anyway.
+
+</li>
+<li>Add appropriate tests (see current tests).
+
+</li>
+</ol>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</div>
     </div>
   </body>
 </html>
