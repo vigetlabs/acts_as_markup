@@ -7,7 +7,7 @@ require 'active_support/test_case'
 require File.expand_path( File.join(File.dirname(__FILE__), %w[.. lib acts_as_markup]) )
 ActiveRecord::Schema.verbose = false
 
-ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :dbfile => ":memory:")
+ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
 
 def setup_db
   ActiveRecord::Schema.define(:version => 1) do
