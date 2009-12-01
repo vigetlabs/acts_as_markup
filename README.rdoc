@@ -41,7 +41,7 @@ what options are available.
 
 ==== Using +acts_as_markdown+:
 
-    class Post < ActiveRecrod
+    class Post < ActiveRecord
       acts_as_markdown :body
     end
     
@@ -52,7 +52,7 @@ what options are available.
 
 ==== Using +acts_as_textile+:
 
-    class Post < ActiveRecrod
+    class Post < ActiveRecord
       acts_as_textile :body
     end
 
@@ -63,7 +63,7 @@ what options are available.
 
 ==== Using +acts_as_wikitext+:
 
-    class Post < ActiveRecrod
+    class Post < ActiveRecord
       acts_as_wikitext :body
     end
 
@@ -74,7 +74,7 @@ what options are available.
 
 ==== Using +acts_as_rdoc+:
 
-    class Post < ActiveRecrod
+    class Post < ActiveRecord
       acts_as_rdoc :body
     end
 
@@ -85,7 +85,7 @@ what options are available.
 
 ==== Using +acts_as_markup+:
 
-    class Post < ActiveRecrod
+    class Post < ActiveRecord
       acts_as_markup :language => :markdown, :columns => [:body]
     end
 
@@ -96,7 +96,7 @@ what options are available.
     
 ==== Using +acts_as_markup+ with <tt>:variable</tt> language:
 
-    class Post < ActiveRecrod
+    class Post < ActiveRecord
       acts_as_markup :language => :variable, :columns => [:body]
     end
     
