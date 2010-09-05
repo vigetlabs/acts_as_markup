@@ -10,6 +10,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "acts_as_markup"
+    gem.summary = %Q{Represent ActiveRecord Markdown, Textile, Wiki text, RDoc columns as Markdown, Textile Wikitext, RDoc objects using various external libraries to convert to HTML.}
     gem.description = %Q{Represent ActiveRecord Markdown, Textile, Wiki text, RDoc columns as Markdown, Textile Wikitext, RDoc objects using various external libraries to convert to HTML.}
     gem.email = "brian.landau@viget.com"
     gem.homepage = "http://vigetlabs.github.com/acts_as_markup/"
