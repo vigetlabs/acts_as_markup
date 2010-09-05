@@ -29,6 +29,8 @@
             
             <li><a href="../files/lib/acts_as_markup/exts/rdoc_rb.html">lib/acts_as_markup/exts/rdoc.rb</a></li>
             
+            <li><a href="../files/lib/acts_as_markup/exts/rdoc_rb.html">lib/acts_as_markup/exts/rdoc.rb</a></li>
+            
         </ul>
     </div>
     <div id="bodyContent">
@@ -49,7 +51,9 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000017">gen_url</a></li>
+                <li><a href="#M000017">gen_url</a>,</li>
+                
+                <li><a href="#M000042">gen_url</a></li>
                 
             </ul>
         </dd>
@@ -58,9 +62,13 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000018">handle_special_HYPERLINK</a>,</li>
+                <li><a href="#M000043">handle_special_HYPERLINK</a>,</li>
                 
-                <li><a href="#M000020">handle_special_TIDYLINK</a></li>
+                <li><a href="#M000020">handle_special_HYPERLINK</a>,</li>
+                
+                <li><a href="#M000021">handle_special_TIDYLINK</a>,</li>
+                
+                <li><a href="#M000044">handle_special_TIDYLINK</a></li>
                 
             </ul>
         </dd>
@@ -138,9 +146,65 @@ for img: and link: described under handle_special_HYPEDLINK
             </div>
             
             <div class="method">
-                <div class="title" id="M000018">
+                <div class="title" id="M000042">
                     
-                    <a name="M000018"></a><b>handle_special_HYPERLINK</b>(special)
+                    <a name="M000042"></a><b>gen_url</b>(url, text)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Generate a hyperlink for url, labeled with text. Handle the special cases
+for img: and link: described under handle_special_HYPEDLINK
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000042_source')" id="l_M000042_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/eebf6cd1c456d31e766d023c58e9fac78bbe2f6b/lib/acts_as_markup/exts/rdoc.rb#L9" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000042_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/rdoc.rb, line 9</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">gen_url</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">text</span>)
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">url</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/([A-Za-z]+):(.*)/</span>
+      <span class="ruby-identifier">type</span> = <span class="ruby-identifier">$1</span>
+      <span class="ruby-identifier">path</span> = <span class="ruby-identifier">$2</span>
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">type</span> = <span class="ruby-value str">&quot;http&quot;</span>
+      <span class="ruby-identifier">path</span> = <span class="ruby-identifier">url</span>
+      <span class="ruby-identifier">url</span>  = <span class="ruby-node">&quot;http://#{url}&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;link&quot;</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">path</span>[<span class="ruby-value">0</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'#'</span>  <span class="ruby-comment cmt"># is this meaningful?</span>
+        <span class="ruby-identifier">url</span> = <span class="ruby-identifier">path</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">url</span> = <span class="ruby-constant">HTMLGenerator</span>.<span class="ruby-identifier">gen_url</span>(<span class="ruby-ivar">@from_path</span>, <span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;http&quot;</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;link&quot;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">url</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/\.(gif|png|jpg|jpeg|bmp)$/</span>
+      <span class="ruby-node">&quot;&lt;img src=\&quot;#{url}\&quot; /&gt;&quot;</span>
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-node">&quot;&lt;a href=\&quot;#{url}\&quot;&gt;#{text.sub(%r{^#{type}:/*}, '')}&lt;/a&gt;&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000043">
+                    
+                    <a name="M000043"></a><b>handle_special_HYPERLINK</b>(special)
                     
                 </div>
                 
@@ -161,12 +225,12 @@ link:, which is a reference to a local file whose path is relative to the
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000018_source')" id="l_M000018_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000043_source')" id="l_M000043_source">show</a>
                         
                         | <a href="http://github.com/brianjlandau/acts_as_markup/blob/eebf6cd1c456d31e766d023c58e9fac78bbe2f6b/lib/acts_as_markup/exts/rdoc.rb#L41" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000018_source" class="dyn-source">
+                    <div id="M000043_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/rdoc.rb, line 41</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_special_HYPERLINK</span>(<span class="ruby-identifier">special</span>)
     <span class="ruby-identifier">url</span> = <span class="ruby-identifier">special</span>.<span class="ruby-identifier">text</span>
@@ -180,7 +244,47 @@ link:, which is a reference to a local file whose path is relative to the
             <div class="method">
                 <div class="title" id="M000020">
                     
-                    <a name="M000020"></a><b>handle_special_TIDYLINK</b>(special)
+                    <a name="M000020"></a><b>handle_special_HYPERLINK</b>(special)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+And we&#8217;re invoked with a potential external hyperlink mailto: just
+gets inserted. http: links are checked to see if they reference an image.
+If so, that image gets inserted using an <img> tag. Otherwise a
+conventional <a href> is used. We also support a special type of hyperlink,
+link:, which is a reference to a local file whose path is relative to the
+&#8212;op directory.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000020_source')" id="l_M000020_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/eebf6cd1c456d31e766d023c58e9fac78bbe2f6b/lib/acts_as_markup/exts/rdoc.rb#L41" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000020_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/rdoc.rb, line 41</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_special_HYPERLINK</span>(<span class="ruby-identifier">special</span>)
+    <span class="ruby-identifier">url</span> = <span class="ruby-identifier">special</span>.<span class="ruby-identifier">text</span>
+    <span class="ruby-identifier">gen_url</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">url</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000021">
+                    
+                    <a name="M000021"></a><b>handle_special_TIDYLINK</b>(special)
                     
                 </div>
                 
@@ -199,12 +303,55 @@ Here&#8217;s a hypedlink where the label is different to the URL
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000020_source')" id="l_M000020_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000021_source')" id="l_M000021_source">show</a>
                         
                         | <a href="http://github.com/brianjlandau/acts_as_markup/blob/eebf6cd1c456d31e766d023c58e9fac78bbe2f6b/lib/acts_as_markup/exts/rdoc.rb#L49" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000020_source" class="dyn-source">
+                    <div id="M000021_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/rdoc.rb, line 49</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_special_TIDYLINK</span>(<span class="ruby-identifier">special</span>)
+    <span class="ruby-identifier">text</span> = <span class="ruby-identifier">special</span>.<span class="ruby-identifier">text</span>
+    <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">text</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/\{(.*?)\}\[(.*?)\]/</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">text</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(\S+)\[(.*?)\]/</span> 
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">text</span>
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">label</span> = <span class="ruby-identifier">$1</span>
+    <span class="ruby-identifier">url</span>   = <span class="ruby-identifier">$2</span>
+    <span class="ruby-identifier">gen_url</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">label</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000044">
+                    
+                    <a name="M000044"></a><b>handle_special_TIDYLINK</b>(special)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Here&#8217;s a hypedlink where the label is different to the URL
+</p>
+<pre>
+   &lt;label&gt;[url]
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000044_source')" id="l_M000044_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/eebf6cd1c456d31e766d023c58e9fac78bbe2f6b/lib/acts_as_markup/exts/rdoc.rb#L49" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000044_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/rdoc.rb, line 49</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_special_TIDYLINK</span>(<span class="ruby-identifier">special</span>)
     <span class="ruby-identifier">text</span> = <span class="ruby-identifier">special</span>.<span class="ruby-identifier">text</span>

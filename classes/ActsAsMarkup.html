@@ -23,6 +23,8 @@
             
             <li><a href="../files/lib/acts_as_markup_rb.html">lib/acts_as_markup.rb</a></li>
             
+            <li><a href="../files/lib/acts_as_markup_rb.html">lib/acts_as_markup.rb</a></li>
+            
         </ul>
     </div>
     <div id="bodyContent">
@@ -73,7 +75,28 @@
         <tr valign='top'>
             <td class="attr-name">LIBRARY_EXTENSIONS</td>
             <td>=</td>
-            <td class="attr-value">Set.new(Dir[ActsAsMarkup::LIBPATH + 'acts_as_markup/exts/*.rb'].map {|file| File.basename(file, '.rb')}).delete('string')</td>
+            <td class="attr-value">::Set.new(Dir[ActsAsMarkup::LIBPATH + 'acts_as_markup/exts/*.rb'].map {|file| File.basename(file, '.rb')}).delete('string')</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">DEFAULT_MARKDOWN_LIB</td>
+            <td>=</td>
+            <td class="attr-value">:rdiscount</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">MARKDOWN_LIBS</td>
+            <td>=</td>
+            <td class="attr-value">{ :rdiscount =&gt; {:class_name =&gt; &quot;RDiscount&quot;,                                    :lib_name   =&gt; &quot;rdiscount&quot;},                      :bluecloth =&gt; {:class_name =&gt; &quot;BlueCloth&quot;,                                    :lib_name   =&gt; &quot;bluecloth&quot;},                     :rpeg      =&gt; {:class_name =&gt; &quot;PEGMarkdown&quot;,                                    :lib_name   =&gt; &quot;peg_markdown&quot;},                     :maruku    =&gt; {:class_name =&gt; &quot;Maruku&quot;,                                    :lib_name   =&gt; &quot;maruku&quot;} }</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">LIBRARY_EXTENSIONS</td>
+            <td>=</td>
+            <td class="attr-value">::Set.new(Dir[ActsAsMarkup::LIBPATH + 'acts_as_markup/exts/*.rb'].map {|file| File.basename(file, '.rb')}).delete('string')</td>
         </tr>
         
         

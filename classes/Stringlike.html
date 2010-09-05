@@ -23,6 +23,8 @@
             
             <li><a href="../files/lib/acts_as_markup/stringlike_rb.html">lib/acts_as_markup/stringlike.rb</a></li>
             
+            <li><a href="../files/lib/acts_as_markup/stringlike_rb.html">lib/acts_as_markup/stringlike.rb</a></li>
+            
         </ul>
     </div>
     <div id="bodyContent">
@@ -30,6 +32,11 @@
     
     <div class="description">
         <p>
+This mixin allows our markup objects (like <a
+href="RDiscount.html">RDiscount</a> or RedCloth) to have all the normal
+string methods that are available.
+</p>
+<hr size="1"></hr><p>
 This mixin allows our markup objects (like <a
 href="RDiscount.html">RDiscount</a> or RedCloth) to have all the normal
 string methods that are available.
@@ -52,7 +59,9 @@ string methods that are available.
         <dd>
             <ul>
                 
-                <li><a href="#M000024">method_missing</a></li>
+                <li><a href="#M000024">method_missing</a>,</li>
+                
+                <li><a href="#M000049">method_missing</a></li>
                 
             </ul>
         </dd>
@@ -91,6 +100,33 @@ string methods that are available.
                         
                     </p>
                     <div id="M000024_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/stringlike.rb, line 4</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">params</span>)
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">params</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000049">
+                    
+                    <a name="M000049"></a><b>method_missing</b>(method, *params)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000049_source')" id="l_M000049_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/68cb02b661f115e607ed4e7b79fe5cae06ac766d/lib/acts_as_markup/stringlike.rb#L4" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000049_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/stringlike.rb, line 4</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">params</span>)
     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">params</span>)

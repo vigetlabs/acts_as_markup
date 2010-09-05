@@ -29,6 +29,8 @@
             
             <li><a href="../files/lib/acts_as_markup/exts/wikitext_rb.html">lib/acts_as_markup/exts/wikitext.rb</a></li>
             
+            <li><a href="../files/lib/acts_as_markup/exts/wikitext_rb.html">lib/acts_as_markup/exts/wikitext.rb</a></li>
+            
         </ul>
     </div>
     <div id="bodyContent">
@@ -58,7 +60,9 @@ HTML text in instance variables.
         <dd>
             <ul>
                 
-                <li><a href="#M000019">new</a></li>
+                <li><a href="#M000018">new</a>,</li>
+                
+                <li><a href="#M000046">new</a></li>
                 
             </ul>
         </dd>
@@ -67,7 +71,9 @@ HTML text in instance variables.
         <dd>
             <ul>
                 
-                <li><a href="#M000021">to_html</a></li>
+                <li><a href="#M000019">to_html</a>,</li>
+                
+                <li><a href="#M000047">to_html</a></li>
                 
             </ul>
         </dd>
@@ -103,6 +109,22 @@ HTML text in instance variables.
             <td class='attr-desc'></td>
         </tr>
         
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>text</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>html</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
     </table>
     
 
@@ -110,9 +132,9 @@ HTML text in instance variables.
             <div class="sectiontitle">Class Public methods</div>
             
             <div class="method">
-                <div class="title" id="M000019">
+                <div class="title" id="M000018">
                     
-                    <a name="M000019"></a><b>new</b>(str, *options)
+                    <a name="M000018"></a><b>new</b>(str, *options)
                     
                 </div>
                 
@@ -121,12 +143,41 @@ HTML text in instance variables.
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000019_source')" id="l_M000019_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000018_source')" id="l_M000018_source">show</a>
                         
                         | <a href="http://github.com/brianjlandau/acts_as_markup/blob/c67bd5536421dc9593fd2884d619b0f34fca21b1/lib/acts_as_markup/exts/wikitext.rb#L11" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000019_source" class="dyn-source">
+                    <div id="M000018_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/wikitext.rb, line 11</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">str</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">str</span>)
+    <span class="ruby-ivar">@text</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-ivar">@html</span> = <span class="ruby-constant">Wikitext</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">options</span>).<span class="ruby-identifier">parse</span>(<span class="ruby-ivar">@text</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000046">
+                    
+                    <a name="M000046"></a><b>new</b>(str, *options)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000046_source')" id="l_M000046_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/c67bd5536421dc9593fd2884d619b0f34fca21b1/lib/acts_as_markup/exts/wikitext.rb#L11" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000046_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/wikitext.rb, line 11</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">str</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">options</span>)
     <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">str</span>)
@@ -141,9 +192,9 @@ HTML text in instance variables.
             <div class="sectiontitle">Instance Public methods</div>
             
             <div class="method">
-                <div class="title" id="M000021">
+                <div class="title" id="M000019">
                     
-                    <a name="M000021"></a><b>to_html</b>()
+                    <a name="M000019"></a><b>to_html</b>()
                     
                 </div>
                 
@@ -152,12 +203,39 @@ HTML text in instance variables.
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000021_source')" id="l_M000021_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000019_source')" id="l_M000019_source">show</a>
                         
                         | <a href="http://github.com/brianjlandau/acts_as_markup/blob/c67bd5536421dc9593fd2884d619b0f34fca21b1/lib/acts_as_markup/exts/wikitext.rb#L17" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000021_source" class="dyn-source">
+                    <div id="M000019_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/wikitext.rb, line 17</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_html</span>
+    <span class="ruby-ivar">@html</span>
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000047">
+                    
+                    <a name="M000047"></a><b>to_html</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000047_source')" id="l_M000047_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/c67bd5536421dc9593fd2884d619b0f34fca21b1/lib/acts_as_markup/exts/wikitext.rb#L17" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000047_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/wikitext.rb, line 17</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_html</span>
     <span class="ruby-ivar">@html</span>

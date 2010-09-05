@@ -29,6 +29,8 @@
             
             <li><a href="../files/lib/acts_as_markup/exts/maruku_rb.html">lib/acts_as_markup/exts/maruku.rb</a></li>
             
+            <li><a href="../files/lib/acts_as_markup/exts/maruku_rb.html">lib/acts_as_markup/exts/maruku.rb</a></li>
+            
         </ul>
     </div>
     <div id="bodyContent">
@@ -49,7 +51,9 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000012">to_xml</a></li>
+                <li><a href="#M000005">to_xml</a>,</li>
+                
+                <li><a href="#M000030">to_xml</a></li>
                 
             </ul>
         </dd>
@@ -71,9 +75,9 @@
             <div class="sectiontitle">Instance Public methods</div>
             
             <div class="method">
-                <div class="title" id="M000012">
+                <div class="title" id="M000005">
                     
-                    <a name="M000012"></a><b>to_xml</b>()
+                    <a name="M000005"></a><b>to_xml</b>()
                     
                 </div>
                 
@@ -82,12 +86,39 @@
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000012_source')" id="l_M000012_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000005_source')" id="l_M000005_source">show</a>
                         
                         | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e35e5a8cc487ec329367b6aaa0403a27267a6f49/lib/acts_as_markup/exts/maruku.rb#L32" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000012_source" class="dyn-source">
+                    <div id="M000005_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/maruku.rb, line 32</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_xml</span>
+    <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Text</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000030">
+                    
+                    <a name="M000030"></a><b>to_xml</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000030_source')" id="l_M000030_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e35e5a8cc487ec329367b6aaa0403a27267a6f49/lib/acts_as_markup/exts/maruku.rb#L32" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000030_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/maruku.rb, line 32</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_xml</span>
     <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Text</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>)

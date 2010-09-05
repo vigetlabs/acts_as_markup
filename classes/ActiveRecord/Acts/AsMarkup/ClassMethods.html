@@ -23,6 +23,8 @@
             
             <li><a href="../../../../files/lib/acts/as_markup_rb.html">lib/acts/as_markup.rb</a></li>
             
+            <li><a href="../../../../files/lib/acts/as_markup_rb.html">lib/acts/as_markup.rb</a></li>
+            
         </ul>
     </div>
     <div id="bodyContent">
@@ -43,15 +45,25 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000002">acts_as_markdown</a>,</li>
+                <li><a href="#M000032">acts_as_markdown</a>,</li>
                 
-                <li><a href="#M000001">acts_as_markup</a>,</li>
+                <li><a href="#M000007">acts_as_markdown</a>,</li>
                 
-                <li><a href="#M000005">acts_as_rdoc</a>,</li>
+                <li><a href="#M000003">acts_as_markup</a>,</li>
                 
-                <li><a href="#M000003">acts_as_textile</a>,</li>
+                <li><a href="#M000026">acts_as_markup</a>,</li>
                 
-                <li><a href="#M000004">acts_as_wikitext</a></li>
+                <li><a href="#M000010">acts_as_rdoc</a>,</li>
+                
+                <li><a href="#M000035">acts_as_rdoc</a>,</li>
+                
+                <li><a href="#M000008">acts_as_textile</a>,</li>
+                
+                <li><a href="#M000033">acts_as_textile</a>,</li>
+                
+                <li><a href="#M000009">acts_as_wikitext</a>,</li>
+                
+                <li><a href="#M000034">acts_as_wikitext</a></li>
                 
             </ul>
         </dd>
@@ -73,16 +85,16 @@
             <div class="sectiontitle">Instance Public methods</div>
             
             <div class="method">
-                <div class="title" id="M000002">
+                <div class="title" id="M000032">
                     
-                    <a name="M000002"></a><b>acts_as_markdown</b>(*columns)
+                    <a name="M000032"></a><b>acts_as_markdown</b>(*columns)
                     
                 </div>
                 
                 <div class="description">
                   <p>
 This is a convenience method for `<tt><a
-href="ClassMethods.html#M000001">acts_as_markup</a> :language =&gt;
+href="ClassMethods.html#M000003">acts_as_markup</a> :language =&gt;
 :markdown, :columns =&gt; [:body]</tt>` Additional options can be given at
 the end, if necessary.
 </p>
@@ -94,12 +106,12 @@ the end, if necessary.
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000002_source')" id="l_M000002_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000032_source')" id="l_M000032_source">show</a>
                         
                         | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e7b951d422ccd0892b1c36ee9739f2741878aec6/lib/acts/as_markup.rb#L127" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000002_source" class="dyn-source">
+                    <div id="M000032_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts/as_markup.rb, line 127</span>
         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">acts_as_markdown</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">columns</span>)
           <span class="ruby-identifier">options</span> = <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">extract_options!</span>
@@ -111,9 +123,47 @@ the end, if necessary.
             </div>
             
             <div class="method">
-                <div class="title" id="M000001">
+                <div class="title" id="M000007">
                     
-                    <a name="M000001"></a><b>acts_as_markup</b>(options)
+                    <a name="M000007"></a><b>acts_as_markdown</b>(*columns)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+This is a convenience method for `<tt><a
+href="ClassMethods.html#M000003">acts_as_markup</a> :language =&gt;
+:markdown, :columns =&gt; [:body]</tt>` Additional options can be given at
+the end, if necessary.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000007_source')" id="l_M000007_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e7b951d422ccd0892b1c36ee9739f2741878aec6/lib/acts/as_markup.rb#L127" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000007_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts/as_markup.rb, line 127</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">acts_as_markdown</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">columns</span>)
+          <span class="ruby-identifier">options</span> = <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">extract_options!</span>
+          <span class="ruby-identifier">acts_as_markup</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:language</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:markdown</span>, <span class="ruby-identifier">:columns</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">columns</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000003">
+                    
+                    <a name="M000003"></a><b>acts_as_markup</b>(options)
                     
                 </div>
                 
@@ -186,12 +236,12 @@ available.
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000001_source')" id="l_M000001_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000003_source')" id="l_M000003_source">show</a>
                         
                         | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e7b951d422ccd0892b1c36ee9739f2741878aec6/lib/acts/as_markup.rb#L72" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000001_source" class="dyn-source">
+                    <div id="M000003_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts/as_markup.rb, line 72</span>
         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">acts_as_markup</span>(<span class="ruby-identifier">options</span>)
           <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:language</span>].<span class="ruby-identifier">to_sym</span>
@@ -249,16 +299,154 @@ available.
             </div>
             
             <div class="method">
-                <div class="title" id="M000005">
+                <div class="title" id="M000026">
                     
-                    <a name="M000005"></a><b>acts_as_rdoc</b>(*columns)
+                    <a name="M000026"></a><b>acts_as_markup</b>(options)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+This allows you to specify columns you want to define as containing
+Markdown, Textile, Wikitext or RDoc content. Then you can simply call
+<tt>.to_html</tt> method on the attribute.
+</p>
+<p>
+You can also specify the language as <tt>:variable</tt>. The language used
+to process the column will be based on another column. By default a column
+named &#8220;<tt>markup_language</tt>&#8220; is used, but this can be
+changed by providing a <tt>:language_column</tt> option. When a value is
+accessed it will create the correct object (Markdown, Textile, Wikitext or
+RDoc) based on the value of the language column. If any value besides
+markdown, textile, wikitext, or RDoc is supplied for the markup language
+the text will pass through as a string.
+</p>
+<p>
+You can specify additional options to pass to the markup library by using
+<tt>:markdown_options</tt>, <tt>:textile_options</tt> or
+<tt>:wikitext_options</tt>. RDoc does not support any useful options. The
+options should be given as an array of arguments. You can specify options
+for more than one language when using <tt>:variable</tt>. See each
+library&#8217;s documentation for more details on what options are
+available.
+</p>
+<h4>Examples</h4>
+<h5>Using Markdown language</h5>
+<pre>
+    class Post &lt; ActiveRecord
+      acts_as_markup :language =&gt; :markdown, :columns =&gt; [:body]
+    end
+
+    @post = Post.find(:first)
+    @post.body.to_s            # =&gt; &quot;## Markdown Headline&quot;
+    @post.body.to_html         # =&gt; &quot;&lt;h2&gt; Markdown Headline&lt;/h2&gt;&quot;
+</pre>
+<h5>Using variable language</h5>
+<pre>
+    class Post &lt; ActiveRecord
+      acts_as_markup :language =&gt; :variable, :columns =&gt; [:body], :language_column =&gt; 'language_name'
+    end
+
+    @post = Post.find(:first)
+    @post.language_name        # =&gt; &quot;markdown&quot;
+    @post.body.to_s            # =&gt; &quot;## Markdown Headline&quot;
+    @post.body.to_html         # =&gt; &quot;&lt;h2&gt; Markdown Headline&lt;/h2&gt;&quot;
+</pre>
+<h5>Using options</h5>
+<pre>
+    class Post &lt; ActiveRecord
+      acts_as_markup :language =&gt; :markdown, :columns =&gt; [:body], :markdown_options =&gt; [ :filter_html ]
+    end
+
+    class Post &lt; ActiveRecord
+      acts_as_markup :language =&gt; :textile, :columns =&gt; [:body], :textile_options =&gt; [ [ :filter_html ] ]
+    end
+
+    class Post &lt; ActiveRecord
+      acts_as_markup :language =&gt; :wikitext, :columns =&gt; [:body], :wikitext_options =&gt; [ { :space_to_underscore =&gt; true } ]
+    end
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000026_source')" id="l_M000026_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e7b951d422ccd0892b1c36ee9739f2741878aec6/lib/acts/as_markup.rb#L72" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000026_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts/as_markup.rb, line 72</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">acts_as_markup</span>(<span class="ruby-identifier">options</span>)
+          <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:language</span>].<span class="ruby-identifier">to_sym</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:markdown</span>, <span class="ruby-identifier">:textile</span>, <span class="ruby-identifier">:wikitext</span>, <span class="ruby-identifier">:rdoc</span>
+            <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">require_library_and_get_class</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:language</span>].<span class="ruby-identifier">to_sym</span>)
+          <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:variable</span>
+            <span class="ruby-identifier">markup_klasses</span> = {}
+            [<span class="ruby-identifier">:textile</span>, <span class="ruby-identifier">:wikitext</span>, <span class="ruby-identifier">:rdoc</span>, <span class="ruby-identifier">:markdown</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">language</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">markup_klasses</span>[<span class="ruby-identifier">language</span>] = <span class="ruby-identifier">require_library_and_get_class</span>(<span class="ruby-identifier">language</span>)
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:language_column</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">:markup_language</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActsAsMarkup</span><span class="ruby-operator">::</span><span class="ruby-constant">UnsupportedMarkupLanguage</span>, <span class="ruby-node">&quot;#{options[:langauge]} is not a currently supported markup language.&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+          
+          <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:language</span>].<span class="ruby-identifier">to_sym</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:variable</span>
+            <span class="ruby-identifier">markup_options</span> = <span class="ruby-identifier">options</span>[<span class="ruby-node">&quot;#{options[:language]}_options&quot;</span>.<span class="ruby-identifier">to_sym</span>] <span class="ruby-operator">||</span> []
+            <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:columns</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">col</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">define_method</span> <span class="ruby-identifier">col</span> <span class="ruby-keyword kw">do</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">instance_variable_defined?</span>(<span class="ruby-node">&quot;@#{col}&quot;</span>)
+                  <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{col}_changed?&quot;</span>)
+                    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-node">&quot;@#{col}&quot;</span>)
+                  <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-node">&quot;@#{col}&quot;</span>, <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">col</span>].<span class="ruby-identifier">to_s</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">markup_options</span>))
+              <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:columns</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">col</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">define_method</span> <span class="ruby-identifier">col</span> <span class="ruby-keyword kw">do</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">instance_variable_defined?</span>(<span class="ruby-node">&quot;@#{col}&quot;</span>)
+                  <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{col}_changed?&quot;</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{options[:language_column]}_changed?&quot;</span>)
+                    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-node">&quot;@#{col}&quot;</span>)
+                  <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-node">&quot;@#{col}&quot;</span>, <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">send</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:language_column</span>])
+                <span class="ruby-keyword kw">when</span> <span class="ruby-regexp re">/markdown/i</span>
+                  <span class="ruby-identifier">markup_klasses</span>[<span class="ruby-identifier">:markdown</span>].<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">col</span>].<span class="ruby-identifier">to_s</span>, <span class="ruby-operator">*</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:markdown_options</span>] <span class="ruby-operator">||</span> [])
+                <span class="ruby-keyword kw">when</span> <span class="ruby-regexp re">/textile/i</span>
+                  <span class="ruby-identifier">markup_klasses</span>[<span class="ruby-identifier">:textile</span>].<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">col</span>].<span class="ruby-identifier">to_s</span>, <span class="ruby-operator">*</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:textile_options</span>] <span class="ruby-operator">||</span> [])
+                <span class="ruby-keyword kw">when</span> <span class="ruby-regexp re">/wikitext/i</span>
+                  <span class="ruby-identifier">markup_klasses</span>[<span class="ruby-identifier">:wikitext</span>].<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">col</span>].<span class="ruby-identifier">to_s</span>, <span class="ruby-operator">*</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:wikitext_options</span>] <span class="ruby-operator">||</span> [])
+                <span class="ruby-keyword kw">when</span> <span class="ruby-regexp re">/rdoc/i</span>
+                  <span class="ruby-identifier">markup_klasses</span>[<span class="ruby-identifier">:rdoc</span>].<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">col</span>].<span class="ruby-identifier">to_s</span>
+                <span class="ruby-keyword kw">else</span>
+                  <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">col</span>]
+                <span class="ruby-keyword kw">end</span>)
+              <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000010">
+                    
+                    <a name="M000010"></a><b>acts_as_rdoc</b>(*columns)
                     
                 </div>
                 
                 <div class="description">
                   <p>
 This is a convenience method for `<tt><a
-href="ClassMethods.html#M000001">acts_as_markup</a> :language =&gt; :rdoc,
+href="ClassMethods.html#M000003">acts_as_markup</a> :language =&gt; :rdoc,
 :columns =&gt; [:body]</tt>` Additional options can be given at the end, if
 necessary.
 </p>
@@ -270,12 +458,12 @@ necessary.
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000005_source')" id="l_M000005_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000010_source')" id="l_M000010_source">show</a>
                         
                         | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e7b951d422ccd0892b1c36ee9739f2741878aec6/lib/acts/as_markup.rb#L154" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000005_source" class="dyn-source">
+                    <div id="M000010_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts/as_markup.rb, line 154</span>
         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">acts_as_rdoc</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">columns</span>)
           <span class="ruby-identifier">options</span> = <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">extract_options!</span>
@@ -287,16 +475,54 @@ necessary.
             </div>
             
             <div class="method">
-                <div class="title" id="M000003">
+                <div class="title" id="M000035">
                     
-                    <a name="M000003"></a><b>acts_as_textile</b>(*columns)
+                    <a name="M000035"></a><b>acts_as_rdoc</b>(*columns)
                     
                 </div>
                 
                 <div class="description">
                   <p>
 This is a convenience method for `<tt><a
-href="ClassMethods.html#M000001">acts_as_markup</a> :language =&gt;
+href="ClassMethods.html#M000003">acts_as_markup</a> :language =&gt; :rdoc,
+:columns =&gt; [:body]</tt>` Additional options can be given at the end, if
+necessary.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000035_source')" id="l_M000035_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e7b951d422ccd0892b1c36ee9739f2741878aec6/lib/acts/as_markup.rb#L154" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000035_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts/as_markup.rb, line 154</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">acts_as_rdoc</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">columns</span>)
+          <span class="ruby-identifier">options</span> = <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">extract_options!</span>
+          <span class="ruby-identifier">acts_as_markup</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:language</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:rdoc</span>, <span class="ruby-identifier">:columns</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">columns</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000008">
+                    
+                    <a name="M000008"></a><b>acts_as_textile</b>(*columns)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+This is a convenience method for `<tt><a
+href="ClassMethods.html#M000003">acts_as_markup</a> :language =&gt;
 :textile, :columns =&gt; [:body]</tt>` Additional options can be given at
 the end, if necessary.
 </p>
@@ -308,12 +534,12 @@ the end, if necessary.
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000003_source')" id="l_M000003_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000008_source')" id="l_M000008_source">show</a>
                         
                         | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e7b951d422ccd0892b1c36ee9739f2741878aec6/lib/acts/as_markup.rb#L136" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000003_source" class="dyn-source">
+                    <div id="M000008_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts/as_markup.rb, line 136</span>
         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">acts_as_textile</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">columns</span>)
           <span class="ruby-identifier">options</span> = <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">extract_options!</span>
@@ -325,16 +551,54 @@ the end, if necessary.
             </div>
             
             <div class="method">
-                <div class="title" id="M000004">
+                <div class="title" id="M000033">
                     
-                    <a name="M000004"></a><b>acts_as_wikitext</b>(*columns)
+                    <a name="M000033"></a><b>acts_as_textile</b>(*columns)
                     
                 </div>
                 
                 <div class="description">
                   <p>
 This is a convenience method for `<tt><a
-href="ClassMethods.html#M000001">acts_as_markup</a> :language =&gt;
+href="ClassMethods.html#M000003">acts_as_markup</a> :language =&gt;
+:textile, :columns =&gt; [:body]</tt>` Additional options can be given at
+the end, if necessary.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000033_source')" id="l_M000033_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e7b951d422ccd0892b1c36ee9739f2741878aec6/lib/acts/as_markup.rb#L136" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000033_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts/as_markup.rb, line 136</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">acts_as_textile</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">columns</span>)
+          <span class="ruby-identifier">options</span> = <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">extract_options!</span>
+          <span class="ruby-identifier">acts_as_markup</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:language</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:textile</span>, <span class="ruby-identifier">:columns</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">columns</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000009">
+                    
+                    <a name="M000009"></a><b>acts_as_wikitext</b>(*columns)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+This is a convenience method for `<tt><a
+href="ClassMethods.html#M000003">acts_as_markup</a> :language =&gt;
 :wikitext, :columns =&gt; [:body]</tt>` Additional options can be given at
 the end, if necessary.
 </p>
@@ -346,12 +610,50 @@ the end, if necessary.
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000004_source')" id="l_M000004_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000009_source')" id="l_M000009_source">show</a>
                         
                         | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e7b951d422ccd0892b1c36ee9739f2741878aec6/lib/acts/as_markup.rb#L145" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000004_source" class="dyn-source">
+                    <div id="M000009_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts/as_markup.rb, line 145</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">acts_as_wikitext</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">columns</span>)
+          <span class="ruby-identifier">options</span> = <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">extract_options!</span>
+          <span class="ruby-identifier">acts_as_markup</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:language</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:wikitext</span>, <span class="ruby-identifier">:columns</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">columns</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000034">
+                    
+                    <a name="M000034"></a><b>acts_as_wikitext</b>(*columns)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+This is a convenience method for `<tt><a
+href="ClassMethods.html#M000003">acts_as_markup</a> :language =&gt;
+:wikitext, :columns =&gt; [:body]</tt>` Additional options can be given at
+the end, if necessary.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000034_source')" id="l_M000034_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e7b951d422ccd0892b1c36ee9739f2741878aec6/lib/acts/as_markup.rb#L145" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000034_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts/as_markup.rb, line 145</span>
         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">acts_as_wikitext</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">columns</span>)
           <span class="ruby-identifier">options</span> = <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">extract_options!</span>

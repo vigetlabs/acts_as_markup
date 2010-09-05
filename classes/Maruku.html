@@ -29,6 +29,8 @@
             
             <li><a href="../files/lib/acts_as_markup/exts/maruku_rb.html">lib/acts_as_markup/exts/maruku.rb</a></li>
             
+            <li><a href="../files/lib/acts_as_markup/exts/maruku_rb.html">lib/acts_as_markup/exts/maruku.rb</a></li>
+            
         </ul>
     </div>
     <div id="bodyContent">
@@ -49,7 +51,9 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000011">blank?</a></li>
+                <li><a href="#M000029">blank?</a>,</li>
+                
+                <li><a href="#M000004">blank?</a></li>
                 
             </ul>
         </dd>
@@ -58,7 +62,9 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000009">new</a></li>
+                <li><a href="#M000027">new</a>,</li>
+                
+                <li><a href="#M000001">new</a></li>
                 
             </ul>
         </dd>
@@ -67,7 +73,9 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000010">to_s</a></li>
+                <li><a href="#M000028">to_s</a>,</li>
+                
+                <li><a href="#M000002">to_s</a></li>
                 
             </ul>
         </dd>
@@ -78,6 +86,13 @@
     
     <div class="sectiontitle">Included Modules</div>
     <ul>
+        
+        <li>
+            
+            <a href="MaRuKu/Out.html">MaRuKu::Out</a>
+            
+            START:includes
+        </li>
         
         <li>
             
@@ -107,6 +122,14 @@
             <td class='attr-desc'></td>
         </tr>
         
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>text</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
     </table>
     
 
@@ -114,9 +137,9 @@
             <div class="sectiontitle">Class Public methods</div>
             
             <div class="method">
-                <div class="title" id="M000009">
+                <div class="title" id="M000001">
                     
-                    <a name="M000009"></a><b>new</b>(s=nil, meta={})
+                    <a name="M000001"></a><b>new</b>(s=nil, meta={})
                     
                 </div>
                 
@@ -125,12 +148,44 @@
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000009_source')" id="l_M000009_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000001_source')" id="l_M000001_source">show</a>
                         
                         | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e35e5a8cc487ec329367b6aaa0403a27267a6f49/lib/acts_as_markup/exts/maruku.rb#L8" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000009_source" class="dyn-source">
+                    <div id="M000001_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/maruku.rb, line 8</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">s</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">meta</span>={})
+    <span class="ruby-keyword kw">super</span>(<span class="ruby-keyword kw">nil</span>)
+    <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">merge!</span> <span class="ruby-identifier">meta</span>
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">s</span>
+      <span class="ruby-ivar">@text</span> = <span class="ruby-identifier">s</span>
+      <span class="ruby-identifier">parse_doc</span>(<span class="ruby-identifier">s</span>)
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000027">
+                    
+                    <a name="M000027"></a><b>new</b>(s=nil, meta={})
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000027_source')" id="l_M000027_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e35e5a8cc487ec329367b6aaa0403a27267a6f49/lib/acts_as_markup/exts/maruku.rb#L8" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000027_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/maruku.rb, line 8</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">s</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">meta</span>={})
     <span class="ruby-keyword kw">super</span>(<span class="ruby-keyword kw">nil</span>)
@@ -148,9 +203,9 @@
             <div class="sectiontitle">Instance Public methods</div>
             
             <div class="method">
-                <div class="title" id="M000011">
+                <div class="title" id="M000004">
                     
-                    <a name="M000011"></a><b>blank?</b>()
+                    <a name="M000004"></a><b>blank?</b>()
                     
                 </div>
                 
@@ -166,12 +221,12 @@ used to be compatable with Rails/ActiveSupport
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000011_source')" id="l_M000011_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000004_source')" id="l_M000004_source">show</a>
                         
                         | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e35e5a8cc487ec329367b6aaa0403a27267a6f49/lib/acts_as_markup/exts/maruku.rb#L23" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000011_source" class="dyn-source">
+                    <div id="M000004_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/maruku.rb, line 23</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">blank?</span>
     <span class="ruby-ivar">@text</span>.<span class="ruby-identifier">blank?</span>
@@ -182,9 +237,43 @@ used to be compatable with Rails/ActiveSupport
             </div>
             
             <div class="method">
-                <div class="title" id="M000010">
+                <div class="title" id="M000029">
                     
-                    <a name="M000010"></a><b>to_s</b>()
+                    <a name="M000029"></a><b>blank?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+used to be compatable with Rails/ActiveSupport
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000029_source')" id="l_M000029_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e35e5a8cc487ec329367b6aaa0403a27267a6f49/lib/acts_as_markup/exts/maruku.rb#L23" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000029_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/maruku.rb, line 23</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">blank?</span>
+    <span class="ruby-ivar">@text</span>.<span class="ruby-identifier">blank?</span>
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000002">
+                    
+                    <a name="M000002"></a><b>to_s</b>()
                     
                 </div>
                 
@@ -200,12 +289,46 @@ Used to get the original Markdown text.
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000010_source')" id="l_M000010_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000002_source')" id="l_M000002_source">show</a>
                         
                         | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e35e5a8cc487ec329367b6aaa0403a27267a6f49/lib/acts_as_markup/exts/maruku.rb#L18" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000010_source" class="dyn-source">
+                    <div id="M000002_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/maruku.rb, line 18</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
+    <span class="ruby-ivar">@text</span>
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000028">
+                    
+                    <a name="M000028"></a><b>to_s</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Used to get the original Markdown text.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000028_source')" id="l_M000028_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e35e5a8cc487ec329367b6aaa0403a27267a6f49/lib/acts_as_markup/exts/maruku.rb#L18" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000028_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/maruku.rb, line 18</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
     <span class="ruby-ivar">@text</span>

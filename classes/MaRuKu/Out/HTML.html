@@ -23,6 +23,8 @@
             
             <li><a href="../../../files/lib/acts_as_markup/exts/maruku_rb.html">lib/acts_as_markup/exts/maruku.rb</a></li>
             
+            <li><a href="../../../files/lib/acts_as_markup/exts/maruku_rb.html">lib/acts_as_markup/exts/maruku.rb</a></li>
+            
         </ul>
     </div>
     <div id="bodyContent">
@@ -43,7 +45,9 @@
         <dd>
             <ul>
                 
-                <li><a href="#M000013">array_to_html</a></li>
+                <li><a href="#M000006">array_to_html</a>,</li>
+                
+                <li><a href="#M000031">array_to_html</a></li>
                 
             </ul>
         </dd>
@@ -65,9 +69,9 @@
             <div class="sectiontitle">Instance Public methods</div>
             
             <div class="method">
-                <div class="title" id="M000013">
+                <div class="title" id="M000006">
                     
-                    <a name="M000013"></a><b>array_to_html</b>(array)
+                    <a name="M000006"></a><b>array_to_html</b>(array)
                     
                 </div>
                 
@@ -91,12 +95,72 @@ original text on plain text fields of the variable language option on
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000013_source')" id="l_M000013_source">show</a>
+                        Source: <a href="javascript:toggleSource('M000006_source')" id="l_M000006_source">show</a>
                         
                         | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e35e5a8cc487ec329367b6aaa0403a27267a6f49/lib/acts_as_markup/exts/maruku.rb#L46" target="_blank" class="github_url">on GitHub</a>
                         
                     </p>
-                    <div id="M000013_source" class="dyn-source">
+                    <div id="M000006_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/maruku.rb, line 46</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">array_to_html</span>(<span class="ruby-identifier">array</span>)
+        <span class="ruby-identifier">elements</span> = []
+        <span class="ruby-identifier">array</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">method</span> = <span class="ruby-identifier">item</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">MDElement</span>) <span class="ruby-operator">?</span> <span class="ruby-node">&quot;to_html_#{item.node_type}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;to_xml&quot;</span>
+          <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">method</span>)
+            <span class="ruby-keyword kw">next</span>
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-identifier">html_text</span> =  <span class="ruby-identifier">item</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">method</span>)
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">html_text</span>.<span class="ruby-identifier">nil?</span>
+            <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Nil html created by method  #{method}:\n#{html_text.inspect}\n for object #{item.inspect[0,300]}&quot;</span>
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">html_text</span>.<span class="ruby-identifier">kind_of?</span><span class="ruby-constant">Array</span>
+            <span class="ruby-identifier">elements</span> = <span class="ruby-identifier">elements</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">html_text</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">elements</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">html_text</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">elements</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000031">
+                    
+                    <a name="M000031"></a><b>array_to_html</b>(array)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+We patch this method to play nicely with our own modifications of <a
+href="../../String.html">String</a>.
+</p>
+<p>
+It originally used a <tt>to_html</tt> method on <a
+href="../../String.html">String</a> we&#8217;ve swapped this out for a
+<tt>to_xml</tt> method because we need <tt>to_html</tt> to return the
+original text on plain text fields of the variable language option on
+<tt>acts_as_markup</tt>
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000031_source')" id="l_M000031_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/e35e5a8cc487ec329367b6aaa0403a27267a6f49/lib/acts_as_markup/exts/maruku.rb#L46" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000031_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/maruku.rb, line 46</span>
       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">array_to_html</span>(<span class="ruby-identifier">array</span>)
         <span class="ruby-identifier">elements</span> = []

@@ -29,6 +29,8 @@
             
             <li><a href="../files/lib/acts_as_markup/exts/rdoc_rb.html">lib/acts_as_markup/exts/rdoc.rb</a></li>
             
+            <li><a href="../files/lib/acts_as_markup/exts/rdoc_rb.html">lib/acts_as_markup/exts/rdoc.rb</a></li>
+            
         </ul>
     </div>
     <div id="bodyContent">
@@ -59,7 +61,9 @@ objects in instance variables.
         <dd>
             <ul>
                 
-                <li><a href="#M000022">new</a></li>
+                <li><a href="#M000022">new</a>,</li>
+                
+                <li><a href="#M000045">new</a></li>
                 
             </ul>
         </dd>
@@ -68,7 +72,9 @@ objects in instance variables.
         <dd>
             <ul>
                 
-                <li><a href="#M000023">to_html</a></li>
+                <li><a href="#M000023">to_html</a>,</li>
+                
+                <li><a href="#M000048">to_html</a></li>
                 
             </ul>
         </dd>
@@ -87,6 +93,38 @@ objects in instance variables.
     
     <div class="sectiontitle">Attributes</div>
     <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>text</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>html</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>markup</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>html_formater</td>
+            <td class='attr-desc'></td>
+        </tr>
         
         <tr valign='top'>
             <td class='attr-rw'>
@@ -174,6 +212,54 @@ objects in instance variables.
                 
             </div>
             
+            <div class="method">
+                <div class="title" id="M000045">
+                    
+                    <a name="M000045"></a><b>new</b>(str)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000045_source')" id="l_M000045_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/eebf6cd1c456d31e766d023c58e9fac78bbe2f6b/lib/acts_as_markup/exts/rdoc.rb#L72" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000045_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/rdoc.rb, line 72</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">str</span>)
+    <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">str</span>)
+    <span class="ruby-ivar">@text</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-ivar">@markup</span> = <span class="ruby-constant">SM</span><span class="ruby-operator">::</span><span class="ruby-constant">SimpleMarkup</span>.<span class="ruby-identifier">new</span>
+    
+    <span class="ruby-comment cmt"># external hyperlinks</span>
+    <span class="ruby-ivar">@markup</span>.<span class="ruby-identifier">add_special</span>(<span class="ruby-regexp re">/((link:|https?:|mailto:|ftp:|www\.)\S+\w)/</span>, <span class="ruby-identifier">:HYPERLINK</span>)
+
+    <span class="ruby-comment cmt"># and links of the form  &lt;text&gt;[&lt;url&gt;]</span>
+    <span class="ruby-ivar">@markup</span>.<span class="ruby-identifier">add_special</span>(<span class="ruby-regexp re">/(((\{.*?\})|\b\S+?)\[\S+?\.\S+?\])/</span>, <span class="ruby-identifier">:TIDYLINK</span>)
+    
+    <span class="ruby-comment cmt"># Convert leading comment markers to spaces, but only</span>
+    <span class="ruby-comment cmt"># if all non-blank lines have them</span>
+
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^(?&gt;\s*)[^\#]/</span>
+      <span class="ruby-identifier">content</span> = <span class="ruby-identifier">str</span>
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">content</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/^\s*(#+)/</span>)  { <span class="ruby-identifier">$1</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-value str">'#'</span>,<span class="ruby-value str">' '</span>) }
+    <span class="ruby-keyword kw">end</span>
+    
+    <span class="ruby-ivar">@html_formatter</span> = <span class="ruby-constant">RDocWithHyperlinkToHtml</span>.<span class="ruby-identifier">new</span>
+    
+    <span class="ruby-ivar">@html</span> = <span class="ruby-ivar">@markup</span>.<span class="ruby-identifier">convert</span>(<span class="ruby-ivar">@text</span>, <span class="ruby-ivar">@html_formatter</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
             <div class="sectiontitle">Instance Public methods</div>
             
             <div class="method">
@@ -194,6 +280,33 @@ objects in instance variables.
                         
                     </p>
                     <div id="M000023_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/rdoc.rb, line 97</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_html</span>
+    <span class="ruby-ivar">@html</span>
+  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000048">
+                    
+                    <a name="M000048"></a><b>to_html</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000048_source')" id="l_M000048_source">show</a>
+                        
+                        | <a href="http://github.com/brianjlandau/acts_as_markup/blob/eebf6cd1c456d31e766d023c58e9fac78bbe2f6b/lib/acts_as_markup/exts/rdoc.rb#L97" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000048_source" class="dyn-source">
                         <pre><span class="ruby-comment cmt"># File lib/acts_as_markup/exts/rdoc.rb, line 97</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_html</span>
     <span class="ruby-ivar">@html</span>
