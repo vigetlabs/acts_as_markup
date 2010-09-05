@@ -5,7 +5,6 @@ by Brian Landau of Viget Labs <brian.landau@viget.com>
 GitHub Project: http://github.com/vigetlabs/acts_as_markup
 
 RDoc: 
-* http://viget.rubyforge.org/acts_as_markup
 * http://gitrdoc.com/vigetlabs/acts_as_markup/tree/master
 * http://vigetlabs.github.com/acts_as_markup
 

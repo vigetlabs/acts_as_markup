@@ -47,7 +47,7 @@ class ActsAsWikitextTest < ActsAsMarkupTestCase
       end
     
       should "return correct HTML for the `to_html` method" do
-        assert_match(/<tt>\@count\s\=\s20<\/tt>/, @post.body.to_html)
+        assert_match(/<p><code>\@count\s\=\s20<\/code><\/p>/, @post.body.to_html)
       end
     
       teardown do

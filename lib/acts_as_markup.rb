@@ -1,8 +1,10 @@
+require 'set'
 require 'active_support'
+require 'active_support/core_ext'
 
 module ActsAsMarkup
   # :stopdoc:
-  VERSION = '1.3.3'.freeze
+  VERSION = '1.3.4'.freeze
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
   # :startdoc:
@@ -26,7 +28,7 @@ module ActsAsMarkup
                     :maruku    => {:class_name => "Maruku",
                                    :lib_name   => "maruku"} }
                                    
-  LIBRARY_EXTENSIONS = Set.new(Dir[ActsAsMarkup::LIBPATH + 'acts_as_markup/exts/*.rb'].map {|file| File.basename(file, '.rb')}).delete('string')
+  LIBRARY_EXTENSIONS = ::Set.new(Dir[ActsAsMarkup::LIBPATH + 'acts_as_markup/exts/*.rb'].map {|file| File.basename(file, '.rb')}).delete('string')
   
   @@markdown_library = DEFAULT_MARKDOWN_LIB
   mattr_accessor :markdown_library
