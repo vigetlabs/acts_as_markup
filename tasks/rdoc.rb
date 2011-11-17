@@ -1,4 +1,5 @@
 require 'rake/sdoctask'
+require 'sdoc_helpers/pages'
 
 Rake::SDocTask.new do |rdoc|
   version = ActsAsMarkup::VERSION
