@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>Class: RDocText</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/acts_as_markup/exts/rdoc.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="String.html">String</a>
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-to_html">#to_html</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="./README_rdoc.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./ActsAsMarkup.html">ActsAsMarkup</a>
+  
+    <li><a href="./ActsAsMarkup/ActiveRecordExtension.html">ActsAsMarkup::ActiveRecordExtension</a>
+  
+    <li><a href="./ActsAsMarkup/ActiveRecordExtension/ClassMethods.html">ActsAsMarkup::ActiveRecordExtension::ClassMethods</a>
+  
+    <li><a href="./ActsAsMarkup/Railtie.html">ActsAsMarkup::Railtie</a>
+  
+    <li><a href="./ActsAsMarkup/UnsportedMarkdownLibrary.html">ActsAsMarkup::UnsportedMarkdownLibrary</a>
+  
+    <li><a href="./ActsAsMarkup/UnsportedMediawikiLibrary.html">ActsAsMarkup::UnsportedMediawikiLibrary</a>
+  
+    <li><a href="./ActsAsMarkup/UnsupportedMarkupLanguage.html">ActsAsMarkup::UnsupportedMarkupLanguage</a>
+  
+    <li><a href="./MaRuKu.html">MaRuKu</a>
+  
+    <li><a href="./MaRuKu/Out.html">MaRuKu::Out</a>
+  
+    <li><a href="./MaRuKu/Out/HTML.html">MaRuKu::Out::HTML</a>
+  
+    <li><a href="./BlueClothText.html">BlueClothText</a>
+  
+    <li><a href="./Maruku.html">Maruku</a>
+  
+    <li><a href="./PEGMarkdown.html">PEGMarkdown</a>
+  
+    <li><a href="./RDiscount.html">RDiscount</a>
+  
+    <li><a href="./RDocText.html">RDocText</a>
+  
+    <li><a href="./RDocWithHyperlinkToHtml.html">RDocWithHyperlinkToHtml</a>
+  
+    <li><a href="./Redcarpet.html">Redcarpet</a>
+  
+    <li><a href="./String.html">String</a>
+  
+    <li><a href="./Stringlike.html">Stringlike</a>
+  
+    <li><a href="./WikiClothText.html">WikiClothText</a>
+  
+    <li><a href="./WikitextString.html">WikitextString</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class RDocText</h1>
+
+  <div id="description" class="description">
+    
+<p>This allows a us to create a wrapper object similar to those provided by
+the Markdown and Textile libraries. It stores the original and formated
+HTML text in instance variables. It also stores the SimpleMarkup parser
+objects in instance variables.</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-html" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">html</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-html_formater" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">html_formater</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-markup" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">markup</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-text" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">text</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(str)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/acts_as_markup/exts/rdoc.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-ivar">@text</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-ivar">@markup</span> = <span class="ruby-constant">RDoc</span><span class="ruby-operator">::</span><span class="ruby-constant">Markup</span>.<span class="ruby-identifier">new</span>
+  
+  <span class="ruby-comment"># external hyperlinks</span>
+  <span class="ruby-ivar">@markup</span>.<span class="ruby-identifier">add_special</span>(<span class="ruby-regexp">/((link:|https?:|mailto:|ftp:|www\.)\S+\w)/</span>, <span class="ruby-value">:HYPERLINK</span>)
+
+  <span class="ruby-comment"># and links of the form  &lt;text&gt;[&lt;url&gt;]</span>
+  <span class="ruby-ivar">@markup</span>.<span class="ruby-identifier">add_special</span>(<span class="ruby-regexp">/(((\{.*?\})|\b\S+?)\[\S+?\.\S+?\])/</span>, <span class="ruby-value">:TIDYLINK</span>)
+  
+  <span class="ruby-comment"># Convert leading comment markers to spaces, but only</span>
+  <span class="ruby-comment"># if all non-blank lines have them</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^(?&gt;\s*)[^\#]/</span>
+    <span class="ruby-identifier">content</span> = <span class="ruby-identifier">str</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">content</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-node">/^\s*(#+)/</span>)  { <span class="ruby-node">$1</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">'#'</span>,<span class="ruby-string">' '</span>) }
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-ivar">@html_formatter</span> = <span class="ruby-constant">RDocWithHyperlinkToHtml</span>.<span class="ruby-identifier">new</span>
+  
+  <span class="ruby-ivar">@html</span> = <span class="ruby-ivar">@markup</span>.<span class="ruby-identifier">convert</span>(<span class="ruby-ivar">@text</span>, <span class="ruby-ivar">@html_formatter</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-to_html" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_html</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_html-source">
+            <pre><span class="ruby-comment"># File lib/acts_as_markup/exts/rdoc.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_html</span>
+  <span class="ruby-ivar">@html</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_html-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_html-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

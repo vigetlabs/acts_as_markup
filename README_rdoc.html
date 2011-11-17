@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>ActsAsMarkup 1.4.0 Documentation</title>
+<title>LICENSE</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
 
 
-<body>
+<body class="file">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -159,7 +159,7 @@ library’s documentation for more details on what options are available.</p>
 
 <h2 id="label-EXAMPLES%3A">EXAMPLES:</h2>
 
-<h4 id="label-Using+acts_as_markdown%3A">Using <code>acts_as_markdown</code>:</h4>
+<h4 id="label-Using+acts_as_markdown%3A">Using acts_as_markdown:</h4>
 
 <pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Post</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span>
   <span class="ruby-identifier">acts_as_markdown</span> :<span class="ruby-identifier">body</span>
@@ -170,7 +170,7 @@ library’s documentation for more details on what options are available.</p>
 <span class="ruby-ivar">@post</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_html</span>  <span class="ruby-comment">#=&gt; &quot;&lt;h2&gt; Markdown Headline&lt;/h2&gt;&quot;</span>
 </pre>
 
-<h4 id="label-Using+acts_as_textile%3A">Using <code>acts_as_textile</code>:</h4>
+<h4 id="label-Using+acts_as_textile%3A">Using acts_as_textile:</h4>
 
 <pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Post</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span>
   <span class="ruby-identifier">acts_as_textile</span> :<span class="ruby-identifier">body</span>
@@ -181,7 +181,7 @@ library’s documentation for more details on what options are available.</p>
 <span class="ruby-ivar">@post</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_html</span>  <span class="ruby-comment">#=&gt; &quot;&lt;h2&gt;Textile Headline&lt;/h2&gt;&quot;</span>
 </pre>
 
-<h4 id="label-Using+acts_as_mediawiki%3A">Using <code>acts_as_mediawiki</code>:</h4>
+<h4 id="label-Using+acts_as_mediawiki%3A">Using acts_as_mediawiki:</h4>
 
 <pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Post</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span>
   <span class="ruby-identifier">acts_as_mediawiki</span> :<span class="ruby-identifier">body</span>
@@ -192,7 +192,7 @@ library’s documentation for more details on what options are available.</p>
 <span class="ruby-ivar">@post</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_html</span>  <span class="ruby-comment">#=&gt; &quot;&lt;h2&gt;Wikitext Headline&lt;/h2&gt;&quot;</span>
 </pre>
 
-<h4 id="label-Using+acts_as_rdoc%3A">Using <code>acts_as_rdoc</code>:</h4>
+<h4 id="label-Using+acts_as_rdoc%3A">Using acts_as_rdoc:</h4>
 
 <pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Post</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span>
   <span class="ruby-identifier">acts_as_rdoc</span> :<span class="ruby-identifier">body</span>
@@ -203,7 +203,7 @@ library’s documentation for more details on what options are available.</p>
 <span class="ruby-ivar">@post</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_html</span>  <span class="ruby-comment">#=&gt; &quot;&lt;h2&gt;RDoc Headline&lt;/h2&gt;&quot;</span>
 </pre>
 
-<h4 id="label-Using+acts_as_markup%3A">Using <code>acts_as_markup</code>:</h4>
+<h4 id="label-Using+acts_as_markup%3A">Using acts_as_markup:</h4>
 
 <pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Post</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span>
   <span class="ruby-identifier">acts_as_markup</span> :<span class="ruby-identifier">language</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">markdown</span>, :<span class="ruby-identifier">columns</span> =<span class="ruby-operator">&gt;</span> [:<span class="ruby-identifier">body</span>]
@@ -214,7 +214,7 @@ library’s documentation for more details on what options are available.</p>
 <span class="ruby-ivar">@post</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_html</span>  <span class="ruby-comment">#=&gt; &quot;&lt;h2&gt; Markdown Headline&lt;/h2&gt;&quot;</span>
 </pre>
 
-<h4 id="label-Using+acts_as_markup+with+%3Avariable+language%3A">Using <code>acts_as_markup</code> with <code>:variable</code> language:</h4>
+<h4 id="label-Using+acts_as_markup+with+%3Avariable+language%3A">Using acts_as_markup with :variable language:</h4>
 
 <pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Post</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span>
   <span class="ruby-identifier">acts_as_markup</span> :<span class="ruby-identifier">language</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">variable</span>, :<span class="ruby-identifier">columns</span> =<span class="ruby-operator">&gt;</span> [:<span class="ruby-identifier">body</span>]
@@ -330,6 +330,7 @@ need to modify the object in anyway.</p>
 </li></ol>
 
 </div>
+
 
 
 <footer id="validator-badges">
