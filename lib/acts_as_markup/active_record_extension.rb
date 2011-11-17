@@ -65,53 +65,13 @@ module ActsAsMarkup
       #     
       # 
       def acts_as_markup(options)
-        case options[:language].to_sym
-        when :markdown, :textile, :wikitext, :rdoc
-          klass = require_library_and_get_class(options[:language].to_sym)
-        when :variable
-          markup_klasses = {}
-          [:textile, :wikitext, :rdoc, :markdown].each do |language|
-            markup_klasses[language] = require_library_and_get_class(language)
-          end
-          options[:language_column] ||= :markup_language
-        else
-          raise ActsAsMarkup::UnsupportedMarkupLanguage, "#{options[:langauge]} is not a currently supported markup language."
-        end
+        options.reverse_merge!(:language_column => :markup_language)
+        markup_class = load_markup_class(options)
         
         unless options[:language].to_sym == :variable
-          markup_options = options["#{options[:language]}_options".to_sym] || []
-          options[:columns].each do |col|
-            define_method col do
-              if instance_variable_defined?("@#{col}")
-                unless send("#{col}_changed?")
-                  return instance_variable_get("@#{col}")
-                end
-              end
-              instance_variable_set("@#{col}", klass.new(self[col].to_s, *markup_options))
-            end
-          end
+          define_markup_columns_reader_methods(markup_class, options)
         else
-          options[:columns].each do |col|
-            define_method col do
-              if instance_variable_defined?("@#{col}")
-                unless send("#{col}_changed?") || send("#{options[:language_column]}_changed?")
-                  return instance_variable_get("@#{col}")
-                end
-              end
-              instance_variable_set("@#{col}", case send(options[:language_column])
-              when /markdown/i
-                markup_klasses[:markdown].new self[col].to_s, *(options[:markdown_options] || [])
-              when /textile/i
-                markup_klasses[:textile].new self[col].to_s, *(options[:textile_options] || [])
-              when /wikitext/i
-                markup_klasses[:wikitext].new self[col].to_s, *(options[:wikitext_options] || [])
-              when /rdoc/i
-                markup_klasses[:rdoc].new self[col].to_s
-              else
-                self[col]
-              end)
-            end
-          end
+          define_variable_markup_columns_reader_methods(markup_class, options)
         end
       end
       
@@ -187,6 +147,59 @@ module ActsAsMarkup
             return RDocText
           else
             return String
+          end
+        end
+        
+        def load_markup_class(options)
+          case options[:language].to_sym
+          when :markdown, :textile, :wikitext, :rdoc
+            require_library_and_get_class(options[:language].to_sym)
+          when :variable
+            markup_classes = {}
+            [:textile, :wikitext, :rdoc, :markdown].each do |language|
+              markup_classes[language] = require_library_and_get_class(language)
+            end
+            markup_classes
+          else
+            raise ActsAsMarkup::UnsupportedMarkupLanguage, "#{options[:langauge]} is not a currently supported markup language."
+          end
+        end
+        
+        def define_markup_columns_reader_methods(markup_class, options)
+          markup_options = options["#{options[:language]}_options".to_sym] || []
+          
+          options[:columns].each do |col|
+            define_method col do
+              if instance_variable_defined?("@#{col}") && !send("#{col}_changed?")
+                  instance_variable_get("@#{col}")
+              else
+                instance_variable_set("@#{col}", markup_class.new(self[col].to_s, *markup_options))
+              end
+            end
+          end
+        end
+        
+        def define_variable_markup_columns_reader_methods(markup_classes, options)
+          options[:columns].each do |col|
+            define_method col do
+              if instance_variable_defined?("@#{col}")
+                unless send("#{col}_changed?") || send("#{options[:language_column]}_changed?")
+                  return instance_variable_get("@#{col}")
+                end
+              end
+              instance_variable_set("@#{col}", case send(options[:language_column])
+              when /markdown/i
+                markup_classes[:markdown].new self[col].to_s, *(options[:markdown_options] || [])
+              when /textile/i
+                markup_classes[:textile].new self[col].to_s, *(options[:textile_options] || [])
+              when /wikitext/i
+                markup_classes[:wikitext].new self[col].to_s, *(options[:wikitext_options] || [])
+              when /rdoc/i
+                markup_classes[:rdoc].new self[col].to_s
+              else
+                self[col]
+              end)
+            end
           end
         end
       
