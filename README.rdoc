@@ -22,7 +22,7 @@ treat it as such, any other value for markup language will have the value pass
 through as a normal string.
 
 This AR extension can use 3 different types of Markdown processing backends: 
-BlueCloth, RDiscount, Ruby PEG or Maruku. You specify which one you want to use by setting
+BlueCloth, RDiscount, Ruby PEG, Redcarpet or Maruku. You specify which one you want to use by setting
 a config value in your environment.rb file:
 
     ActsAsMarkup.markdown_library = :bluecloth
@@ -133,6 +133,7 @@ The four options currently supported are:
 * RDiscount[http://github.com/rtomayko/rdiscount]
 * {Ruby PEG}[http://github.com/rtomayko/rpeg-markdown]
 * Maruku[http://maruku.rubyforge.org/]
+* Redcarpet[https://github.com/tanoku/redcarpet]
 
 == INSTALL:
 

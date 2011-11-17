@@ -25,7 +25,9 @@ module ActsAsMarkup
                     :rpeg      => {:class_name => "PEGMarkdown",
                                    :lib_name   => "peg_markdown"},
                     :maruku    => {:class_name => "Maruku",
-                                   :lib_name   => "maruku"} }
+                                   :lib_name   => "maruku"},
+                    :redcarpet => {:class_name => "Redcarpet",
+                                   :lib_name   => 'redcarpet'} }
 
   MEDIAWIKI_LIBS = { :wikitext  => {:class_name => "WikitextString",
                                    :lib_name   => "wikitext"},

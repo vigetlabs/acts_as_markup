@@ -18,4 +18,5 @@ group :development do
   gem 'bluecloth'
   gem 'maruku'
   gem 'wikitext'
+  gem 'redcarpet'
 end

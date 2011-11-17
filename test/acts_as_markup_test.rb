@@ -597,6 +597,37 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
         Post.delete_all
       end
     end
+    
+    context 'with Redcarpet Markdown' do
+      setup do
+        ActsAsMarkup.markdown_library = :redcarpet
+        class ::Post < ActiveRecord::Base
+          acts_as_markdown :body
+        end
+        @post = Post.create!(:title => 'Blah', :body => @text)
+      end
+      
+      should 'return a blank string for `to_s` method' do
+        assert_equal @post.body.to_s, ''
+      end
+      
+      should 'return true for .blank?' do
+        assert @post.body.blank?
+      end
+      
+      should 'return a blank string for `to_html` method' do
+        assert_match(/[\n\s]*/, @post.body.to_html)
+      end
+      
+      should "have a Maruku object returned for the column value" do
+        assert_kind_of Redcarpet, @post.body
+      end
+      
+      teardown do
+        @post = nil
+        Post.delete_all
+      end
+    end
   end
   
   context 'acts_as_markup with bad language name' do
