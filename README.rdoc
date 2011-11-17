@@ -17,7 +17,7 @@ text or +to_html+ to get the formated HTML.
 
 Additionally you can have a model that contains a column that has a column with 
 markup text, and another that defines what language to process it as. If the field 
-is listed as "markdown" "textile", "wikitext" or "rdoc" (case insensitive) it will 
+is listed as "markdown" "textile", "mediawiki" or "rdoc" (case insensitive) it will 
 treat it as such, any other value for markup language will have the value pass 
 through as a normal string.
 
@@ -30,7 +30,7 @@ a config value in your environment.rb file:
 By default RDiscount will be used.
 
 You can specify additional options to pass to the markup library by using
-<tt>:markdown_options</tt>, <tt>:textile_options</tt> or <tt>:wikitext_options</tt>.
+<tt>:markdown_options</tt>, <tt>:textile_options</tt> or <tt>:mediawiki_options</tt>.
 RDoc does not support any useful options. The options should be given as an
 array of arguments. You can specify options for multiple languages when
 allowing more than one. See each library's documentation for more details on
@@ -60,10 +60,10 @@ what options are available.
     @post.body.to_html  #=> "<h2>Textile Headline</h2>"
     
 
-==== Using +acts_as_wikitext+:
+==== Using +acts_as_mediawiki+:
 
     class Post < ActiveRecord
-      acts_as_wikitext :body
+      acts_as_mediawiki :body
     end
 
     @post = Post.find(:first)
@@ -116,22 +116,22 @@ what options are available.
     end
     
     class Post < ActiveRecord
-      acts_as_wikitext :body, :wikitext_options => [ { :space_to_underscore => true } ]
+      acts_as_mediawiki :body, :mediawiki_options => [ { :space_to_underscore => true } ]
     end
     
 
 == REQUIREMENTS:
 
 You will need the RedCloth[http://whytheluckystiff.net/ruby/redcloth/] library 
-for processing the Textile text, and the Wikitext[http://wikitext.rubyforge.org/] 
-library for processing wikitext.
+for processing the Textile text, and the WikiCloth[https://github.com/nricciar/wikicloth] 
+library for processing mediawiki text.
 
 You will also need to install some type of Markdown processor.
-The three options currently supported are:
+The four options currently supported are:
 
 * BlueCloth
 * RDiscount[http://github.com/rtomayko/rdiscount]
-* {Ruby PEG}[http://github.com/rtomayko/rpeg-markdown/tree/master]
+* {Ruby PEG}[http://github.com/rtomayko/rpeg-markdown]
 * Maruku[http://maruku.rubyforge.org/]
 
 == INSTALL:

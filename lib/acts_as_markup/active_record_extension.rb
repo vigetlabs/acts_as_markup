@@ -13,11 +13,11 @@ module ActsAsMarkup
       # named "<tt>markup_language</tt>" is used, but this can be changed by providing 
       # a <tt>:language_column</tt> option. When a value is accessed it will create 
       # the correct object (Markdown, Textile, Wikitext or RDoc) based on the value 
-      # of the language column. If any value besides markdown, textile, wikitext, or 
+      # of the language column. If any value besides markdown, textile, mediawiki, or 
       # RDoc is supplied for the markup language the text will pass through as a string.
       #
       # You can specify additional options to pass to the markup library by using
-      # <tt>:markdown_options</tt>, <tt>:textile_options</tt> or <tt>:wikitext_options</tt>.
+      # <tt>:markdown_options</tt>, <tt>:textile_options</tt> or <tt>:mediawiki_options</tt>.
       # RDoc does not support any useful options. The options should be given as an array
       # of arguments. You can specify options for more than one language when using
       # <tt>:variable</tt>. See each library's documentation for more details on what
@@ -60,7 +60,7 @@ module ActsAsMarkup
       #     end
       #     
       #     class Post < ActiveRecord
-      #       acts_as_markup :language => :wikitext, :columns => [:body], :wikitext_options => [ { :space_to_underscore => true } ]
+      #       acts_as_markup :language => :mediawiki, :columns => [:body], :mediawiki_options => [ { :space_to_underscore => true } ]
       #     end
       #     
       # 
@@ -94,12 +94,12 @@ module ActsAsMarkup
       end
       
       # This is a convenience method for 
-      # `<tt>acts_as_markup :language => :wikitext, :columns => [:body]</tt>`
+      # `<tt>acts_as_markup :language => :mediawiki, :columns => [:body]</tt>`
       # Additional options can be given at the end, if necessary.
       #
-      def acts_as_wikitext(*columns)
+      def acts_as_mediawiki(*columns)
         options = columns.extract_options!
-        acts_as_markup options.merge(:language => :wikitext, :columns => columns)
+        acts_as_markup options.merge(:language => :mediawiki, :columns => columns)
       end
       
       # This is a convenience method for 
@@ -124,6 +124,17 @@ module ActsAsMarkup
           end
         end
         
+        def get_mediawiki_class
+          if ActsAsMarkup::MEDIAWIKI_LIBS.keys.include? ActsAsMarkup.mediawiki_library
+            mediawiki_library_names = ActsAsMarkup::MEDIAWIKI_LIBS[ActsAsMarkup.mediawiki_library]
+            require mediawiki_library_names[:lib_name]
+            require_extensions(mediawiki_library_names[:lib_name])
+            return mediawiki_library_names[:class_name].constantize
+          else
+            raise ActsAsMarkup::UnsportedMediawikiLibrary, "#{ActsAsMarkup.mediawiki_library} is not currently supported."
+          end
+        end
+        
         def require_extensions(library)# :nodoc:
           if ActsAsMarkup::LIBRARY_EXTENSIONS.include? library.to_s
             require "acts_as_markup/exts/#{library}"
@@ -137,10 +148,8 @@ module ActsAsMarkup
           when :textile
             require 'redcloth'
             return RedCloth
-          when :wikitext
-            require 'wikitext'
-            require_extensions 'wikitext'
-            return WikitextString
+          when :mediawiki
+            return get_mediawiki_class
           when :rdoc
             require 'rdoc'
             require_extensions 'rdoc'
@@ -152,11 +161,11 @@ module ActsAsMarkup
         
         def load_markup_class(options)
           case options[:language].to_sym
-          when :markdown, :textile, :wikitext, :rdoc
+          when :markdown, :textile, :mediawiki, :rdoc
             require_library_and_get_class(options[:language].to_sym)
           when :variable
             markup_classes = {}
-            [:textile, :wikitext, :rdoc, :markdown].each do |language|
+            [:textile, :mediawiki, :rdoc, :markdown].each do |language|
               markup_classes[language] = require_library_and_get_class(language)
             end
             markup_classes
@@ -192,8 +201,8 @@ module ActsAsMarkup
                 markup_classes[:markdown].new self[col].to_s, *(options[:markdown_options] || [])
               when /textile/i
                 markup_classes[:textile].new self[col].to_s, *(options[:textile_options] || [])
-              when /wikitext/i
-                markup_classes[:wikitext].new self[col].to_s, *(options[:wikitext_options] || [])
+              when /mediawiki/i
+                markup_classes[:mediawiki].new self[col].to_s, *(options[:mediawiki_options] || [])
               when /rdoc/i
                 markup_classes[:rdoc].new self[col].to_s
               else

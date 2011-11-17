@@ -2,6 +2,8 @@
 * Make more like modern Rails 3 plugin.
 * Fix broken markup processors integration.
 * Refactor .acts_as_markup method
+* Allow use of different mediawiki libraries
+* Default mediawiki library is WikiCloth
 
 == 1.3.4 / 2010-09-04
 * Rails 3.x release

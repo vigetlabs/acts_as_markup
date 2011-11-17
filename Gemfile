@@ -3,7 +3,7 @@ source "http://rubygems.org"
 gem 'activesupport'
 gem 'activerecord'
 gem 'rdiscount'
-gem 'wikitext'
+gem 'wikicloth'
 gem 'RedCloth'
 
 group :development do
@@ -17,4 +17,5 @@ group :development do
   gem 'rdoc'
   gem 'bluecloth'
   gem 'maruku'
+  gem 'wikitext'
 end

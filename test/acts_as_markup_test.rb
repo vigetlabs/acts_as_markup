@@ -77,6 +77,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
   context 'acts_as_markup with variable language' do
     setup do
       ActsAsMarkup.markdown_library = :rdiscount
+      ActsAsMarkup.mediawiki_library = :wikicloth
       class ::VariablePost < ActiveRecord::Base
         acts_as_markup :language => :variable, :columns => [:body]
       end
@@ -176,14 +177,14 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
       end
     end
     
-    context 'with a Wikitext post' do
+    context 'with a Mediawiki post' do
       setup do
         @wikitext = "== Wikitext Test Text =="
-        @wikitext_post = VariablePost.create!(:title => 'Blah', :body => @wikitext, :markup_language => 'Wikitext')
+        @wikitext_post = VariablePost.create!(:title => 'Blah', :body => @wikitext, :markup_language => 'Mediawiki')
       end
 
       should "have a WikitextString object returned for the column value" do
-        assert_kind_of WikitextString, @wikitext_post.body
+        assert_kind_of WikiClothText, @wikitext_post.body
       end
 
       should "return original wikitext text for a `to_s` method call on the column value" do
@@ -191,26 +192,26 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
       end
 
       should "return formated html for a `to_html` method call on the column value" do
-        assert_match(/<h2>Wikitext Test Text<\/h2>/, @wikitext_post.body.to_html)
+        assert_match(/<h2>.*Wikitext Test Text.*<\/h2>/, @wikitext_post.body.to_html)
       end
 
       context "changing value of wikitext field should return new wikitext object" do
         setup do
           @old_body = @wikitext_post.body
-          @wikitext_post.body = "`@count = 20`"
+          @wikitext_post.body = "'''This is very important'''"
         end
 
         should "still have an WikitextString object but not the same object" do
-          assert_kind_of WikitextString, @wikitext_post.body
+          assert_kind_of WikiClothText, @wikitext_post.body
           assert_not_same @wikitext_post.body, @old_body 
         end
 
         should "return correct text for `to_s`" do
-          assert_equal "`@count = 20`", @wikitext_post.body.to_s
+          assert_equal "'''This is very important'''", @wikitext_post.body.to_s
         end
 
         should "return correct HTML for the `to_html` method" do
-          assert_match(/<p><code>\@count\s\=\s20<\/code><\/p>/, @wikitext_post.body.to_html)
+          assert_match(/<p><b>This is very important<\/b><\/p>/, @wikitext_post.body.to_html)
         end
 
         teardown do
@@ -326,6 +327,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
   context 'acts_as_markup with variable language setting the language column' do
     setup do
       ActsAsMarkup.markdown_library = :rdiscount
+      ActsAsMarkup.mediawiki_library = :wikicloth
       class ::VariableLanguagePost < ActiveRecord::Base
         acts_as_markup :language => :variable, :columns => [:body], :language_column => :language_name
       end
@@ -380,10 +382,42 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
       end
     end
     
-    context 'with wikitext' do
+    context 'with WikiCloth mediawiki' do
       setup do
+        ActsAsMarkup.mediawiki_library = :wikicloth
         class ::Post < ActiveRecord::Base
-          acts_as_wikitext :body
+          acts_as_mediawiki :body
+        end
+        @post = Post.create!(:title => 'Blah', :body => @text)
+      end
+      
+      should 'return a blank string for `to_s` method' do
+        assert_equal @post.body.to_s, ''
+      end
+      
+      should 'return true for .blank?' do
+        assert @post.body.blank?
+      end
+      
+      should 'return a blank string for `to_html` method' do
+        assert_match(/[\n\s]*/, @post.body.to_html)
+      end
+      
+      should "have a WikitextString object returned for the column value" do
+        assert_kind_of WikiClothText, @post.body
+      end
+      
+      teardown do
+        @post = nil
+        Post.delete_all
+      end
+    end
+    
+    context 'with Wikitext mediawiki' do
+      setup do
+        ActsAsMarkup.mediawiki_library = :wikitext
+        class ::Post < ActiveRecord::Base
+          acts_as_mediawiki :body
         end
         @post = Post.create!(:title => 'Blah', :body => @text)
       end
@@ -581,6 +615,17 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
         ActsAsMarkup.markdown_library = :fake
         class ::Post < ActiveRecord::Base
           acts_as_markup :language => :markdown, :columns => [:body]
+        end
+      end
+    end
+  end
+  
+  context 'acts_as_markup with bad mediawiki library' do
+    should 'raise exception when a non-supported library is set as the mediawiki library attribute on ActsAsMarkup' do
+      assert_raise ActsAsMarkup::UnsportedMediawikiLibrary do
+        ActsAsMarkup.mediawiki_library = :fake
+        class ::Post < ActiveRecord::Base
+          acts_as_markup :language => :mediawiki, :columns => [:body]
         end
       end
     end
