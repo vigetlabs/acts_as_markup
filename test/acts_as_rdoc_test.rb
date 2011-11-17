@@ -23,7 +23,7 @@ class ActsAsRDocTest < ActsAsMarkupTestCase
     end
   
     should "return formated html for a `to_html` method call on the column value" do
-      assert_match(/<h2>\s*RDoc Test Text\s*<\/h2>/, @post.body.to_html)
+      assert_match(/<h2[^>]*>\s*RDoc Test Text\s*<\/h2>/, @post.body.to_html)
     end
   
     context "changing value of RDoc field should return new RDoc object" do

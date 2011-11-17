@@ -7,7 +7,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
   
   context 'acts_as_markup' do
     setup do
-      ActsAsMarkup.markdown_library = ActsAsMarkup::DEFAULT_MARKDOWN_LIB
+      ActsAsMarkup.markdown_library = :rdiscount
       
       @textile_text = "h2. Textile Test Text"
       class ::TextilePost < ActiveRecord::Base
@@ -76,7 +76,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
   
   context 'acts_as_markup with variable language' do
     setup do
-      ActsAsMarkup.markdown_library = ActsAsMarkup::DEFAULT_MARKDOWN_LIB
+      ActsAsMarkup.markdown_library = :rdiscount
       class ::VariablePost < ActiveRecord::Base
         acts_as_markup :language => :variable, :columns => [:body]
       end
@@ -239,7 +239,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
       end
 
       should "return formated html for a `to_html` method call on the column value" do
-        assert_match(/<h2>\s*RDoc Test Text\s*<\/h2>/, @rdoc_post.body.to_html)
+        assert_match(/<h2[^>]*>\s*RDoc Test Text\s*<\/h2>/, @rdoc_post.body.to_html)
       end
 
       context "changing value of RDoc field should return new RDoc object" do
@@ -325,7 +325,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
   
   context 'acts_as_markup with variable language setting the language column' do
     setup do
-      ActsAsMarkup.markdown_library = ActsAsMarkup::DEFAULT_MARKDOWN_LIB
+      ActsAsMarkup.markdown_library = :rdiscount
       class ::VariableLanguagePost < ActiveRecord::Base
         acts_as_markup :language => :variable, :columns => [:body], :language_column => :language_name
       end
@@ -481,7 +481,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
       end
       
       should 'return a blank string for `to_s` method' do
-        assert_equal @post.body.to_s, ''
+        assert_equal '', @post.body.to_s
       end
       
       should 'return true for .blank?' do

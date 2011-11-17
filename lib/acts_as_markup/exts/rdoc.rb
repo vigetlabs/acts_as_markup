@@ -1,7 +1,6 @@
-require 'rdoc/markup/simple_markup'
-require 'rdoc/markup/simple_markup/to_html'
+require 'rdoc'
 
-class RDocWithHyperlinkToHtml < SM::ToHtml
+class RDocWithHyperlinkToHtml < RDoc::Markup::ToHtml
 
   # Generate a hyperlink for url, labeled with text. Handle the
   # special cases for img: and link: described under handle_special_HYPEDLINK
@@ -72,7 +71,7 @@ class RDocText < String
   def initialize(str)
     super(str)
     @text = str.to_s
-    @markup = SM::SimpleMarkup.new
+    @markup = RDoc::Markup.new
     
     # external hyperlinks
     @markup.add_special(/((link:|https?:|mailto:|ftp:|www\.)\S+\w)/, :HYPERLINK)

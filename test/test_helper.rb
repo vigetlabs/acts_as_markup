@@ -1,13 +1,31 @@
-require 'test/unit'
 require 'rubygems'
+require 'bundler'
+begin
+  Bundler.setup(:default, :development)
+rescue Bundler::BundlerError => e
+  $stderr.puts e.message
+  $stderr.puts "Run `bundle install` to install missing gems"
+  exit e.status_code
+end
+require 'test/unit'
 gem 'sqlite3-ruby'
 require 'shoulda'
 require 'active_support'
 require 'active_support/test_case'
-require File.expand_path( File.join(File.dirname(__FILE__), %w[.. lib acts_as_markup]) )
-ActiveRecord::Schema.verbose = false
 
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+
+require 'acts_as_markup'
+require 'acts_as_markup/exts/object'
+require 'acts_as_markup/stringlike'
+require 'acts_as_markup/active_record_extension'
+require 'active_record'
+
+ActiveRecord::Schema.verbose = false
+ActiveRecord::Base.send :include, ActsAsMarkup::ActiveRecordExtension
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
+ActsAsMarkup.markdown_library = :rdiscount
 
 def setup_db
   ActiveRecord::Schema.define(:version => 1) do

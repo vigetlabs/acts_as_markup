@@ -223,12 +223,13 @@ class ActsAsMarkdownTest < ActsAsMarkupTestCase
     context 'using BlueCloth with options' do
       setup do
         class ::Post
-          acts_as_markdown :body, :markdown_options => [ :filter_html ]
+          acts_as_markdown :body, :markdown_options => [{:escape_html => true}]
         end
         @post = Post.new(:title => 'Blah')
       end
       
-      should "return escaped html because of :filter_html" do
+      # TODO: This test is broken because BleuCloth's behavior is broken.
+      should "return escaped html because of :escape_html" do
         @post.body = "## Markdown <i>Test</i> Text"
         assert_match(/&lt;i&gt;Test&lt;\/i&gt;/, @post.body.to_html)
       end
