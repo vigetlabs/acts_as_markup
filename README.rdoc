@@ -137,11 +137,21 @@ The four options currently supported are:
 
 == INSTALL:
 
-<tt>sudo gem install acts_as_markup</tt>
+==== Rails 2
+
+<tt>(sudo) gem install acts_as_markup</tt>
  
 Add "+acts_as_markup+" to your environment.rb:
 
     config.gem "acts_as_markup"
+    
+==== Rails 3
+
+Simply add "+acts_as_markup+" to your Gemfile:
+
+    gem "acts_as_markup"
+
+And run "+bundle+ +install+"
 
 == CONTRIBUTING:
 
