@@ -21,7 +21,7 @@ is listed as "markdown" "textile", "mediawiki" or "rdoc" (case insensitive) it w
 treat it as such, any other value for markup language will have the value pass 
 through as a normal string.
 
-This AR extension can use 3 different types of Markdown processing backends: 
+This AR extension can use 5 different types of Markdown processing backends: 
 BlueCloth, RDiscount, Ruby PEG, Redcarpet or Maruku. You specify which one you want to use by setting
 a config value in your environment.rb file:
 
