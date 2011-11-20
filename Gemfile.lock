@@ -15,7 +15,7 @@ GEM
       multi_json (~> 1.0)
     arel (2.2.1)
     bluecloth (2.2.0)
-    brianjlandau-sdoc-helpers (0.1.4)
+    brianjlandau-sdoc-helpers (0.1.5)
     builder (3.0.0)
     expression_parser (0.9.0)
     git (1.2.5)
