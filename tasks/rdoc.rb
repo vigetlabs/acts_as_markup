@@ -1,3 +1,4 @@
+require 'sdoc'
 require 'rake/sdoctask'
 require 'sdoc_helpers/pages'
 
