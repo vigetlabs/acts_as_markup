@@ -4,8 +4,8 @@ module ActsAsMarkup
     
     initializer 'acts_as_markup.set_config', :after => 'active_record.initialize_database' do |app|
       ActiveSupport.on_load(:acts_as_markup) do
-        self.markdown_library = app.config.acts_as_makrup.markdown_library
-        self.mediawiki_library = app.config.acts_as_makrup.mediawiki_library
+        self.markdown_library = app.config.acts_as_markup.markdown_library
+        self.mediawiki_library = app.config.acts_as_markup.mediawiki_library
       end
     end
     
@@ -19,8 +19,8 @@ module ActsAsMarkup
     end
     
     config.before_configuration do
-      config.acts_as_makrup.markdown_library = :rdiscount
-      config.acts_as_makrup.mediawiki_library = :wikicloth
+      config.acts_as_markup.markdown_library = :rdiscount
+      config.acts_as_markup.mediawiki_library = :wikicloth
     end
   end
 end
