@@ -14,7 +14,7 @@ module ActsAsMarkup
         require 'acts_as_markup/exts/object'
         require 'acts_as_markup/stringlike'
         require 'acts_as_markup/active_record_extension'
-        self.send :include, ActsAsMakup::ActiveRecordExtension
+        self.send :include, ActsAsMarkup::ActiveRecordExtension
       end
     end
     
