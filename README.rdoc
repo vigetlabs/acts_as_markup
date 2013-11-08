@@ -1,5 +1,7 @@
 = Acts as Markup
 
+{<img src="https://codeclimate.com/github/vigetlabs/acts_as_markup.png" />}[https://codeclimate.com/github/vigetlabs/acts_as_markup]
+
 by Brian Landau of Viget Labs <brian.landau@viget.com>
 
 GitHub Project: http://github.com/vigetlabs/acts_as_markup
