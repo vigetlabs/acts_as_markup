@@ -1,6 +1,6 @@
 = Acts as Markup
 
-{<img src="https://codeclimate.com/github/vigetlabs/acts_as_markup.png" />}[https://codeclimate.com/github/vigetlabs/acts_as_markup]
+{<img src="https://codeclimate.com/github/vigetlabs/acts_as_markup.png" />}[https://codeclimate.com/github/vigetlabs/acts_as_markup] {<img src="https://travis-ci.org/vigetlabs/acts_as_markup.png?branch=master" />}[https://travis-ci.org/vigetlabs/acts_as_markup] {<img src="https://badge.fury.io/rb/acts_as_markup.png" />}[http://badge.fury.io/rb/acts_as_markup]
 
 by Brian Landau of Viget Labs <brian.landau@viget.com>
 
@@ -14,12 +14,12 @@ RDoc:
 == DESCRIPTION:
 
 Allows you to specify columns of an ActiveRecord model that contain Markdown, 
-Textile, Wiki text and RDoc. You may then use +to_s+ to get the original markup 
+Textile, and RDoc. You may then use +to_s+ to get the original markup 
 text or +to_html+ to get the formated HTML.
 
 Additionally you can have a model that contains a column that has a column with 
 markup text, and another that defines what language to process it as. If the field 
-is listed as "markdown" "textile", "mediawiki" or "rdoc" (case insensitive) it will 
+is listed as "markdown" "textile", or "rdoc" (case insensitive) it will 
 treat it as such, any other value for markup language will have the value pass 
 through as a normal string.
 
@@ -32,7 +32,7 @@ a config value in your environment.rb file:
 By default RDiscount will be used.
 
 You can specify additional options to pass to the markup library by using
-<tt>:markdown_options</tt>, <tt>:textile_options</tt> or <tt>:mediawiki_options</tt>.
+<tt>:markdown_options</tt>, <tt>:textile_options</tt>.
 RDoc does not support any useful options. The options should be given as an
 array of arguments. You can specify options for multiple languages when
 allowing more than one. See each library's documentation for more details on
@@ -60,17 +60,6 @@ what options are available.
     @post = Post.find(:first)
     @post.body.to_s     #=> "h2. Textile Headline"
     @post.body.to_html  #=> "<h2>Textile Headline</h2>"
-    
-
-==== Using +acts_as_mediawiki+:
-
-    class Post < ActiveRecord
-      acts_as_mediawiki :body
-    end
-
-    @post = Post.find(:first)
-    @post.body.to_s     #=> "== Wikitext Headline =="
-    @post.body.to_html  #=> "<h2>Wikitext Headline</h2>"
     
 
 ==== Using +acts_as_rdoc+:
@@ -117,16 +106,11 @@ what options are available.
       acts_as_textile :body, :textile_options => [ [ :filter_html ] ]
     end
     
-    class Post < ActiveRecord
-      acts_as_mediawiki :body, :mediawiki_options => [ { :space_to_underscore => true } ]
-    end
-    
 
 == REQUIREMENTS:
 
 You will need the RedCloth[http://whytheluckystiff.net/ruby/redcloth/] library 
-for processing the Textile text, and the WikiCloth[https://github.com/nricciar/wikicloth] 
-library for processing mediawiki text.
+for processing the Textile text.
 
 You will also need to install some type of Markdown processor.
 The four options currently supported are:

@@ -88,9 +88,9 @@ class RDocText < String
       content = str.gsub(/^\s*(#+)/)  { $1.tr('#',' ') }
     end
     
-    @html_formatter = RDocWithHyperlinkToHtml.new
+    @html_formatter = RDocWithHyperlinkToHtml.new(RDoc::Options.new, @markup)
     
-    @html = @markup.convert(@text, @html_formatter)
+    @html = @html_formatter.convert(@text)
   end
   
   def to_html

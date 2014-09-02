@@ -14,10 +14,6 @@ module ActsAsMarkup
   class UnsportedMarkdownLibrary < ArgumentError
   end
   
-  # This exception is raised when an unsupported Mediawiki library is set to the config value.
-  class UnsportedMediawikiLibrary < ArgumentError
-  end
-  
   MARKDOWN_LIBS = { :rdiscount => {:class_name => "RDiscount",
                                    :lib_name   => "rdiscount"}, 
                     :bluecloth => {:class_name => "BlueClothText",
@@ -26,18 +22,12 @@ module ActsAsMarkup
                                    :lib_name   => "peg_markdown"},
                     :maruku    => {:class_name => "Maruku",
                                    :lib_name   => "maruku"},
-                    :redcarpet => {:class_name => "Redcarpet",
+                    :redcarpet => {:class_name => "RedcarpetText",
                                    :lib_name   => 'redcarpet'} }
-
-  MEDIAWIKI_LIBS = { :wikitext  => {:class_name => "WikitextString",
-                                   :lib_name   => "wikitext"},
-                     :wikicloth => {:class_name => "WikiClothText",
-                                    :lib_name   => 'wikicloth'} }
                                    
   LIBRARY_EXTENSIONS = ::Set.new(Dir[File.join(File.expand_path(File.dirname(__FILE__)), 'acts_as_markup/exts/*.rb')].map {|file| File.basename(file, '.rb')}).delete('string')
 
   mattr_accessor :markdown_library
-  mattr_accessor :mediawiki_library
 
   # Returns the version string for the library.
   def self.version

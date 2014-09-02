@@ -7,7 +7,12 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
-require 'test/unit'
+require 'active_support/version'
+if ActiveSupport::VERSION::MAJOR >= 4
+  require 'minitest/autorun'
+else
+  require 'test/unit'
+end
 gem 'sqlite3-ruby'
 require 'shoulda'
 require 'active_support'
