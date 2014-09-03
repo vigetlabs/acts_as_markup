@@ -11,9 +11,10 @@ Gem::Specification.new do |s|
   s.email = "brian.landau@viget.com"
   s.extra_rdoc_files = [
     "LICENSE",
+    "CHANGELOG",
     "README.rdoc"
   ]
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.markdown"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE", "Rakefile", "README.rdoc", "CHANGELOG"]
   s.test_files = Dir["test/**/*"]
 
   s.homepage = "http://vigetlabs.github.com/acts_as_markup/"

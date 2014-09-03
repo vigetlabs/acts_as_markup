@@ -1,3 +1,12 @@
+== 2.0.0 / 2014-09-03
+* Update for latest version of Ruby & Rails
+
+== 1.4.2 / 2012-03-09
+* Bug fix
+
+== 1.4.1 / 2012-03-09
+* Bug fix
+
 == 1.4.0 / 2011-11-17
 * Make more like modern Rails 3 plugin.
 * Fix broken markup processors integration.
