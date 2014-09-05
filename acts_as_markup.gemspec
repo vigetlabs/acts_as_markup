@@ -27,12 +27,12 @@ Gem::Specification.new do |s|
   s.add_dependency "rdiscount"
 
   s.add_development_dependency "appraisal"
-  s.add_development_dependency "sqlite3-ruby"
+  s.add_development_dependency "sqlite3"
   s.add_development_dependency "shoulda"
   s.add_development_dependency "sdoc"
   s.add_development_dependency "brianjlandau-sdoc-helpers"
   s.add_development_dependency "RedCloth"
-  s.add_development_dependency "rdoc"
+  s.add_development_dependency "rdoc", '~> 4.0'
   s.add_development_dependency "bluecloth"
   s.add_development_dependency "maruku"
   s.add_development_dependency "rpeg-markdown"

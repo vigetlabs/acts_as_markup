@@ -10,7 +10,7 @@ module ActsAsMarkup
     
     initializer 'acts_as_markup.extend_active_record', :after => 'acts_as_markup.set_config' do |app|
       ActiveSupport.on_load(:active_record) do
-        require 'acts_as_markup/exts/object'
+        require 'acts_as_markup/exts/string'
         require 'acts_as_markup/stringlike'
         require 'acts_as_markup/active_record_extension'
         self.send :include, ActsAsMarkup::ActiveRecordExtension

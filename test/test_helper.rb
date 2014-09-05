@@ -13,7 +13,7 @@ if ActiveSupport::VERSION::MAJOR >= 4
 else
   require 'test/unit'
 end
-gem 'sqlite3-ruby'
+gem 'sqlite3'
 require 'shoulda'
 require 'active_support'
 require 'active_support/test_case'
@@ -22,7 +22,7 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'acts_as_markup'
-require 'acts_as_markup/exts/object'
+require 'acts_as_markup/exts/string'
 require 'acts_as_markup/stringlike'
 require 'acts_as_markup/active_record_extension'
 require 'active_record'
