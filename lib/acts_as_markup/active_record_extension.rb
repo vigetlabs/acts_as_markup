@@ -182,7 +182,7 @@ module ActsAsMarkup
               when /rdoc/i
                 markup_classes[:rdoc].new string_for_markup_column(col)
               else
-                self[col]
+                String(self[col])
               end)
             end
           end
