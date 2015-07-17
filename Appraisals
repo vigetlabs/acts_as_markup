@@ -22,3 +22,8 @@ appraise "rails-41" do
   gem "activesupport", '~> 4.1.5'
   gem "activerecord", '~> 4.1.5'
 end
+
+appraise "rails-42" do
+  gem "activesupport", '~> 4.2.3'
+  gem "activerecord", '~> 4.2.3'
+end

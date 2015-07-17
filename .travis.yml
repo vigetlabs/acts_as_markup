@@ -6,9 +6,44 @@ rvm:
   - "2.1.1"
   - "2.1.2"
   - "2.1.3"
+  - "2.1.4"
+  - "2.1.5"
+  - "2.1.6"
+  - "2.2.0"
+  - "2.2.1"
+  - "2.2.2"
 gemfile:
   - gemfiles/rails_30.gemfile
   - gemfiles/rails_31.gemfile
   - gemfiles/rails_32.gemfile
   - gemfiles/rails_40.gemfile
   - gemfiles/rails_41.gemfile
+  - gemfiles/rails_42.gemfile
+matrix:
+  exclude:
+    - rvm: 2.2.0
+      gemfile: gemfiles/rails_30.gemfile
+    - rvm: 2.2.1
+      gemfile: gemfiles/rails_30.gemfile
+    - rvm: 2.2.2
+      gemfile: gemfiles/rails_30.gemfile
+    - rvm: 2.2.0
+      gemfile: gemfiles/rails_31.gemfile
+    - rvm: 2.2.1
+      gemfile: gemfiles/rails_31.gemfile
+    - rvm: 2.2.2
+      gemfile: gemfiles/rails_31.gemfile
+    - rvm: 2.2.0
+      gemfile: gemfiles/rails_32.gemfile
+    - rvm: 2.2.1
+      gemfile: gemfiles/rails_32.gemfile
+    - rvm: 2.2.2
+      gemfile: gemfiles/rails_32.gemfile
+    - rvm: 2.2.0
+      gemfile: gemfiles/rails_40.gemfile
+    - rvm: 2.2.1
+      gemfile: gemfiles/rails_40.gemfile
+    - rvm: 2.2.2
+      gemfile: gemfiles/rails_40.gemfile
+notifications:
+  slack: viget:g9nhMe2ZIu0p49xgfNQSfWxA
