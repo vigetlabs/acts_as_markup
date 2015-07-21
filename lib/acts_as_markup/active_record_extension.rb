@@ -66,12 +66,13 @@ module ActsAsMarkup
       # 
       def acts_as_markup(options)
         options.reverse_merge!(:language_column => :markup_language)
-        markup_class = load_markup_class(options)
-        
+
+        include InstanceMethods
+
         unless options[:language].to_sym == :variable
-          define_markup_columns_reader_methods(markup_class, options)
+          define_markup_columns_reader_methods(options)
         else
-          define_variable_markup_columns_reader_methods(markup_class, options)
+          define_variable_markup_columns_reader_methods(options)
         end
       end
       
@@ -101,93 +102,51 @@ module ActsAsMarkup
         options = columns.extract_options!
         acts_as_markup options.merge(:language => :rdoc, :columns => columns)
       end
-      
-      
-      private
-        def get_markdown_class
-          if ActsAsMarkup::MARKDOWN_LIBS.keys.include? ActsAsMarkup.markdown_library
-            markdown_library_names = ActsAsMarkup::MARKDOWN_LIBS[ActsAsMarkup.markdown_library]
-            require markdown_library_names[:lib_name]
-            require_extensions(markdown_library_names[:lib_name])
-            return markdown_library_names[:class_name].constantize
-          else
-            raise ActsAsMarkup::UnsportedMarkdownLibrary, "#{ActsAsMarkup.markdown_library} is not currently supported."
-          end
-        end
-        
-        def require_extensions(library)# :nodoc:
-          if ActsAsMarkup::LIBRARY_EXTENSIONS.include? library.to_s
-            require "acts_as_markup/exts/#{library}"
-          end
-        end
-        
-        def require_library_and_get_class(language)
-          case language
-          when :markdown
-            return get_markdown_class
-          when :textile
-            require 'redcloth'
-            return RedCloth
-          when :rdoc
-            require 'rdoc'
-            require_extensions 'rdoc'
-            return RDocText
-          else
-            return String
-          end
-        end
-        
-        def load_markup_class(options)
-          case options[:language].to_sym
-          when :markdown, :textile, :rdoc
-            require_library_and_get_class(options[:language].to_sym)
-          when :variable
-            markup_classes = {}
-            [:textile, :rdoc, :markdown].each do |language|
-              markup_classes[language] = require_library_and_get_class(language)
-            end
-            markup_classes
-          else
-            raise ActsAsMarkup::UnsupportedMarkupLanguage, "#{options[:langauge]} is not a currently supported markup language."
-          end
-        end
-        
-        def define_markup_columns_reader_methods(markup_class, options)
-          markup_options = options["#{options[:language]}_options".to_sym] || []
-          
-          options[:columns].each do |col|
-            define_method col do
-              if instance_variable_defined?("@#{col}") && !send("#{col}_changed?")
-                  instance_variable_get("@#{col}")
-              else
-                instance_variable_set("@#{col}", markup_class.new(self[col].to_s, *markup_options))
-              end
-            end
-          end
-        end
 
-        def define_variable_markup_columns_reader_methods(markup_classes, options)
-          options[:columns].each do |col|
-            define_method col do
-              if instance_variable_defined?("@#{col}")
-                unless send("#{col}_changed?") || send("#{options[:language_column]}_changed?")
-                  return instance_variable_get("@#{col}")
-                end
-              end
-              instance_variable_set("@#{col}", case send(options[:language_column])
-              when /markdown/i
-                markup_classes[:markdown].new string_for_markup_column(col), *(options[:markdown_options] || [])
-              when /textile/i
-                markup_classes[:textile].new string_for_markup_column(col), *(options[:textile_options] || [])
-              when /rdoc/i
-                markup_classes[:rdoc].new string_for_markup_column(col)
-              else
-                String(self[col])
-              end)
+      private
+
+      def define_markup_columns_reader_methods(options)
+        markup_options = options["#{options[:language]}_options".to_sym] || []
+        
+        options[:columns].each do |col|
+          define_method col do
+            if instance_variable_defined?("@#{col}") && !send("#{col}_changed?")
+                instance_variable_get("@#{col}")
+            else
+              instance_variable_set("@#{col}", markup_class(options[:language]).new(self[col].to_s, *markup_options))
             end
           end
         end
+      end
+
+      def define_variable_markup_columns_reader_methods(options)
+        options[:columns].each do |col|
+          define_method col do
+            if instance_variable_defined?("@#{col}")
+              unless send("#{col}_changed?") || send("#{options[:language_column]}_changed?")
+                return instance_variable_get("@#{col}")
+              end
+            end
+            instance_variable_set("@#{col}", case send(options[:language_column])
+            when /markdown/i
+              markup_class(:markdown).new string_for_markup_column(col), *(options[:markdown_options] || [])
+            when /textile/i
+              markup_class(:textile).new string_for_markup_column(col), *(options[:textile_options] || [])
+            when /rdoc/i
+              markup_class(:rdoc).new string_for_markup_column(col)
+            else
+              String(self[col])
+            end)
+          end
+        end
+      end
       
+    end
+
+    module InstanceMethods
+      def markup_class(markup_name)
+        ActsAsMarkup.markup_class(markup_name)
+      end
     end
   end
 end

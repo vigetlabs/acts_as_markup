@@ -302,6 +302,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
     
     context 'with textile' do
       setup do
+        ActsAsMarkup.markup_class(:textile)
         class ::Post < ActiveRecord::Base
           acts_as_textile :body
         end
@@ -332,6 +333,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
   
     context 'with RDoc' do
       setup do
+        ActsAsMarkup.markup_class(:rdoc)
         class ::Post < ActiveRecord::Base
           acts_as_rdoc :body
         end
@@ -363,6 +365,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
     context 'with RDiscount Markdown' do
       setup do
         ActsAsMarkup.markdown_library = :rdiscount
+        ActsAsMarkup.markup_class(:markdown)
         class ::Post < ActiveRecord::Base
           acts_as_markdown :body
         end
@@ -394,6 +397,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
     context 'with BlueCloth Markdown' do
       setup do
         ActsAsMarkup.markdown_library = :bluecloth
+        ActsAsMarkup.markup_class(:markdown)
         class ::Post < ActiveRecord::Base
           acts_as_markdown :body
         end
@@ -425,6 +429,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
     context 'with Ruby PEG Markdown' do
       setup do
         ActsAsMarkup.markdown_library = :rpeg
+        ActsAsMarkup.markup_class(:markdown)
         class ::Post < ActiveRecord::Base
           acts_as_markdown :body
         end
@@ -444,7 +449,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
       end
       
       should "have a PEGMarkdown object returned for the column value" do
-        assert_kind_of PEGMarkdown, @post.body
+        assert_kind_of ::PEGMarkdown, @post.body
       end
       
       teardown do
@@ -456,6 +461,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
     context 'with Maruku Markdown' do
       setup do
         ActsAsMarkup.markdown_library = :maruku
+        ActsAsMarkup.markup_class(:markdown)
         class ::Post < ActiveRecord::Base
           acts_as_markdown :body
         end
@@ -488,6 +494,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
     context 'with Redcarpet Markdown' do
       setup do
         ActsAsMarkup.markdown_library = :redcarpet
+        ActsAsMarkup.markup_class(:markdown)
         class ::Post < ActiveRecord::Base
           acts_as_markdown :body
         end
@@ -507,7 +514,7 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
       end
       
       should "have a Maruku object returned for the column value" do
-        assert_kind_of RedcarpetText, @post.body
+        assert_kind_of ::RedcarpetText, @post.body
       end
       
       teardown do
@@ -520,20 +527,16 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
   context 'acts_as_markup with bad language name' do
     should 'raise exception when a non-supported language is passed to acts_as_markup' do
       assert_raise ActsAsMarkup::UnsupportedMarkupLanguage do
-        class ::Post < ActiveRecord::Base
-          acts_as_markup :language => :fake, :columns => [:body]
-        end
+        ActsAsMarkup.markup_class(:fake)
       end
     end
   end
   
   context 'acts_as_markup with bad markdown library' do
     should 'raise exception when a non-supported library is set as the markdown library attribute on ActsAsMarkup' do
+      ActsAsMarkup.markdown_library = :fake
       assert_raise ActsAsMarkup::UnsportedMarkdownLibrary do
-        ActsAsMarkup.markdown_library = :fake
-        class ::Post < ActiveRecord::Base
-          acts_as_markup :language => :markdown, :columns => [:body]
-        end
+        ActsAsMarkup.markup_class(:markdown)
       end
     end
   end

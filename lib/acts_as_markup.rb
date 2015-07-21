@@ -30,8 +30,57 @@ module ActsAsMarkup
   mattr_accessor :markdown_library
 
   # Returns the version string for the library.
-  def self.version
-    VERSION
+  class << self
+    def version
+      VERSION
+    end
+
+    def markup_class(markup_name)
+      load_markup_class(markup_name)
+    end
+    
+    private
+
+    def get_markdown_class
+      if ActsAsMarkup::MARKDOWN_LIBS.keys.include? ActsAsMarkup.markdown_library
+        markdown_library_names = ActsAsMarkup::MARKDOWN_LIBS[ActsAsMarkup.markdown_library]
+        require markdown_library_names[:lib_name]
+        require_extensions(markdown_library_names[:lib_name])
+        return markdown_library_names[:class_name].constantize
+      else
+        raise ActsAsMarkup::UnsportedMarkdownLibrary, "#{ActsAsMarkup.markdown_library} is not currently supported."
+      end
+    end
+    
+    def require_extensions(library)# :nodoc:
+      if ActsAsMarkup::LIBRARY_EXTENSIONS.include? library.to_s
+        require "acts_as_markup/exts/#{library}"
+      end
+    end
+    
+    def require_library_and_get_class(language)
+      case language
+      when :markdown
+        return get_markdown_class
+      when :textile
+        require 'redcloth'
+        return RedCloth
+      when :rdoc
+        require 'rdoc'
+        require_extensions 'rdoc'
+        return RDocText
+      else
+        return String
+      end
+    end
+    
+    def load_markup_class(markup_name)
+      if [:markdown, :textile, :rdoc].include?(markup_name.to_sym)
+        require_library_and_get_class(markup_name.to_sym)
+      else
+        raise ActsAsMarkup::UnsupportedMarkupLanguage, "#{markup_name} is not a currently supported markup language."
+      end
+    end
   end
 
 end
