@@ -220,7 +220,6 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
 
       teardown do
         @rdoctext, @rdoc_post = nil
-        Post.delete_all
       end
     end
     
@@ -266,7 +265,6 @@ class ActsAsMarkupTest < ActsAsMarkupTestCase
         @textile_text, @textile_post = nil
       end
     end
-    
     
     teardown do
       VariablePost.delete_all
