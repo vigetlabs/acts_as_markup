@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    acts_as_markup (2.0.1)
+    acts_as_markup (2.0.2)
       activerecord (>= 3.0.20)
       activesupport (>= 3.0.20)
       rdiscount

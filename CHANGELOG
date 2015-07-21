@@ -1,3 +1,10 @@
+== 2.0.2 / 2015-07-21
+* Plain text variable columns always return strings now
+* Refactor how we load markup classes to not load ones we aren't using.
+
+== 2.0.1 / 2014-09-04
+* Stop extending Object and extend string instead.
+
 == 2.0.0 / 2014-09-03
 * Update for latest version of Ruby & Rails
 
