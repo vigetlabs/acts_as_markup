@@ -154,3 +154,8 @@ Make a fork on GitHub, make your changes and do a pull request. Good places to s
 6. Add an extension file to the "lib/acts_as_markup/exts/" directory if you need to modify the object in anyway.
 7. Add appropriate tests (see current tests).
 
+---
+
+{<img src="http://code.viget.com/github-banner.png" alt="Code At Viget">}[http://code.viget.com]
+
+Visit {code.viget.com}[http://code.viget.com] to see more projects from {Viget.}[https://viget.com]
