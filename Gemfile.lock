@@ -35,7 +35,7 @@ GEM
     json (1.8.3)
     maruku (0.7.2)
     minitest (5.7.0)
-    rake (10.4.2)
+    rake (13.0.1)
     rdiscount (2.1.8)
     rdoc (4.2.0)
     redcarpet (3.3.2)
